@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OhMyToolbox Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6366f1;
+            --bg: #0f0f14;
+            --card: #18181f;
+            --border: #27272a;
+            --text: #fafafa;
+            --text-dim: #a1a1aa;
+            --green: #22c55e;
+            --red: #ef4444;
+            --orange: #f97316;
+        }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        
+        .login { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .login-box { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; width: 340px; }
+        .login-box h2 { text-align: center; margin-bottom: 20px; }
+        .login-box input {
+            width: 100%; padding: 14px; border-radius: 10px;
+            border: 1px solid var(--border); background: var(--bg); color: var(--text);
+            margin-bottom: 16px; font-size: 14px;
+        }
+        .login-box button {
+            width: 100%; padding: 14px; border-radius: 10px; border: none;
+            background: var(--primary); color: #fff; font-weight: 600; cursor: pointer;
+        }
+        .error { color: var(--red); font-size: 13px; margin-bottom: 12px; display: none; text-align: center; }
+        
+        .admin { display: none; padding: 30px; max-width: 1200px; margin: 0 auto; }
+        .admin.show { display: block; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .header-left h1 { font-size: 24px; }
+        .header-left span { color: var(--primary); }
+        .header button { 
+            padding: 10px 20px; border-radius: 10px; border: 1px solid var(--border);
+            background: var(--card); color: var(--text); cursor: pointer;
+        }
+        
+        .stats { display: flex; gap: 15px; margin-bottom: 30px; }
+        .stat { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; flex: 1; text-align: center; }
+        .stat-num { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .stat-label { color: var(--text-dim); font-size: 13px; margin-top: 4px; }
+        
+        .section { margin-bottom: 30px; }
+        .section h2 { font-size: 18px; margin-bottom: 16px; }
+        
+        .add-form { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        .form-title { font-size: 14px; color: var(--text-dim); margin-bottom: 16px; }
+        .form-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        .form-row input, .form-row select {
+            flex: 1; padding: 12px; border-radius: 10px;
+            border: 1px solid var(--border); background: var(--bg); color: var(--text);
+            font-size: 13px;
+        }
+        .form-row button {
+            padding: 12px 24px; border-radius: 10px; border: none;
+            background: var(--green); color: #fff; font-weight: 600; cursor: pointer;
+        }
+        
+        .tool-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+        .tool-item {
+            display: flex; align-items: center; gap: 12px;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 16px;
+        }
+        .tool-icon { font-size: 24px; }
+        .tool-info { flex: 1; min-width: 0; }
+        .tool-name { font-weight: 600; font-size: 14px; }
+        .tool-desc { color: var(--text-dim); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tool-actions button {
+            padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border);
+            background: var(--bg); color: var(--text); cursor: pointer; font-size: 12px;
+        }
+        .tool-actions .delete { color: var(--red); border-color: var(--red); }
+        
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { padding: 10px 20px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text-dim); cursor: pointer; font-size: 13px; }
+        .tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--green); color: #fff; padding: 12px 24px; border-radius: 10px; font-size: 14px; display: none; }
+        .toast.show { display: block; }
+    </style>
+</head>
+<body>
+    <div class="login" id="loginPage">
+        <div class="login-box">
+            <h2>🔐 OhMyToolbox Admin</h2>
+            <p style="color:var(--text-dim);margin-bottom:20px;font-size:13px;">Password: toolbox123</p>
+            <div class="error" id="error">Incorrect password</div>
+            <input type="password" id="password" placeholder="Enter password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+    
+    <div class="admin" id="adminPage">
+        <div class="header">
+            <div class="header-left">
+                <h1>🧰 Admin <span>Panel</span></h1>
+            </div>
+            <button onclick="logout()">Logout</button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat"><div class="stat-num" id="totalAI">0</div><div class="stat-label">AI Tools</div></div>
+            <div class="stat"><div class="stat-num" id="totalTG">0</div><div class="stat-label">Communities</div></div>
+            <div class="stat"><div class="stat-num" id="totalPro">0</div><div class="stat-label">Productivity</div></div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('ai')">🤖 AI Tools</div>
+            <div class="tab" onclick="switchTab('tg')">📡 Communities</div>
+            <div class="tab" onclick="switchTab('pro')">⚡ Productivity</div>
+        </div>
+        
+        <div class="section">
+            <h2 id="formTitle">➕ Add New Tool</h2>
+            <div class="add-form">
+                <div class="form-row">
+                    <input type="text" id="toolName" placeholder="Tool name *">
+                    <input type="text" id="toolIcon" placeholder="Emoji (e.g. 🤖)" style="flex:0.5">
+                    <select id="toolHot" style="flex:0.5">
+                        <option value="">Hot?</option>
+                        <option value="true">🔥 Yes</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <input type="url" id="toolUrl" placeholder="URL (https://...) *">
+                    <input type="text" id="toolDesc" placeholder="Description">
+                </div>
+                <div class="form-row">
+                    <input type="text" id="toolNameZh" placeholder="中文名称" style="flex:0.5">
+                    <input type="text" id="toolDescZh" placeholder="中文描述" style="flex:1">
+                    <button onclick="addTool()">+ Add</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 id="listTitle">📋 Manage Tools</h2>
+            <div class="tool-list" id="toolList"></div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast">✅ Done!</div>
+    
+    <script>
+        const PASSWORD = 'toolbox123';
+        
+        // Data - will be updated by admin
+        let aiTools = JSON.parse(localStorage.getItem('omt_ai') || '[{"name":"Claude","name_zh":"Claude","desc":"Anthropic flagship AI model","name_zh_desc":"Anthropic 旗舰AI模型","type":"ai,chat","icon":"🧠","hot":true,"link":"https://claude.ai"},{"name":"ChatGPT","name_zh":"ChatGPT","desc":"OpenAI GPT-4","name_zh_desc":"OpenAI GPT-4","type":"ai,chat","icon":"💬","hot":true,"link":"https://chat.openai.com"}]');
+        let tgChannels = JSON.parse(localStorage.getItem('omt_tg') || '[{"name":"OpenAI","name_zh":"OpenAI","desc":"Official updates","name_zh_desc":"官方频道","type":"tg","icon":"🤖","hot":true,"link":"https://t.me/openai"}]');
+        let productivity = JSON.parse(localStorage.getItem('omt_pro') || '[{"name":"Notion","name_zh":"Notion","desc":"All-in-one workspace","name_zh_desc":"全能笔记","type":"productivity","icon":"📒","hot":true,"link":"https://notion.so"}]');
+        
+        let currentTab = 'ai';
+        
+        function login() {
+            if(document.getElementById('password').value === PASSWORD) {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('adminPage').classList.add('show');
+                loadStats();
+                renderList();
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+        
+        function logout() {
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('adminPage').classList.remove('show');
+            document.getElementById('password').value = '';
+        }
+        
+        function loadStats() {
+            document.getElementById('totalAI').textContent = aiTools.length;
+            document.getElementById('totalTG').textContent = tgChannels.length;
+            document.getElementById('totalPro').textContent = productivity.length;
+        }
+        
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            renderList();
+        }
+        
+        function renderList() {
+            let data = currentTab === 'ai' ? aiTools : currentTab === 'tg' ? tgChannels : productivity;
+            document.getElementById('toolList').innerHTML = data.map((t, i) => `
+                <div class="tool-item">
+                    <div class="tool-icon">${t.icon}</div>
+                    <div class="tool-info">
+                        <div class="tool-name">${t.name}</div>
+                        <div class="tool-desc">${t.desc}</div>
+                    </div>
+                    <div class="tool-actions">
+                        <button class="delete" onclick="deleteTool(${i})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function addTool() {
+            const name = document.getElementById('toolName').value;
+            const url = document.getElementById('toolUrl').value;
+            const desc = document.getElementById('toolDesc').value || name + ' tool';
+            const icon = document.getElementById('toolIcon').value || '📌';
+            const hot = document.getElementById('toolHot').value === 'true';
+            const nameZh = document.getElementById('toolNameZh').value || name;
+            const descZh = document.getElementById('toolDescZh').value || desc;
+            
+            if(!name || !url) { showToast('⚠️ Name & URL required!'); return; }
+            
+            const newTool = {
+                name, name_zh: nameZh,
+                desc, name_zh_desc: descZh,
+                type: currentTab === 'ai' ? 'ai' : currentTab === 'tg' ? 'tg' : 'productivity',
+                icon, hot,
+                link: url
+            };
+            
+            if(currentTab === 'ai') aiTools.push(newTool);
+            else if(currentTab === 'tg') tgChannels.push(newTool);
+            else productivity.push(newTool);
+            
+            saveData();
+            loadStats();
+            renderList();
+            clearForm();
+            showToast('✅ Added: ' + name);
+        }
+        
+        function deleteTool(index) {
+            if(!confirm('Delete this tool?')) return;
+            
+            if(currentTab === 'ai') aiTools.splice(index, 1);
+            else if(currentTab === 'tg') tgChannels.splice(index, 1);
+            else productivity.splice(index, 1);
+            
+            saveData();
+            loadStats();
+            renderList();
+            showToast('🗑️ Deleted');
+        }
+        
+        function saveData() {
+            localStorage.setItem('omt_ai', JSON.stringify(aiTools));
+            localStorage.setItem('omt_tg', JSON.stringify(tgChannels));
+            localStorage.setItem('omt_pro', JSON.stringify(productivity));
+        }
+        
+        function clearForm() {
+            document.getElementById('toolName').value = '';
+            document.getElementById('toolUrl').value = '';
+            document.getElementById('toolDesc').value = '';
+            document.getElementById('toolIcon').value = '';
+            document.getElementById('toolHot').value = '';
+            document.getElementById('toolNameZh').value = '';
+            document.getElementById('toolDescZh').value = '';
+        }
+        
+        function showToast(msg) {
+            document.getElementById('toast').textContent = msg;
+            document.getElementById('toast').classList.add('show');
+            setTimeout(() => document.getElementById('toast').classList.remove('show'), 2000);
+        }
+    </script>
+</body>
+</html>
