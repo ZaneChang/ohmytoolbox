@@ -3,487 +3,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OhMyToolbox - AI工具箱 - 精选好用的AI工具 - 精选资源集合</title>
+    <title>OhMyToolbox - AI工具箱 - 精选好用的AI工具</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg: #0a0a0f;
-            --sidebar: #0d0d14;
+            --bg-light: #f5f5f7;
             --card: #12121a;
-            --card-hover: #1a1a25;
+            --card-light: #ffffff;
             --border: #2a2a3a;
+            --border-light: #e5e5e5;
             --text: #e0e0e0;
+            --text-light: #1d1d1f;
             --dim: #888;
             --tg-blue: #229ED9;
             --ai-blue: #00d4ff;
             --active: #1e1e2e;
+            --green: #4ade80;
+            --orange: #f97316;
+            --purple: #a855f7;
         }
+        .light { --bg: var(--bg-light); --card: var(--card-light); --border: var(--border-light); --text: var(--text-light); --active: #f0f0f2; }
+        
         body { 
             font-family: 'Outfit', -apple-system, sans-serif; 
             background: var(--bg); 
             color: var(--text); 
             min-height: 100vh;
-            display: flex;
+            transition: all 0.3s;
         }
         
-        /* 左侧导航 */
-        .sidebar {
-            width: 240px;
-            background: var(--sidebar);
-            border-right: 1px solid var(--border);
-            padding: 25px 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
+        /* 顶部栏 */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .logo { 
-            text-align: center; 
-            padding: 15px; 
-            font-size: 22px; 
+            font-size: 20px; 
             font-weight: 700;
             background: linear-gradient(135deg, var(--tg-blue), var(--ai-blue)); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            margin-bottom: 25px;
         }
-        .nav-group { margin-bottom: 25px; }
-        .nav-label { 
-            padding: 10px 25px; 
-            font-size: 11px; 
-            color: var(--dim); 
-            text-transform: uppercase; 
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 25px;
+        .topbar-actions { display: flex; gap: 12px; align-items: center; }
+        .icon-btn {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
             cursor: pointer;
-            color: var(--dim);
+            font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
             transition: all 0.2s;
-            border-left: 3px solid transparent;
+        }
+        .icon-btn:hover { border-color: var(--tg-blue); }
+        .submit-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: var(--tg-blue);
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
             font-size: 14px;
         }
-        .nav-item:hover { background: var(--active); color: var(--text); }
-        .nav-item.active { 
-            background: var(--active); 
-            color: var(--text);
-            border-left-color: var(--tg-blue);
-        }
-        .nav-item .icon { font-size: 18px; }
-        .nav-item .name { flex: 1; }
-        .nav-item .badge {
-            background: var(--card);
-            font-size: 11px;
-            padding: 3px 10px;
-            border-radius: 12px;
-            color: var(--dim);
-        }
         
-        /* 主内容区 */
-        .main {
-            flex: 1;
-            margin-left: 240px;
-            padding: 40px 50px;
-            max-width: calc(100% - 240px);
-        }
-        
-        .section { display: none; padding-bottom: 50px; }
-        .section.active { display: block; }
-        
-        .section-header { margin-bottom: 30px; }
-        h2 { 
-            font-size: 28px; 
-            font-weight: 700;
-            margin-bottom: 8px; 
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .section-desc { color: var(--dim); font-size: 15px; }
-        
-        .search { margin-bottom: 30px; }
-        .search input { 
-            width: 100%; 
-            padding: 16px 24px; 
-            border-radius: 14px; 
-            border: 1px solid var(--border); 
-            background: var(--card); 
-            color: var(--text); 
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-        .search input:focus { outline: none; border-color: var(--tg-blue); box-shadow: 0 0 0 3px rgba(34,158,217,0.15); }
-        
-        .category { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
-        .cat-btn { 
-            padding: 10px 18px; 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            border-radius: 20px; 
-            color: var(--dim); 
-            cursor: pointer; 
-            font-size: 13px;
-            transition: all 0.2s;
-        }
-        .cat-btn:hover { border-color: var(--tg-blue); color: var(--text); }
-        .cat-btn.active { background: var(--tg-blue); color: #fff; border-color: var(--tg-blue); }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 20px; 
-        }
-        .card { 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            border-radius: 18px; 
-            padding: 24px; 
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--tg-blue), var(--ai-blue));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .card:hover { 
-            transform: translateY(-4px); 
-            border-color: var(--tg-blue);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        .card:hover::before { opacity: 1; }
-        
-        .card-top { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-        .card-icon { 
-            width: 52px; height: 52px; 
-            background: linear-gradient(135deg, #1a1a2e, #252540);
-            border-radius: 14px; 
-            display: flex; align-items: center; justify-content: center;
-            font-size: 26px;
-        }
-        .card-name { font-size: 17px; font-weight: 600; }
-        .card-desc { color: var(--dim); font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
-        .card-link { 
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--tg-blue); 
-            font-size: 13px; 
-            font-weight: 500;
-        }
-        
-        .empty { text-align: center; padding: 60px; color: var(--dim); font-size: 15px; }
-        
-        /* 统计 */
+        /* 统计栏 */
         .stats-bar {
             display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 15px;
+            padding: 20px 30px;
+            flex-wrap: wrap;
         }
         .stat-item {
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 16px 24px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            font-size: 14px;
         }
-        .stat-num { font-size: 24px; font-weight: 700; color: var(--tg-blue); }
-        .stat-label { font-size: 13px; color: var(--dim); }
+        .stat-num { font-size: 20px; font-weight: 700; color: var(--tg-blue); }
         
-        @media (max-width: 900px) {
-            .sidebar { display: none; }
-            .main { margin-left: 0; padding: 25px; }
-            .grid { grid-template-columns: 1fr; }
-            .stats-bar { flex-wrap: wrap; }
+        /* 主内容 */
+        .main { padding: 0 30px 40px; max-width: 1200px; margin: 0 auto; }
+        
+        /* 搜索 */
+        .search-box {
+            position: relative;
+            margin-bottom: 25px;
         }
+        .search-box input { 
+            width: 100%; 
+            padding: 18px 24px 18px 50px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border); 
+            background: var(--card); 
+            color: var(--text); 
+            font-size: 16px;
+        }
+        .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 20px; }
+        
+        /* 筛选标签 */
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        .filter-tag {
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--dim);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .filter-tag:hover { border-color: var(--tg-blue); color: var(--text); }
+        .filter-tag.active { background: var(--tg-blue); color: #fff; border-color: var(--tg-blue); }
+        
+        /* 分类标题 */
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 30px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* 工具网格 */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        /* 工具卡片 */
+        .tool-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .tool-card:hover { 
+            transform: translateY(-4px); 
+            border-color: var(--tg-blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .tool-card.favorited { border-color: var(--orange); }
+        .tool-top { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
+        .tool-icon { 
+            width: 50px; height: 50px; 
+            background: linear-gradient(135deg, #1a1a2e, #252540);
+            border-radius: 12px; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+        }
+        .tool-name { font-size: 16px; font-weight: 600; flex: 1; }
+        .favorite-btn {
+            font-size: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.2s;
+        }
+        .favorite-btn:hover, .favorite-btn.active { opacity: 1; }
+        .favorite-btn.active { color: var(--orange); }
+        .tool-desc { color: var(--dim); font-size: 14px; line-height: 1.5; margin-bottom: 12px; }
+        .tool-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tool-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: var(--bg);
+            color: var(--dim);
+        }
+        .tool-link { 
+            display: inline-block;
+            margin-top: 12px; 
+            color: var(--tg-blue); 
+            font-size: 13px; 
+            font-weight: 500;
+        }
+        
+        /* 弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+        }
+        .modal h3 { margin-bottom: 20px; }
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .modal-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            cursor: pointer;
+        }
+        .modal-btn.primary { background: var(--tg-blue); color: #fff; border: none; }
+        
+        /* 热门标记 */
+        .hot-badge {
+            position: absolute;
+            top: -8px; right: -8px;
+            background: linear-gradient(135deg, var(--orange), #ff6b6b);
+            color: #fff;
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .topbar { padding: 12px 15px; }
+            .main { padding: 0 15px 30px; }
+            .stats-bar { padding: 15px; }
+            .stats-bar { flex-wrap: wrap; }
+            .stat-item { flex: 1; min-width: 100px; }
+            .tools-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* 空状态 */
+        .empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--dim);
+        }
+        
+        /* 我的收藏 */
+        .favorites-section {
+            display: none;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+        .favorites-section.active { display: block; }
     </style>
 </head>
 <body>
-    <!-- 左侧导航 -->
-    <div class="sidebar">
-        <div class="logo">🚀 OhMyToolbox</div>
-        
-        <div class="nav-group">
-            <div class="nav-label">AI工具</div>
-            <div class="nav-item active" data-target="ai-all">
-                <span class="icon">🤖</span>
-                <span class="name">全部AI</span>
-                <span class="badge">14</span>
-            </div>
-            <div class="nav-item" data-target="ai-chat">
-                <span class="icon">💬</span>
-                <span class="name">对话AI</span>
-                <span class="badge">5</span>
-            </div>
-            <div class="nav-item" data-target="ai-image">
-                <span class="icon">🎨</span>
-                <span class="name">图像生成</span>
-                <span class="badge">3</span>
-            </div>
-            <div class="nav-item" data-target="ai-code">
-                <span class="icon">⌨️</span>
-                <span class="name">编程辅助</span>
-                <span class="badge">3</span>
-            </div>
-            <div class="nav-item" data-target="ai-agent">
-                <span class="icon">⚡</span>
-                <span class="name">AI Agent</span>
-                <span class="badge">3</span>
-            </div>
+    <!-- 顶部栏 -->
+    <div class="topbar">
+        <div class="logo">🧰 OhMyToolbox</div>
+        <div class="topbar-actions">
+            <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+            <button class="icon-btn" onclick="showFavorites()">❤️</button>
+            <button class="submit-btn" onclick="openSubmitModal()">+ 提交工具</button>
         </div>
-        
-        <div class="nav-group">
-            <div class="nav-label">OhMyToolbox</div>
-            <div class="nav-item" data-target="tg-all">
-                <span class="icon">📡</span>
-                <span class="name">全部频道</span>
-                <span class="badge">20</span>
-            </div>
-            <div class="nav-item" data-target="tg-news">
-                <span class="icon">📰</span>
-                <span class="name">资讯</span>
-                <span class="badge">5</span>
-            </div>
-            <div class="nav-item" data-target="tg-trading">
-                <span class="icon">📈</span>
-                <span class="name">交易</span>
-                <span class="badge">4</span>
-            </div>
-            <div class="nav-item" data-target="tg-tech">
-                <span class="icon">💻</span>
-                <span class="name">技术</span>
-                <span class="badge">4</span>
-            </div>
-            <div class="nav-item" data-target="tg-group">
-                <span class="icon">👥</span>
-                <span class="name">社群</span>
-                <span class="badge">3</span>
-            </div>
-            <div class="nav-item" data-target="tg-bot">
-                <span class="icon">🤖</span>
-                <span class="name">机器人</span>
-                <span class="badge">4</span>
-            </div>
-        </div>
+    </div>
+    
+    <!-- 统计 -->
+    <div class="stats-bar">
+        <div class="stat-item"><span class="stat-num" id="totalTools">0</span> <span>个工具</span></div>
+        <div class="stat-item"><span class="stat-num">14</span> <span>AI工具</span></div>
+        <div class="stat-item"><span class="stat-num">20</span> <span>TG资源</span></div>
+        <div class="stat-item"><span class="stat-num">34</span> <span>总收录</span></div>
     </div>
     
     <!-- 主内容 -->
     <div class="main">
-        <div class="search">
-            <input type="text" placeholder="搜索资源..." id="searchInput">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="搜索工具..." id="searchInput" oninput="filterTools()">
         </div>
         
-        <div class="stats-bar">
-            <div class="stat-item">
-                <div class="stat-num">14</div>
-                <div class="stat-label">AI工具</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num">20</div>
-                <div class="stat-label">TG频道</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num">34</div>
-                <div class="stat-label">总资源</div>
-            </div>
+        <div class="filters">
+            <div class="filter-tag active" onclick="setFilter('all')">全部</div>
+            <div class="filter-tag" onclick="setFilter('chat')">💬 对话</div>
+            <div class="filter-tag" onclick="setFilter('image')">🎨 图像</div>
+            <div class="filter-tag" onclick="setFilter('code')">⌨️ 编程</div>
+            <div class="filter-tag" onclick="setFilter('agent')">⚡ Agent</div>
+            <div class="filter-tag" onclick="setFilter('news')">📰 资讯</div>
+            <div class="filter-tag" onclick="setFilter('trading')">📈 交易</div>
+            <div class="filter-tag" onclick="setFilter('tech')">💻 技术</div>
         </div>
         
-        <!-- AI工具区 -->
-        <div class="section active" id="ai-all">
-            <div class="section-header">
-                <h2>🤖 全部AI工具</h2>
-                <p class="section-desc">精选对话、图像、编程、AI Agent工具</p>
-            </div>
-            <div class="grid" id="grid-ai-all"></div>
+        <!-- 我的收藏 -->
+        <div class="favorites-section" id="favoritesSection">
+            <div class="section-title">❤️ 我的收藏</div>
+            <div class="tools-grid" id="favoritesGrid"></div>
         </div>
         
-        <div class="section" id="ai-chat">
-            <div class="section-header">
-                <h2>💬 对话AI</h2>
-                <p class="section-desc">智能对话助手</p>
-            </div>
-            <div class="grid" id="grid-ai-chat"></div>
-        </div>
+        <!-- AI工具 -->
+        <div class="section-title">🤖 AI工具</div>
+        <div class="tools-grid" id="aiGrid"></div>
         
-        <div class="section" id="ai-image">
-            <div class="section-header">
-                <h2>🎨 图像生成</h2>
-                <p class="section-desc">AI绘画与图像创作</p>
+        <!-- TG资源 -->
+        <div class="section-title">📡 TG资源</div>
+        <div class="tools-grid" id="tgGrid"></div>
+    </div>
+    
+    <!-- 提交弹窗 -->
+    <div class="modal" id="submitModal">
+        <div class="modal-content">
+            <h3>提交新工具</h3>
+            <input type="text" id="submitName" placeholder="工具名称">
+            <input type="text" id="submitUrl" placeholder="网址 URL">
+            <textarea id="submitDesc" placeholder="简单描述" rows="3"></textarea>
+            <div class="modal-buttons">
+                <button class="modal-btn" onclick="closeSubmitModal()">取消</button>
+                <button class="modal-btn primary" onclick="submitTool()">提交</button>
             </div>
-            <div class="grid" id="grid-ai-image"></div>
-        </div>
-        
-        <div class="section" id="ai-code">
-            <div class="section-header">
-                <h2>⌨️ 编程辅助</h2>
-                <p class="section-desc">AI代码助手</p>
-            </div>
-            <div class="grid" id="grid-ai-code"></div>
-        </div>
-        
-        <div class="section" id="ai-agent">
-            <div class="section-header">
-                <h2>⚡ AI Agent</h2>
-                <p class="section-desc">自动化任务执行</p>
-            </div>
-            <div class="grid" id="grid-ai-agent"></div>
-        </div>
-        
-        <!-- OhMyToolbox区 -->
-        <div class="section" id="tg-all">
-            <div class="section-header">
-                <h2>📡 全部OhMyToolbox</h2>
-                <p class="section-desc">Telegram 频道、群组、机器人</p>
-            </div>
-            <div class="grid" id="grid-tg-all"></div>
-        </div>
-        
-        <div class="section" id="tg-news">
-            <div class="section-header">
-                <h2>📰 资讯频道</h2>
-                <p class="section-desc">区块链与币圈资讯</p>
-            </div>
-            <div class="grid" id="grid-tg-news"></div>
-        </div>
-        
-        <div class="section" id="tg-trading">
-            <div class="section-header">
-                <h2>📈 交易社区</h2>
-                <p class="section-desc">交易信号与分析</p>
-            </div>
-            <div class="grid" id="grid-tg-trading"></div>
-        </div>
-        
-        <div class="section" id="tg-tech">
-            <div class="section-header">
-                <h2>💻 技术社区</h2>
-                <p class="section-desc">开发者技术频道</p>
-            </div>
-            <div class="grid" id="grid-tg-tech"></div>
-        </div>
-        
-        <div class="section" id="tg-group">
-            <div class="section-header">
-                <h2>👥 社群</h2>
-                <p class="section-desc">交流群组</p>
-            </div>
-            <div class="grid" id="grid-tg-group"></div>
-        </div>
-        
-        <div class="section" id="tg-bot">
-            <div class="section-header">
-                <h2>🤖 TG机器人</h2>
-                <p class="section-desc">实用机器人</p>
-            </div>
-            <div class="grid" id="grid-tg-bot"></div>
         </div>
     </div>
     
     <script>
+        // 数据
         const aiTools = [
-            { name: 'Claude', desc: 'Anthropic 旗舰AI模型，推理能力强，代码能力顶级', type: 'chat', icon: '🧠', link: 'https://claude.ai' },
-            { name: 'ChatGPT', desc: 'OpenAI GPT-4，对话生成顶级，生态丰富', type: 'chat', icon: '💬', link: 'https://chat.openai.com' },
-            { name: 'DeepSeek', desc: '国产大模型，开源且免费，API价格低', type: 'chat', icon: '🔮', link: 'https://chat.deepseek.com' },
-            { name: 'Grok', desc: 'xAI 出品，实时信息搜索强，幽默感足', type: 'chat', icon: '🚀', link: 'https://x.com/i/grok' },
-            { name: 'Gemini', desc: 'Google 多模态AI，图片理解能力强', type: 'chat', icon: '🌟', link: 'https://gemini.google.com' },
-            { name: 'Midjourney', desc: '最强AI图像生成，画质细腻逼真', type: 'image', icon: '🎨', link: 'https://www.midjourney.com' },
-            { name: 'DALL-E', desc: 'OpenAI 图像生成，与GPT深度集成', type: 'image', icon: '🖼️', link: 'https://openai.com/dall-e-3' },
-            { name: 'Leonardo', desc: '开源AI绘画平台，免费额度多', type: 'image', icon: '🎭', link: 'https://leonardo.ai' },
-            { name: 'Cursor', desc: 'AI代码编辑器，编程效率翻倍，社区活跃', type: 'code', icon: '⌨️', link: 'https://cursor.sh' },
+            { name: 'Claude', desc: 'Anthropic 旗舰AI模型，推理能力强', type: 'chat', icon: '🧠', hot: true, link: 'https://claude.ai' },
+            { name: 'ChatGPT', desc: 'OpenAI GPT-4，对话生成顶级', type: 'chat', icon: '💬', hot: true, link: 'https://chat.openai.com' },
+            { name: 'DeepSeek', desc: '国产大模型，开源且免费', type: 'chat', icon: '🔮', link: 'https://chat.deepseek.com' },
+            { name: 'Grok', desc: 'xAI 出品，实时信息搜索强', type: 'chat', icon: '🚀', link: 'https://x.com/i/grok' },
+            { name: 'Gemini', desc: 'Google 多模态AI', type: 'chat', icon: '🌟', link: 'https://gemini.google.com' },
+            { name: 'Midjourney', desc: '最强AI图像生成', type: 'image', icon: '🎨', hot: true, link: 'https://www.midjourney.com' },
+            { name: 'DALL-E', desc: 'OpenAI 图像生成', type: 'image', icon: '🖼️', link: 'https://openai.com/dall-e-3' },
+            { name: 'Leonardo', desc: '开源AI绘画平台', type: 'image', icon: '🎭', link: 'https://leonardo.ai' },
+            { name: 'Cursor', desc: 'AI代码编辑器，编程效率翻倍', type: 'code', icon: '⌨️', hot: true, link: 'https://cursor.sh' },
             { name: 'Windsurf', desc: 'AI编程助手，Flow模式创新', type: 'code', icon: '💻', link: 'https://windsurf.ai' },
-            { name: 'V0', desc: 'Vercel 前端代码生成，React神器', type: 'code', icon: '⚛️', link: 'https://v0.dev' },
-            { name: 'Manus', desc: 'AI Agent，自动执行任务，多代理协作', type: 'agent', icon: '⚡', link: 'https://manus.im' },
-            { name: 'Perplexity', desc: 'AI搜索，实时信息整合，学术神器', type: 'agent', icon: '🔍', link: 'https://www.perplexity.ai' },
-            { name: 'Devin', desc: 'AI程序员，独立完成项目，惊艳业界', type: 'agent', icon: '🛠️', link: 'https://devin.ai' },
+            { name: 'V0', desc: 'Vercel 前端代码生成', type: 'code', icon: '⚛️', link: 'https://v0.dev' },
+            { name: 'Manus', desc: 'AI Agent，自动执行任务', type: 'agent', icon: '⚡', hot: true, link: 'https://manus.im' },
+            { name: 'Perplexity', desc: 'AI搜索，实时信息整合', type: 'agent', icon: '🔍', link: 'https://www.perplexity.ai' },
+            { name: 'Devin', desc: 'AI程序员，独立完成项目', type: 'agent', icon: '🛠️', link: 'https://devin.ai' },
         ];
         
         const tgChannels = [
-            { name: '金色财经', desc: '区块链行业头部媒体，资讯全面专业', cat: 'news', icon: '📰', link: 'https://t.me/jinse' },
-            { name: '币世界', desc: '实时币圈快讯，24小时更新', cat: 'news', icon: '⚡', link: 'https://t.me/bishijie' },
-            { name: '火星财经', desc: '区块链资讯平台，深度报道', cat: 'news', icon: '🔥', link: 'https://t.me/marsfinance' },
-            { name: 'PANews', desc: '区块链媒体，数据分析强', cat: 'news', icon: '📡', link: 'https://t.me/panews' },
-            { name: 'Odaily', desc: '星球日报，Web3垂直媒体', cat: 'news', icon: '🌍', link: 'https://t.me/odaily' },
-            { name: '合约帝', desc: '合约交易社区，信号准确', cat: 'trading', icon: '📊', link: 'https://t.me/jiayoux' },
-            { name: 'TradingView', desc: '全球交易者社区，图表神器', cat: 'trading', icon: '📈', link: 'https://t.me/tradingview' },
-            { name: 'BTCmaster', desc: '比特币价格分析，技术流', cat: 'trading', icon: '₿', link: 'https://t.me/btcmaster' },
-            { name: '币coin', desc: '合约信号社区，跟单首选', cat: 'trading', icon: '🪙', link: 'https://t.me/bicointv' },
-            { name: 'GitHub', desc: '开发者技术社区，开源项目', cat: 'tech', icon: '🐙', link: 'https://t.me/github' },
-            { name: 'V2EX', desc: '程序员讨论社区，氛围好', cat: 'tech', icon: '💬', link: 'https://t.me/v2ex' },
-            { name: '掘金', desc: '技术社区，帮你提升', cat: 'tech', icon: '⛏️', link: 'https://t.me/juejin' },
-            { name: 'Python中文社区', desc: 'Python技术交流，新人友好', cat: 'tech', icon: '🐍', link: 'https://t.me/pythoncn' },
-            { name: 'Telegram 中文群', desc: '官方中文社区', cat: 'group', icon: '👥', link: 'https://t.me/telegramc' },
-            { name: '币圈研究院', desc: '价值投资社区，深度分析', cat: 'group', icon: '📚', link: 'https://t.me/biquanyjs' },
-            { name: 'DeFi讨论群', desc: '去中心化金融，热门项目', cat: 'group', icon: '🔗', link: 'https://t.me/defichain' },
-            { name: '@ControllerBot', desc: '群组管理机器人，管理员必备', cat: 'bot', icon: '🎛️', link: 'https://t.me/ControllerBot' },
-            { name: '@BotFather', desc: '机器人创建工具，自定义Bot', cat: 'bot', icon: '🤖', link: 'https://t.me/BotFather' },
-            { name: '@SpamBot', desc: '检测垃圾消息，群防黑科技', cat: 'bot', icon: '🛡️', link: 'https://t.me/SpamBot' },
-            { name: '@天气机器人', desc: '天气查询，生活小助手', cat: 'bot', icon: '🌤️', link: 'https://t.me/wetbt' },
+            { name: '金色财经', desc: '区块链行业头部媒体', type: 'news', icon: '📰', link: 'https://t.me/jinse' },
+            { name: '币世界', desc: '实时币圈快讯', type: 'news', icon: '⚡', link: 'https://t.me/bishijie' },
+            { name: '火星财经', desc: '区块链资讯平台', type: 'news', icon: '🔥', link: 'https://t.me/marsfinance' },
+            { name: 'PANews', desc: '区块链媒体', type: 'news', icon: '📡', link: 'https://t.me/panews' },
+            { name: 'Odaily', desc: '星球日报', type: 'news', icon: '🌍', link: 'https://t.me/odaily' },
+            { name: '合约帝', desc: '合约交易社区', type: 'trading', icon: '📊', link: 'https://t.me/jiayoux' },
+            { name: 'TradingView', desc: '全球交易者社区', type: 'trading', icon: '📈', link: 'https://t.me/tradingview' },
+            { name: 'BTCmaster', desc: '比特币价格分析', type: 'trading', icon: '₿', link: 'https://t.me/btcmaster' },
+            { name: '币coin', desc: '合约信号社区', type: 'trading', icon: '🪙', link: 'https://t.me/bicointv' },
+            { name: 'GitHub', desc: '开发者技术社区', type: 'tech', icon: '🐙', link: 'https://t.me/github' },
+            { name: 'V2EX', desc: '程序员讨论社区', type: 'tech', icon: '💬', link: 'https://t.me/v2ex' },
+            { name: '掘金', desc: '技术社区', type: 'tech', icon: '⛏️', link: 'https://t.me/juejin' },
+            { name: 'Python中文社区', desc: 'Python技术交流', type: 'tech', icon: '🐍', link: 'https://t.me/pythoncn' },
+            { name: 'Telegram 中文群', desc: '官方中文社区', type: 'tech', icon: '👥', link: 'https://t.me/telegramc' },
+            { name: '币圈研究院', desc: '价值投资社区', type: 'tech', icon: '📚', link: 'https://t.me/biquanyjs' },
+            { name: '@BotFather', desc: '机器人创建工具', type: 'tech', icon: '🤖', link: 'https://t.me/BotFather' },
         ];
         
-        function renderCard(item) {
+        // 收藏功能
+        let favorites = JSON.parse(localStorage.getItem('ohmytoolbox_favorites') || '[]');
+        let currentFilter = 'all';
+        
+        // 渲染工具卡片
+        function renderTool(tool, isFavorite = false) {
+            const hotBadge = tool.hot ? '<span class="hot-badge">🔥 热门</span>' : '';
+            const favClass = favorites.includes(tool.name) ? 'active' : '';
             return `
-                <div class="card" onclick="window.open('${item.link}','_blank')">
-                    <div class="card-top">
-                        <div class="card-icon">${item.icon}</div>
-                        <div class="card-name">${item.name}</div>
+                <div class="tool-card ${favClass}" onclick="window.open('${tool.link}','_blank')">
+                    ${hotBadge}
+                    <div class="tool-top">
+                        <div class="tool-icon">${tool.icon}</div>
+                        <div class="tool-name">${tool.name}</div>
+                        <button class="favorite-btn ${favClass}" onclick="event.stopPropagation();toggleFav('${tool.name}')">❤️</button>
                     </div>
-                    <div class="card-desc">${item.desc}</div>
-                    <span class="card-link">访问 →</span>
+                    <div class="tool-desc">${tool.desc}</div>
+                    <div class="tool-tags">
+                        <span class="tool-tag">${tool.type}</span>
+                    </div>
+                    <span class="tool-link">访问 →</span>
                 </div>
             `;
         }
         
-        function renderList(data, filter = '') {
-            if (!data.length) return '<div class="empty">暂无结果</div>';
-            return data.filter(d => !filter || d.name.toLowerCase().includes(filter.toLowerCase()) || d.desc.includes(filter)).map(renderCard).join('');
+        // 初始化
+        function init() {
+            document.getElementById('totalTools').textContent = aiTools.length + tgChannels.length;
+            renderAll();
         }
         
-        // 渲染AI各分类
-        document.getElementById('grid-ai-all').innerHTML = renderList(aiTools);
-        document.getElementById('grid-ai-chat').innerHTML = renderList(aiTools.filter(a => a.type === 'chat'));
-        document.getElementById('grid-ai-image').innerHTML = renderList(aiTools.filter(a => a.type === 'image'));
-        document.getElementById('grid-ai-code').innerHTML = renderList(aiTools.filter(a => a.type === 'code'));
-        document.getElementById('grid-ai-agent').innerHTML = renderList(aiTools.filter(a => a.type === 'agent'));
-        
-        // 渲染TG各分类
-        document.getElementById('grid-tg-all').innerHTML = renderList(tgChannels);
-        document.getElementById('grid-tg-news').innerHTML = renderList(tgChannels.filter(t => t.cat === 'news'));
-        document.getElementById('grid-tg-trading').innerHTML = renderList(tgChannels.filter(t => t.cat === 'trading'));
-        document.getElementById('grid-tg-tech').innerHTML = renderList(tgChannels.filter(t => t.cat === 'tech'));
-        document.getElementById('grid-tg-group').innerHTML = renderList(tgChannels.filter(t => t.cat === 'group'));
-        document.getElementById('grid-tg-bot').innerHTML = renderList(tgChannels.filter(t => t.cat === 'bot'));
-        
-        // 导航点击
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-                item.classList.add('active');
-                document.getElementById(item.dataset.target).classList.add('active');
+        // 渲染全部
+        function renderAll() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            
+            // AI工具
+            let filteredAI = aiTools.filter(t => {
+                const matchFilter = currentFilter === 'all' || t.type === currentFilter;
+                const matchSearch = !search || t.name.toLowerCase().includes(search) || t.desc.includes(search);
+                return matchFilter && matchSearch;
             });
-        });
+            document.getElementById('aiGrid').innerHTML = filteredAI.map(t => renderTool(t)).join('') || '<div class="empty">暂无结果</div>';
+            
+            // TG资源
+            let filteredTG = tgChannels.filter(t => {
+                const matchFilter = currentFilter === 'all' || t.type === currentFilter;
+                const matchSearch = !search || t.name.toLowerCase().includes(search) || t.desc.includes(search);
+                return matchFilter && matchSearch;
+            });
+            document.getElementById('tgGrid').innerHTML = filteredTG.map(t => renderTool(t)).join('') || '<div class="empty">暂无结果</div>';
+            
+            // 收藏
+            const favTools = [...aiTools, ...tgChannels].filter(t => favorites.includes(t.name));
+            document.getElementById('favoritesGrid').innerHTML = favTools.map(t => renderTool(t)).join('') || '<div class="empty">还没有收藏</div>';
+        }
         
-        // 搜索
-        document.getElementById('searchInput').addEventListener('input', e => {
-            const q = e.target.value.toLowerCase();
-            document.getElementById('grid-ai-all').innerHTML = renderList(aiTools, q);
-            document.getElementById('grid-tg-all').innerHTML = renderList(tgChannels, q);
-        });
+        // 筛选
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-tag').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderAll();
+        }
+        
+        function filterTools() {
+            renderAll();
+        }
+        
+        // 收藏
+        function toggleFav(name) {
+            if (favorites.includes(name)) {
+                favorites = favorites.filter(f => f !== name);
+            } else {
+                favorites.push(name);
+            }
+            localStorage.setItem('ohmytoolbox_favorites', JSON.stringify(favorites));
+            renderAll();
+            updateFavBtn();
+        }
+        
+        function updateFavBtn() {
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                const name = btn.closest('.tool-card').querySelector('.tool-name').textContent;
+                btn.classList.toggle('active', favorites.includes(name));
+            });
+        }
+        
+        function showFavorites() {
+            document.getElementById('favoritesSection').classList.toggle('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // 主题
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            const btn = document.getElementById('themeBtn');
+            btn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+        }
+        
+        // 提交弹窗
+        function openSubmitModal() {
+            document.getElementById('submitModal').classList.add('active');
+        }
+        
+        function closeSubmitModal() {
+            document.getElementById('submitModal').classList.remove('active');
+        }
+        
+        function submitTool() {
+            const name = document.getElementById('submitName').value;
+            const url = document.getElementById('submitUrl').value;
+            const desc = document.getElementById('submitDesc').value;
+            
+            if (name && url) {
+                alert('感谢提交! 审核后会上线。');
+                closeSubmitModal();
+                document.getElementById('submitName').value = '';
+                document.getElementById('submitUrl').value = '';
+                document.getElementById('submitDesc').value = '';
+            } else {
+                alert('请填写名称和网址');
+            }
+        }
+        
+        init();
     </script>
 </body>
 </html>
