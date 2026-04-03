@@ -1,178 +1,56 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OhMyToolbox | The Ultimate Resource Hub - AI, Tech & Tools</title>
-    <meta name="description" content="OhMyToolbox - 精选AI Tools、Communities、Productivity导航。发现ChatGPT、Claude、Midjourney等热门工具。">
+    <title>OhMyToolbox | The Ultimate Resource Hub</title>
+    <meta name="description" content="Curated AI tools, communities and productivity resources.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --accent: #22d3ee;
-            --bg: #0f0f14;
-            --card: #18181f;
-            --border: #27272a;
-            --text: #fafafa;
-            --text-dim: #a1a1aa;
-            --green: #22c55e;
-            --orange: #f97316;
-            --pink: #ec4899;
-            --purple: #a855f7;
-            --yellow: #eab308;
-        }
-        body { 
-            font-family: 'Outfit', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.15), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(34,211,238,0.1), transparent);
-        }
-        
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 40px;
-            background: rgba(24,24,31,0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        :root { --primary: #6366f1; --bg: #0f0f14; --card: #18181f; --border: #27272a; --text: #fafafa; --text-dim: #a1a1aa; --green: #22c55e; --orange: #f97316; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: var(--card); border-bottom: 1px solid var(--border); }
         .brand { display: flex; align-items: center; gap: 12px; }
-        .brand-icon {
-            width: 42px; height: 42px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px;
-            box-shadow: 0 4px 20px rgba(99,102,241,0.3);
-        }
-        .brand-text {
-            font-size: 22px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff 0%, var(--text-dim) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .brand-text span { color: var(--accent); }
-        
+        .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), #22d3ee); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .brand-text { font-size: 22px; font-weight: 800; }
+        .brand-text span { color: #22d3ee; }
         .nav-actions { display: flex; gap: 12px; }
-        .nav-btn {
-            width: 40px; height: 40px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            cursor: pointer;
-            font-size: 18px;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s;
-        }
-        .nav-btn:hover { border-color: var(--primary); transform: scale(1.05); }
-        .submit-btn {
-            padding: 10px 24px;
-            border-radius: 12px;
-            border: none;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #fff;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 4px 15px rgba(99,102,241,0.3);
-        }
-        
+        .nav-btn { width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); cursor: pointer; font-size: 18px; }
+        .submit-btn { padding: 10px 24px; border-radius: 12px; border: none; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; }
         .hero { text-align: center; padding: 60px 20px 40px; }
-        .hero h1 {
-            font-size: 48px; font-weight: 800; margin-bottom: 16px;
-        }
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
+        .hero h1 span { background: linear-gradient(135deg, var(--primary), #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero p { font-size: 18px; color: var(--text-dim); max-width: 600px; margin: 0 auto 30px; }
-        
-        .stats { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
-        .stat-box {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 20px 30px; text-align: center;
-        }
+        .stats { display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; }
+        .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px 30px; text-align: center; }
         .stat-num { font-size: 32px; font-weight: 700; color: var(--primary); }
         .stat-label { color: var(--text-dim); font-size: 14px; margin-top: 4px; }
-        
         .search-container { max-width: 600px; margin: 0 auto 30px; position: relative; }
-        .search-input { 
-            width: 100%; padding: 20px 24px 20px 56px; 
-            border-radius: 20px; border: 1px solid var(--border); 
-            background: var(--card); color: var(--text); font-size: 16px;
-        }
-        .search-input:focus { outline: none; border-color: var(--primary); }
+        .search-input { width: 100%; padding: 20px 24px 20px 56px; border-radius: 20px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 16px; }
         .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-dim); }
-        
         .tags { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 50px; }
-        .tag {
-            padding: 10px 20px; border-radius: 24px;
-            border: 1px solid var(--border); background: var(--card);
-            color: var(--text-dim); cursor: pointer; font-size: 14px;
-        }
-        .tag:hover, .tag.active { border-color: var(--primary); color: var(--text); }
+        .tag { padding: 10px 20px; border-radius: 24px; border: 1px solid var(--border); background: var(--card); color: var(--text-dim); cursor: pointer; font-size: 14px; }
         .tag.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-        
         .section-header { display: flex; align-items: center; gap: 12px; margin: 50px 0 24px; padding: 0 20px; max-width: 1200px; margin: 50px auto 24px; }
-        .section-icon { font-size: 28px; }
-        .section-title { font-size: 22px; font-weight: 700; }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 0 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .card {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 20px; padding: 24px; cursor: pointer;
-            transition: all 0.3s; position: relative;
-        }
+        .section-title { font-size: 24px; font-weight: 700; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 0 20px; max-width: 1200px; margin: 0 auto; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.3s; }
         .card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        
         .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-        .card-icon { 
-            width: 52px; height: 52px; 
-            background: linear-gradient(135deg, #27272a, #18181f);
-            border-radius: 14px; display: flex; align-items: center; justify-content: center;
-            font-size: 26px;
-        }
+        .card-icon { width: 52px; height: 52px; background: linear-gradient(135deg, #27272a, #18181f); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
         .card-name { font-size: 18px; font-weight: 600; flex: 1; }
         .card-fav { font-size: 22px; background: none; border: none; cursor: pointer; opacity: 0.4; }
         .card-fav:hover, .card-fav.active { opacity: 1; }
         .card-fav.active { color: var(--orange); }
-        
         .card-desc { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
         .card-footer { display: flex; align-items: center; justify-content: space-between; }
         .card-tag { font-size: 12px; padding: 6px 12px; border-radius: 20px; background: rgba(99,102,241,0.1); color: var(--primary); }
-        .card-link { color: var(--accent); font-size: 14px; font-weight: 500; }
-        
-        .hot-tag {
-            position: absolute; top: 12px; right: 12px;
-            font-size: 11px; padding: 5px 12px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, var(--orange), #fb923c);
-            color: #fff; font-weight: 600;
-        }
-        
+        .card-link { color: #22d3ee; font-size: 14px; font-weight: 500; }
+        .hot-tag { position: absolute; top: 12px; right: 12px; font-size: 11px; padding: 5px 12px; border-radius: 20px; background: linear-gradient(135deg, var(--orange), #fb923c); color: #fff; font-weight: 600; }
         .favorites-area { display: none; margin: 40px auto; padding: 30px; background: var(--card); border-radius: 24px; border: 1px solid var(--border); max-width: 1200px; }
         .favorites-area.active { display: block; }
-        
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; align-items: center; justify-content: center; }
         .modal.active { display: flex; }
         .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; max-width: 480px; width: 90%; }
@@ -181,15 +59,8 @@
         .modal-btns { display: flex; gap: 12px; justify-content: flex-end; }
         .modal-btn { padding: 12px 24px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; font-weight: 500; }
         .modal-btn.primary { background: var(--primary); color: #fff; border: none; }
-        
         footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 14px; border-top: 1px solid var(--border); margin-top: 60px; }
-        
-        @media (max-width: 768px) {
-            .navbar { padding: 12px 20px; }
-            .hero h1 { font-size: 32px; }
-            .stats { gap: 15px; }
-            .grid { grid-template-columns: 1fr; padding: 0 15px; }
-        }
+        @media (max-width: 768px) { .hero h1 { font-size: 32px; } .grid { grid-template-columns: 1fr; } }
         .empty { text-align: center; padding: 50px; color: var(--text-dim); }
     </style>
 </head>
@@ -201,264 +72,106 @@
         </div>
         <div class="nav-actions">
             <button class="nav-btn" onclick="toggleFavView()">❤️</button>
-            <button class="lang-btn" onclick="toggleLang()" style="padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:14px;">🌐 EN/中</button>
-            <button class="submit-btn" onclick="openModal()">+ 提交工具</button>
+            <button class="submit-btn" onclick="openModal()">+ Submit</button>
         </div>
     </nav>
-    
     <section class="hero">
         <h1>Discover the Best <span>Tools & Resources</span></h1>
-        <p>Curated resources from around the world. AI tools, tech communities, productivity apps and more.</p>
-        
+        <p>Curated resources from around the world.</p>
         <div class="stats">
-            <div class="stat-box"><div class="stat-num" id="totalNum">50</div><div class="stat-label">curated resources</div></div>
-            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">AI Tools</div></div>
-            <div class="stat-box"><div class="stat-num">40+</div><div class="stat-label">Communities</div></div>
-            <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">Productivity</div></div>
+            <div class="stat-box"><div class="stat-num" id="totalNum">0</div><div class="stat-label">Total</div></div>
+            <div class="stat-box"><div class="stat-num">19</div><div class="stat-label">AI Tools</div></div>
+            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">Communities</div></div>
+            <div class="stat-box"><div class="stat-num">12</div><div class="stat-label">Productivity</div></div>
         </div>
-        
         <div class="search-container">
             <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" placeholder="Search tools, communities..." id="search" oninput="render()">
+            <input type="text" class="search-input" placeholder="Search..." id="search" oninput="render()">
         </div>
-        
         <div class="tags">
-            <div class="tag active" onclick="setFilter('all')">全部</div>
-            <div class="tag" onclick="setFilter('ai')">🤖 AI Tools</div>
-            <div class="tag" onclick="setFilter('tg')">📡 Communities</div>
-            <div class="tag" onclick="setFilter('chat')">💬 对话</div>
-            <div class="tag" onclick="setFilter('image')">🎨 图像</div>
-            <div class="tag" onclick="setFilter('code')">⌨️ 编程</div>
-            <div class="tag" onclick="setFilter('news')">📰 资讯</div>
-            <div class="tag" onclick="setFilter('trading')">📈 交易</div>
-            <div class="tag" onclick="setFilter('productivity')">⚡ 效率</div>
+            <div class="tag active" onclick="setFilter('all')">All</div>
+            <div class="tag" onclick="setFilter('ai')">🤖 AI</div>
+            <div class="tag" onclick="setFilter('tg')">📡</div>
+            <div class="tag" onclick="setFilter('productivity')">⚡</div>
         </div>
     </section>
-    
     <div class="favorites-area" id="favArea">
-        <div class="section-header"><span class="section-icon">❤️</span><div class="section-title">我的收藏</div></div>
+        <div class="section-header"><div class="section-title">❤️ My Favorites</div></div>
         <div class="grid" id="favGrid"></div>
     </div>
-    
-    <div class="section-header"><span class="section-icon">🤖</span><div class="section-title">AI Tools</div></div>
+    <div class="section-header"><div class="section-title">🤖 AI Tools</div></div>
     <div class="grid" id="aiGrid"></div>
-    
-    <div class="section-header"><span class="section-icon">📡</span><div class="section-title">Communities</div></div>
+    <div class="section-header"><div class="section-title">📡 Communities</div></div>
     <div class="grid" id="tgGrid"></div>
-    
-    <div class="section-header"><span class="section-icon">⚡</span><div class="section-title">Productivity</div></div>
+    <div class="section-header"><div class="section-title">⚡ Productivity</div></div>
     <div class="grid" id="proGrid"></div>
-    
     <div class="modal" id="modal">
         <div class="modal-box">
-            <h3>提交新工具</h3>
-            <input type="text" id="name" placeholder="工具名称">
-            <input type="url" id="url" placeholder="网址 https://...">
-            <textarea id="desc" placeholder="简单描述" rows="3"></textarea>
+            <h3>Submit New Tool</h3>
+            <input type="text" id="name" placeholder="Tool name">
+            <input type="url" id="url" placeholder="URL">
+            <textarea id="desc" placeholder="Description" rows="3"></textarea>
             <div class="modal-btns">
-                <button class="modal-btn" onclick="closeModal()">取消</button>
-                <button class="modal-btn primary" onclick="submit()">提交</button>
+                <button class="modal-btn" onclick="closeModal()">Cancel</button>
+                <button class="modal-btn primary" onclick="submit()">Submit</button>
             </div>
         </div>
     </div>
-    
-    <footer>
-        <p>© 2026 OhMyToolbox - Global · Discover more, achieve more</p>
-    </footer>
-    
-    
+    <footer><p>© 2026 OhMyToolbox</p></footer>
     <script>
-// OhMyToolbox Data
-const aiTools = [
-    { name: 'Claude', name_zh: 'Claude', desc: 'Anthropic flagship AI model', name_zh_desc: 'Anthropic 旗舰AI模型', type: 'ai,chat', icon: '🧠', hot: true, link: 'https://claude.ai' },
-    { name: 'ChatGPT', name_zh: 'ChatGPT', desc: 'OpenAI GPT-4', name_zh_desc: 'OpenAI GPT-4', type: 'ai,chat', icon: '💬', hot: true, link: 'https://chat.openai.com' },
-    { name: 'DeepSeek', name_zh: 'DeepSeek', desc: 'Open source AI model', name_zh_desc: '国产开源大模型', type: 'ai,chat', icon: '🔮', link: 'https://chat.deepseek.com' },
-    { name: 'Grok', name_zh: 'Grok', desc: 'xAI real-time search', name_zh_desc: 'xAI 实时搜索', type: 'ai,chat', icon: '🚀', link: 'https://x.com/i/grok' },
-    { name: 'Gemini', name_zh: 'Gemini', desc: 'Google multimodal AI', name_zh_desc: 'Google 多模态AI', type: 'ai,chat', icon: '🌟', link: 'https://gemini.google.com' },
-    { name: 'Midjourney', name_zh: 'Midjourney', desc: 'Best AI image generation', name_zh_desc: '最强AI图像生成', type: 'ai,image', icon: '🎨', hot: true, link: 'https://www.midjourney.com' },
-    { name: 'DALL-E', name_zh: 'DALL-E', desc: 'OpenAI image generator', name_zh_desc: 'OpenAI 图像生成', type: 'ai,image', icon: '🖼️', link: 'https://openai.com/dall-e-3' },
-    { name: 'Leonardo', name_zh: 'Leonardo', desc: 'Open source AI art', name_zh_desc: '开源AI绘画平台', type: 'ai,image', icon: '🎭', link: 'https://leonardo.ai' },
-    { name: 'Cursor', name_zh: 'Cursor', desc: 'AI code editor', name_zh_desc: 'AI代码编辑器', type: 'ai,code', icon: '⌨️', hot: true, link: 'https://cursor.sh' },
-    { name: 'Windsurf', name_zh: 'Windsurf', desc: 'AI programming assistant', name_zh_desc: 'AI编程助手', type: 'ai,code', icon: '💻', link: 'https://windsurf.ai' },
-    { name: 'V0', name_zh: 'V0', desc: 'Vercel frontend generator', name_zh_desc: 'Vercel前端代码生成', type: 'ai,code', icon: '⚛️', link: 'https://v0.dev' },
-    { name: 'Manus', name_zh: 'Manus', desc: 'AI Agent auto tasks', name_zh_desc: 'AI Agent自动任务', type: 'ai,agent', icon: '⚡', hot: true, link: 'https://manus.im' },
-    { name: 'Perplexity', name_zh: 'Perplexity', desc: 'AI search engine', name_zh_desc: 'AI搜索引擎', type: 'ai,agent', icon: '🔍', link: 'https://www.perplexity.ai' },
-    { name: 'Devin', name_zh: 'Devin', desc: 'AI programmer', name_zh_desc: 'AI程序员', type: 'ai,agent', icon: '🛠️', link: 'https://devin.ai' },
-    { name: 'Gamma', name_zh: 'Gamma', desc: 'AI PPT maker', name_zh_desc: 'AI PPT制作', type: 'ai,productivity', icon: '📊', link: 'https://gamma.app' },
-    { name: 'Notion AI', name_zh: 'Notion AI', desc: 'AI writing assistant', name_zh_desc: 'AI笔记辅助', type: 'ai,productivity', icon: '📝', link: 'https://notion.so' },
-    { name: 'Runway', name_zh: 'Runway', desc: 'AI video generation', name_zh_desc: 'AI视频生成', type: 'ai,productivity', icon: '🎬', link: 'https://runwayml.com' },
-    { name: 'Grammarly', name_zh: 'Grammarly', desc: 'AI writing checker', name_zh_desc: 'AI写作辅助', type: 'ai,productivity', icon: '✍️', link: 'https://grammarly.com' },
-];
-
-const tgChannels = [
-    { name: 'OpenAI', name_zh: 'OpenAI', desc: 'Official OpenAI updates', name_zh_desc: 'OpenAI官方频道', type: 'tg,ai', icon: '🤖', hot: true, link: 'https://t.me/openai' },
-    { name: 'Anthropic', name_zh: 'Anthropic', desc: 'Claude AI official', name_zh_desc: 'Claude官方', type: 'tg,ai', icon: '🧠', link: 'https://t.me/anthropic' },
-    { name: 'GitHub', name_zh: 'GitHub', desc: 'Developer community', name_zh_desc: '开发者技术社区', type: 'tg,dev', icon: '🐙', hot: true, link: 'https://t.me/github' },
-    { name: 'V2EX', name_zh: 'V2EX', desc: 'Chinese dev community', name_zh_desc: '程序员讨论社区', type: 'tg,dev', icon: '💬', link: 'https://t.me/v2ex' },
-    { name: 'Stack Overflow', name_zh: 'Stack Overflow', desc: 'Tech Q&A', name_zh_desc: '技术问答', type: 'tg,dev', icon: '📚', link: 'https://t.me/stackoverflow' },
-    { name: 'Ethereum', name_zh: '以太坊', desc: 'Ethereum official', name_zh_desc: '以太坊官方', type: 'tg,crypto', icon: '💎', hot: true, link: 'https://t.me/ethereum' },
-    { name: 'Bitcoin', name_zh: '比特币', desc: 'Bitcoin official', name_zh_desc: '比特币官方', type: 'tg,crypto', icon: '₿', link: 'https://t.me/Bitcoin' },
-    { name: 'Vitalik', name_zh: 'Vitalik', desc: 'Ethereum founder', name_zh_desc: '以太坊创始人', type: 'tg,crypto', icon: '👤', link: 'https://t.me/vitalikbuterin' },
-    { name: 'Product Hunt', name_zh: 'Product Hunt', desc: 'Product discovery', name_zh_desc: '产品发现社区', type: 'tg,product', icon: '🔍', hot: true, link: 'https://t.me/producthunt' },
-    { name: 'Figma', name_zh: 'Figma', desc: 'Design community', name_zh_desc: '设计工具社区', type: 'tg,design', icon: '🎨', link: 'https://t.me/figma' },
-    { name: 'TechCrunch', name_zh: 'TechCrunch', desc: 'Tech news', name_zh_desc: '科技媒体', type: 'tg,news', icon: '📰', link: 'https://t.me/techcrunch' },
-    { name: 'Notion', name_zh: 'Notion', desc: 'All-in-one workspace', name_zh_desc: '全能笔记工具', type: 'tg,tool', icon: '📒', hot: true, link: 'https://t.me/Notion' },
-    { name: 'Raycast', name_zh: 'Raycast', desc: 'Mac launcher', name_zh_desc: 'Mac效率启动器', type: 'tg,tool', icon: '⚡', hot: true, link: 'https://t.me/raycast' },
-    { name: 'Telegram', name_zh: 'Telegram', desc: 'Messaging app', name_zh_desc: '即时通讯工具', type: 'tg,tool', icon: '✈️', hot: true, link: 'https://t.me/telegram' },
-];
-
-const productivity = [
-    { name: 'Notion', name_zh: 'Notion', desc: 'All-in-one workspace', name_zh_desc: '全能笔记工具', type: 'productivity', icon: '📒', hot: true, link: 'https://notion.so' },
-    { name: 'Raycast', name_zh: 'Raycast', desc: 'Mac efficiency launcher', name_zh_desc: 'Mac效率启动器', type: 'productivity', icon: '⚡', hot: true, link: 'https://raycast.com' },
-    { name: 'Arc Browser', name_zh: 'Arc Browser', desc: 'AI-enhanced browser', name_zh_desc: 'AI增强浏览器', type: 'productivity', icon: '🌐', link: 'https://arc.net' },
-    { name: 'Linear', name_zh: 'Linear', desc: 'Project management', name_zh_desc: '项目管理工具', type: 'productivity', icon: '📋', link: 'https://linear.app' },
-    { name: 'Figma', name_zh: 'Figma', desc: 'Collaborative UI design', name_zh_desc: '协作UI设计工具', type: 'productivity', icon: '🎯', hot: true, link: 'https://figma.com' },
-    { name: 'Canva', name_zh: 'Canva', desc: 'Online design tool', name_zh_desc: '在线设计工具', type: 'productivity', icon: '🎨', link: 'https://canva.com' },
-    { name: 'Slack', name_zh: 'Slack', desc: 'Team collaboration', name_zh_desc: '团队协作通讯', type: 'productivity', icon: '💬', link: 'https://slack.com' },
-    { name: 'Zoom', name_zh: 'Zoom', desc: 'Video conferencing', name_zh_desc: '视频会议工具', type: 'productivity', icon: '📹', link: 'https://zoom.us' },
-    { name: 'Grammarly', name_zh: 'Grammarly', desc: 'AI writing assistant', name_zh_desc: 'AI写作辅助', type: 'productivity', icon: '✍️', link: 'https://grammarly.com' },
-    { name: 'Loom', name_zh: 'Loom', desc: 'Screen recording', name_zh_desc: '屏幕录制工具', type: 'productivity', icon: '📹', link: 'https://loom.com' },
-    { name: 'Obsidian', name_zh: 'Obsidian', desc: 'Markdown knowledge base', name_zh_desc: 'Markdown笔记', type: 'productivity', icon: '💎', link: 'https://obsidian.md' },
-    { name: 'ClickUp', name_zh: 'ClickUp', desc: 'All-in-one PM', name_zh_desc: '一体化项目管理', type: 'productivity', icon: '✅', link: 'https://clickup.com' },
-];
-
-// Export for global use
-
-
-
-        
-
-
-
-
-        
-        
-        
-        
-        
+        const aiTools = [
+            {name:'Claude',name_zh:'Claude',desc:'Anthropic flagship AI model',name_zh_desc:'Anthropic 旗舰AI模型',type:'ai,chat',icon:'🧠',hot:true,link:'https://claude.ai'},
+            {name:'ChatGPT',name_zh:'ChatGPT',desc:'OpenAI GPT-4',name_zh_desc:'OpenAI GPT-4',type:'ai,chat',icon:'💬',hot:true,link:'https://chat.openai.com'},
+            {name:'DeepSeek',name_zh:'DeepSeek',desc:'Open source AI model',name_zh_desc:'开源大模型',type:'ai,chat',icon:'🔮',link:'https://chat.deepseek.com'},
+            {name:'Midjourney',name_zh:'Midjourney',desc:'AI image generation',name_zh_desc:'AI图像生成',type:'ai,image',icon:'🎨',hot:true,link:'https://www.midjourney.com'},
+            {name:'Cursor',name_zh:'Cursor',desc:'AI code editor',name_zh_desc:'AI代码编辑器',type:'ai,code',icon:'⌨️',hot:true,link:'https://cursor.sh'},
+            {name:'Perplexity',name_zh:'Perplexity',desc:'AI search engine',name_zh_desc:'AI搜索引擎',type:'ai,agent',icon:'🔍',link:'https://www.perplexity.ai'},
+            {name:'Windsurf',name_zh:'Windsurf',desc:'AI programming assistant',name_zh_desc:'AI编程助手',type:'ai,code',icon:'💻',link:'https://windsurf.ai'},
+            {name:'V0',name_zh:'V0',desc:'Vercel frontend generator',name_zh_desc:'Vercel前端代码',type:'ai,code',icon:'⚛️',link:'https://v0.dev'},
+            {name:'Devin',name_zh:'Devin',desc:'AI programmer',name_zh_desc:'AI程序员',type:'ai,agent',icon:'🛠️',link:'https://devin.ai'},
+            {name:'Gamma',name_zh:'Gamma',desc:'AI PPT maker',name_zh_desc:'AI PPT制作',type:'ai,productivity',icon:'📊',link:'https://gamma.app'},
+        ];
+        const tgChannels = [
+            {name:'OpenAI',name_zh:'OpenAI',desc:'Official updates',name_zh_desc:'官方频道',type:'tg',icon:'🤖',hot:true,link:'https://t.me/openai'},
+            {name:'GitHub',name_zh:'GitHub',desc:'Developer community',name_zh_desc:'开发者社区',type:'tg',icon:'🐙',hot:true,link:'https://t.me/github'},
+            {name:'Product Hunt',name_zh:'Product Hunt',desc:'Product discovery',name_zh_desc:'产品发现',type:'tg',icon:'🔍',hot:true,link:'https://t.me/producthunt'},
+            {name:'Ethereum',name_zh:'以太坊',desc:'Ethereum official',name_zh_desc:'以太坊官方',type:'tg',icon:'💎',link:'https://t.me/ethereum'},
+            {name:'Telegram',name_zh:'Telegram',desc:'Messaging app',name_zh_desc:'通讯工具',type:'tg',icon:'✈️',link:'https://t.me/telegram'},
+        ];
+        const productivity = [
+            {name:'Notion',name_zh:'Notion',desc:'All-in-one workspace',name_zh_desc:'全能笔记',type:'productivity',icon:'📒',hot:true,link:'https://notion.so'},
+            {name:'Raycast',name_zh:'Raycast',desc:'Mac launcher',name_zh_desc:'效率启动器',type:'productivity',icon:'⚡',hot:true,link:'https://raycast.com'},
+            {name:'Figma',name_zh:'Figma',desc:'UI design tool',name_zh_desc:'UI设计',type:'productivity',icon:'🎯',hot:true,link:'https://figma.com'},
+            {name:'Linear',name_zh:'Linear',desc:'Project management',name_zh_desc:'项目管理',type:'productivity',icon:'📋',link:'https://linear.app'},
+            {name:'Slack',name_zh:'Slack',desc:'Team collaboration',name_zh_desc:'团队协作',type:'productivity',icon:'💬',link:'https://slack.com'},
+            {name:'Zoom',name_zh:'Zoom',desc:'Video conferencing',name_zh_desc:'视频会议',type:'productivity',icon:'📹',link:'https://zoom.us'},
+        ];
         let favs = JSON.parse(localStorage.getItem('omt_favs') || '[]');
         let filter = 'all';
         
         function render() {
             const s = document.getElementById('search').value.toLowerCase();
             document.getElementById('totalNum').textContent = aiTools.length + tgChannels.length + productivity.length;
-            
-            const f = (arr, cat) => arr.filter(t => {
-                const inCat = filter === 'all' || t.type.includes(filter) || (filter === 'ai' && t.type.includes('ai')) || (filter === 'tg' && t.type.includes('tg'));
-                return inCat && (!s || t.name.toLowerCase().includes(s) || t.desc.includes(s));
-            });
-            
-            document.getElementById('aiGrid').innerHTML = f(aiTools, 'ai').map(card).join('') || '<div class="empty">暂无结果</div>';
-            document.getElementById('tgGrid').innerHTML = f(tgChannels, 'tg').map(card).join('') || '<div class="empty">暂无结果</div>';
-            document.getElementById('proGrid').innerHTML = f(productivity, 'productivity').map(card).join('') || '<div class="empty">暂无结果</div>';
-            
+            const f = (arr) => arr.filter(t => (filter === 'all' || t.type?.includes(filter)) && (!s || t.name.toLowerCase().includes(s) || t.desc?.toLowerCase().includes(s)));
+            document.getElementById('aiGrid').innerHTML = f(aiTools).map(card).join('') || '<div class="empty">No results</div>';
+            document.getElementById('tgGrid').innerHTML = f(tgChannels).map(card).join('') || '<div class="empty">No results</div>';
+            document.getElementById('proGrid').innerHTML = f(productivity).map(card).join('') || '<div class="empty">No results</div>';
             const all = [...aiTools, ...tgChannels, ...productivity];
-            document.getElementById('favGrid').innerHTML = all.filter(t => favs.includes(t.name)).map(card).join('') || '<div class="empty">还没有收藏</div>';
+            document.getElementById('favGrid').innerHTML = all.filter(t => favs.includes(t.name)).map(card).join('') || '<div class="empty">No favorites</div>';
         }
         
         function card(t) {
-            const name = currentLang === 'zh' && t.name_zh ? t.name_zh : t.name;
-            const desc = currentLang === 'zh' && t.name_zh_desc ? t.name_zh_desc : t.desc;
-            const hot = t.hot ? '<span class="hot-tag">' + (currentLang === 'zh' ? '🔥 热门' : '🔥 Hot') + '</span>' : '';
-            const active = favs.includes(t.name) ? 'active' : '';
-            const visitText = currentLang === 'zh' ? '访问 →' : 'Visit →';
-            return `
-                <div class="card" onclick="window.open('${t.link}','_blank')">
-                    ${hot}
-                    <div class="card-header">
-                        <div class="card-icon">${t.icon}</div>
-                        <div class="card-name">${name}</div>
-                        <button class="card-fav ${active}" onclick="event.stopPropagation();toggle('${t.name}')">❤️</button>
-                    </div>
-                    <div class="card-desc">${desc}</div>
-                    <div class="card-footer">
-                        <span class="card-tag">${t.type?.split(',')[0] || t.type}</span>
-                        <span class="card-link">${visitText}</span>
-                    </div>
-                </div>
-            `;
+            return '<div class="card" onclick="window.open(\''+t.link+'\',\'_blank\')">'+(t.hot?'<span class="hot-tag">🔥 Hot</span>':'')+'<div class="card-header"><div class="card-icon">'+t.icon+'</div><div class="card-name">'+t.name+'</div><button class="card-fav '+(favs.includes(t.name)?'active':'')+'" onclick="event.stopPropagation();toggle(\''+t.name+'\')">❤️</button></div><div class="card-desc">'+t.desc+'</div><div class="card-footer"><span class="card-tag">'+t.type?.split(',')[0]+'</span><span class="card-link">Visit →</span></div></div>';
         }
         
-        function setFilter(f) {
-            filter = f;
-            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            render();
-        }
-        
-        function toggle(n) {
-            favs = favs.includes(n) ? favs.filter(x => x !== n) : [...favs, n];
-            localStorage.setItem('omt_favs', JSON.stringify(favs));
-            render();
-        }
-        
-        function toggleFavView() {
-            document.getElementById('favArea').classList.toggle('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
+        function setFilter(f) { filter = f; document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); event.target.classList.add('active'); render(); }
+        function toggle(n) { favs = favs.includes(n) ? favs.filter(x => x !== n) : [...favs, n]; localStorage.setItem('omt_favs', JSON.stringify(favs)); render(); }
+        function toggleFavView() { document.getElementById('favArea').classList.toggle('active'); window.scrollTo({top:0,behavior:'smooth'}); }
         function openModal() { document.getElementById('modal').classList.add('active'); }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
-        
-        function submit() {
-            const name = document.getElementById('name').value;
-            if (name) {
-                alert('感谢提交! 审核后上线。');
-                closeModal();
-                document.getElementById('name').value = '';
-                document.getElementById('url').value = '';
-                document.getElementById('desc').value = '';
-            }
-        }
+        function submit() { if(document.getElementById('name').value) { alert('Thanks!'); closeModal(); document.getElementById('name').value=''; document.getElementById('url').value=''; document.getElementById('desc').value=''; } }
         
         render();
-    
-        // Language translations
-        const translations = {
-            en: {
-                heroTitle: 'Discover the Best Tools & Resources',
-                heroDesc: 'Curated resources from around the world. AI tools, tech communities, productivity apps and more.',
-                searchPlaceholder: 'Search tools, communities...',
-                aiTools: 'AI Tools',
-                communities: 'Communities',
-                productivity: 'Productivity',
-                myFavorites: 'My Favorites',
-                visit: 'Visit →',
-                hot: '🔥 Hot',
-                noResults: 'No results',
-                noFavorites: 'No favorites yet'
-            },
-            zh: {
-                heroTitle: '发现你的万能工具箱',
-                heroDesc: '精选全球好用的AI工具、TG资源、效率软件，一个就够了。',
-                searchPlaceholder: '搜索工具...',
-                aiTools: 'AI工具',
-                communities: 'TG频道',
-                productivity: '效率软件',
-                myFavorites: '我的收藏',
-                visit: '访问 →',
-                hot: '🔥 热门',
-                noResults: '暂无结果',
-                noFavorites: '还没有收藏'
-            }
-        };
-        
-        let currentLang = 'en';
-        
-        function toggleLang() {
-            currentLang = currentLang === 'en' ? 'zh' : 'en';
-            updateLang();
-        }
-        
-        function updateLang() {
-            const t = translations[currentLang];
-            document.querySelector('.hero h1').innerHTML = t.heroTitle;
-            document.querySelector('.hero p').textContent = t.heroDesc;
-            document.getElementById('search').placeholder = t.searchPlaceholder;
-            document.querySelectorAll('.section-title')[0].textContent = t.aiTools;
-            document.querySelectorAll('.section-title')[1].textContent = t.communities;
-            document.querySelectorAll('.section-title')[2].textContent = t.productivity;
-        }
-</script>
+    </script>
 </body>
 </html>
