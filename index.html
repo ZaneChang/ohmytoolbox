@@ -195,10 +195,10 @@
             document.getElementById('cryptoGrid').style.display = (filter === 'all' || filter === 'crypto' || filter === 'featured') ? 'grid' : 'none';
             document.getElementById('tgGrid').style.display = (filter === 'all' || filter === 'tg' || filter === 'featured') ? 'grid' : 'none';
             document.getElementById('aiGrid').style.display = (filter === 'all' || filter === 'ai' || filter === 'featured') ? 'grid' : 'none';
-            document.getElementById('tgGrid').style.display = (filter === 'all' || filter === 'tg' || filter === 'featured') ? 'grid' : 'none';
             
+            // Section order: crypto(0), tg(1), ai(2)
             document.querySelectorAll('.section-header').forEach((el, i) => {
-                el.style.display = (filter === 'all' || filter === 'featured' || (i===0 && filter === 'ai') || (i===1 && filter === 'crypto') || (i===2 && filter === 'tg')) ? 'flex' : 'none';
+                el.style.display = (filter === 'all' || filter === 'featured' || (i===0 && filter === 'crypto') || (i===1 && filter === 'tg') || (i===2 && filter === 'ai')) ? 'flex' : 'none';
             });
         }
         
