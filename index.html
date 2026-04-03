@@ -201,6 +201,7 @@
         </div>
         <div class="nav-actions">
             <button class="nav-btn" onclick="toggleFavView()">❤️</button>
+            <button class="lang-btn" onclick="toggleLang()" style="padding:10px 16px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:14px;">🌐 EN/中</button>
             <button class="submit-btn" onclick="openModal()">+ 提交工具</button>
         </div>
     </nav>
@@ -432,6 +433,53 @@
         }
         
         render();
-    </script>
+    
+        // Language translations
+        const translations = {
+            en: {
+                heroTitle: 'Discover the Best Tools & Resources',
+                heroDesc: 'Curated resources from around the world. AI tools, tech communities, productivity apps and more.',
+                searchPlaceholder: 'Search tools, communities...',
+                aiTools: 'AI Tools',
+                communities: 'Communities',
+                productivity: 'Productivity',
+                myFavorites: 'My Favorites',
+                visit: 'Visit →',
+                hot: '🔥 Hot',
+                noResults: 'No results',
+                noFavorites: 'No favorites yet'
+            },
+            zh: {
+                heroTitle: '发现你的万能工具箱',
+                heroDesc: '精选全球好用的AI工具、TG资源、效率软件，一个就够了。',
+                searchPlaceholder: '搜索工具...',
+                aiTools: 'AI工具',
+                communities: 'TG频道',
+                productivity: '效率软件',
+                myFavorites: '我的收藏',
+                visit: '访问 →',
+                hot: '🔥 热门',
+                noResults: '暂无结果',
+                noFavorites: '还没有收藏'
+            }
+        };
+        
+        let currentLang = 'en';
+        
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateLang();
+        }
+        
+        function updateLang() {
+            const t = translations[currentLang];
+            document.querySelector('.hero h1').innerHTML = t.heroTitle;
+            document.querySelector('.hero p').textContent = t.heroDesc;
+            document.getElementById('search').placeholder = t.searchPlaceholder;
+            document.querySelectorAll('.section-title')[0].textContent = t.aiTools;
+            document.querySelectorAll('.section-title')[1].textContent = t.communities;
+            document.querySelectorAll('.section-title')[2].textContent = t.productivity;
+        }
+</script>
 </body>
 </html>
