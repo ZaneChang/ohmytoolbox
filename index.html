@@ -176,16 +176,25 @@
             const f = (arr) => arr.filter(t => (filter === 'all' || filter === 'featured' || t.type === filter) && (!s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s)));
             
             // Featured: show hot items only in each section
-            const aiShow = filter === 'featured' ? f(aiTools.filter(t => t.hot)) : f(aiTools);
-            const cryptoShow = filter === 'featured' ? f(cryptoTools.filter(t => t.hot)) : f(cryptoTools);
-            const tgShow = filter === 'featured' ? f(tgChannels.filter(t => t.hot)) : f(tgChannels);
+            // Show crypto first when featured
+            let aiShow, cryptoShow, tgShow;
+            if (filter === 'featured') {
+                cryptoShow = f(cryptoTools.filter(t => t.hot));
+                tgShow = f(tgChannels.filter(t => t.hot));
+                aiShow = f(aiTools.filter(t => t.hot));
+            } else {
+                cryptoShow = f(cryptoTools);
+                tgShow = f(tgChannels);
+                aiShow = f(aiTools);
+            }
             
-            document.getElementById('aiGrid').innerHTML = aiShow.map(card).join('') || '';
             document.getElementById('cryptoGrid').innerHTML = cryptoShow.map(card).join('') || '';
             document.getElementById('tgGrid').innerHTML = tgShow.map(card).join('') || '';
+            document.getElementById('aiGrid').innerHTML = aiShow.map(card).join('') || '';
             
-            document.getElementById('aiGrid').style.display = (filter === 'all' || filter === 'ai' || filter === 'featured') ? 'grid' : 'none';
             document.getElementById('cryptoGrid').style.display = (filter === 'all' || filter === 'crypto' || filter === 'featured') ? 'grid' : 'none';
+            document.getElementById('tgGrid').style.display = (filter === 'all' || filter === 'tg' || filter === 'featured') ? 'grid' : 'none';
+            document.getElementById('aiGrid').style.display = (filter === 'all' || filter === 'ai' || filter === 'featured') ? 'grid' : 'none';
             document.getElementById('tgGrid').style.display = (filter === 'all' || filter === 'tg' || filter === 'featured') ? 'grid' : 'none';
             
             document.querySelectorAll('.section-header').forEach((el, i) => {
