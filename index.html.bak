@@ -212,7 +212,7 @@
         <div class="stats">
             <div class="stat-box"><div class="stat-num" id="totalNum">50</div><div class="stat-label">个精选工具</div></div>
             <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">AI工具</div></div>
-            <div class="stat-box"><div class="stat-num">30</div><div class="stat-label">TG资源</div></div>
+            <div class="stat-box"><div class="stat-num">16</div><div class="stat-label">TG资源</div></div>
             <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">效率软件</div></div>
         </div>
         
@@ -289,39 +289,41 @@
         ];
         
         const tgChannels = [
-            // 头部媒体
-            { name: '金色财经', desc: '区块链行业头部媒体', type: 'tg,news', icon: '📰', hot: true, link: 'https://t.me/jinse' },
-            { name: '吴说区块链', desc: '最受欢迎中文币圈媒体', type: 'tg,news', icon: '🗣️', hot: true, link: 'https://t.me/wublock' },
-            { name: '币世界', desc: '实时币圈快讯', type: 'tg,news', icon: '⚡', link: 'https://t.me/bishijie' },
+            { name: "ChainCaster", desc: "DAO管理工具", type: "tg,productivity", icon: "🔧", link: "https://t.me/chaincaster" },
+            { name: "WalletConnect", desc: "钱包连接协议", type: "tg,productivity", icon: "🔗", link: "https://t.me/walletconnect" },
+            { name: "CryptoPanic", desc: "加密新闻聚合", type: "tg,news", icon: "📰", link: "https://t.me/cryptopanic" },
+            { name: "The Block", desc: "加密媒体巨头", type: "tg,news", icon: "📰", link: "https://t.me/theblock" },
+            { name: "Wu Blockchain", desc: "吴说区块链", type: "tg,news", icon: "🗣️", link: "https://t.me/wublock" },
+            { name: "BlockBeats", desc: "区块热点", type: "tg,news", icon: "📰", link: "https://t.me/blockbeats" },
+            { name: "Foresight News", desc: "前瞻区块链", type: "tg,news", icon: "🔮", link: "https://t.me/foresight_news" },
+            { name: "MetaEarth", desc: "元宇宙频道", type: "tg,news", icon: "🌍", link: "https://t.me/metaearth" },
+            { name: "Bankless", desc: "无银行运动", type: "tg,trading", icon: "🏦", link: "https://t.me/bankless" },
+            { name: "The DeFi Pulse", desc: "DeFi数据分析", type: "tg,trading", icon: "📊", link: "https://t.me/defipulse" },
+            { name: "TokenTerminal", desc: "项目基本面数据", type: "tg,trading", icon: "📈", link: "https://t.me/tokenterminal" },
+            { name: "DappRadar", desc: "DApp数据追踪", type: "tg,trading", icon: "🔍", link: "https://t.me/dappradar" },
+            { name: "Nansen", desc: "链上分析工具", type: "tg,trading", icon: "🔎", link: "https://t.me/nansen" },
+            { name: "Solidity Academy", desc: "Solidity教学", type: "tg,code", icon: "📚", link: "https://t.me/solidityacademy" },
+            { name: "CryptoDev", desc: "开发者社区", type: "tg,code", icon: "👨‍💻", link: "https://t.me/cryptodev" },
+            { name: "LearnWeb3", desc: "Web3学习资源", type: "tg,code", icon: "📖", link: "https://t.me/learnweb3" },
+            { name: "DAO Maker", desc: "DAO工具", type: "tg,productivity", icon: "🏛️", link: "https://t.me/daomaker" },
+            { name: "Snapshot", desc: "DAO投票工具", type: "tg,productivity", icon: "🗳️", link: "https://t.me/snapshot" },
+            { name: "Rabbithole", desc: "Web3任务平台", type: "tg,productivity", icon: "🐇", link: "https://t.me/rabbithole" },
+            { name: "Galxe", desc: "Web3激励平台", type: "tg,productivity", icon: "⭐", link: "https://t.me/galxe" },
+            { name: '金色财经', desc: '区块链行业头部媒体,资讯全面专业', type: 'tg,news', icon: '📰', hot: true, link: 'https://t.me/jinse' },
+            { name: '币世界', desc: '实时币圈快讯,24h更新', type: 'tg,news', icon: '⚡', link: 'https://t.me/bishijie' },
             { name: '火星财经', desc: '区块链资讯平台', type: 'tg,news', icon: '🔥', link: 'https://t.me/marsfinance' },
-            { name: 'PANews', desc: '区块链媒体', type: 'tg,news', icon: '📡', link: 'https://t.me/panews' },
-            { name: 'Odaily', desc: '星球日报', type: 'tg,news', icon: '🌍', link: 'https://t.me/odaily' },
-            { name: 'Foresight', desc: '前瞻区块链', type: 'tg,news', icon: '🔮', link: 'https://t.me/foresight_news' },
-            { name: 'BlockBeats', desc: '区块热点', type: 'tg,news', icon: '📰', link: 'https://t.me/blockbeats' },
-            { name: 'The Block', desc: '加密媒体巨头', type: 'tg,news', icon: '📰', link: 'https://t.me/theblock' },
-            { name: 'CryptoPanic', desc: '加密新闻聚合', type: 'tg,news', icon: '📰', link: 'https://t.me/cryptopanic' },
-            // 交易社区
-            { name: '合约帝', desc: '合约交易社区', type: 'tg,trading', icon: '📊', hot: true, link: 'https://t.me/jiayoux' },
-            { name: 'TradingView', desc: '全球交易者社区', type: 'tg,trading', icon: '📈', link: 'https://t.me/tradingview' },
+            { name: 'PANews', desc: '区块链媒体,数据分析强', type: 'tg,news', icon: '📡', link: 'https://t.me/panews' },
+            { name: 'Odaily', desc: '星球日报,Web3垂直媒体', type: 'tg,news', icon: '🌍', link: 'https://t.me/odaily' },
+            { name: '合约帝', desc: '合约交易社区,信号准确', type: 'tg,trading', icon: '📊', hot: true, link: 'https://t.me/jiayoux' },
+            { name: 'TradingView', desc: '全球交易者社区,图表神器', type: 'tg,trading', icon: '📈', link: 'https://t.me/tradingview' },
             { name: 'BTCmaster', desc: '比特币价格分析', type: 'tg,trading', icon: '₿', link: 'https://t.me/btcmaster' },
             { name: '币coin', desc: '合约信号社区', type: 'tg,trading', icon: '🪙', link: 'https://t.me/bicointv' },
-            { name: 'Nansen', desc: '链上分析工具', type: 'tg,trading', icon: '🔎', hot: true, link: 'https://t.me/nansen' },
-            { name: 'DappRadar', desc: 'DApp数据追踪', type: 'tg,trading', icon: '🔍', link: 'https://t.me/dappradar' },
-            { name: 'TokenTerminal', desc: '项目基本面数据', type: 'tg,trading', icon: '📈', link: 'https://t.me/tokenterminal' },
-            // 开发技术
+            { name: 'DeFi Watch', desc: 'DeFi项目监控', type: 'tg,trading', icon: '🔗', link: 'https://t.me/defiwatch' },
             { name: 'GitHub', desc: '开发者技术社区', type: 'tg,code', icon: '🐙', link: 'https://t.me/github' },
             { name: 'V2EX', desc: '程序员讨论社区', type: 'tg,code', icon: '💬', link: 'https://t.me/v2ex' },
-            { name: '掘金', desc: '技术社区', type: 'tg,code', icon: '⛏️', link: 'https://t.me/juejin' },
-            { name: 'Python社区', desc: 'Python技术交流', type: 'tg,code', icon: '🐍', link: 'https://t.me/pythoncn' },
-            { name: 'Solidity学院', desc: 'Solidity教学', type: 'tg,code', icon: '📚', link: 'https://t.me/solidityacademy' },
-            { name: 'CryptoDev', desc: '开发者社区', type: 'tg,code', icon: '👨‍💻', link: 'https://t.me/cryptodev' },
-            { name: 'LearnWeb3', desc: 'Web3学习资源', type: 'tg,code', icon: '📖', link: 'https://t.me/learnweb3' },
-            // 官方社区
-            { name: 'Telegram中文群', desc: '官方中文社区', type: 'tg', icon: '👥', link: 'https://t.me/telegramc' },
-            { name: '币圈研究院', desc: '价值投资社区', type: 'tg', icon: '📚', link: 'https://t.me/biquanyjs' },
-            { name: 'WalletConnect', desc: '钱包连接协议', type: 'tg', icon: '🔗', link: 'https://t.me/walletconnect' },
-            { name: 'Snapshot', desc: 'DAO投票工具', type: 'tg', icon: '🗳️', link: 'https://t.me/snapshot' },
-            { name: 'Galxe', desc: 'Web3激励平台', type: 'tg', icon: '⭐', link: 'https://t.me/galxe' },
+            { name: '掘金', desc: '技术社区,帮你提升', type: 'tg,code', icon: '⛏️', link: 'https://t.me/juejin' },
+            { name: 'Python中文社区', desc: 'Python技术交流', type: 'tg,code', icon: '🐍', link: 'https://t.me/pythoncn' },
+            { name: 'Telegram 中文群', desc: '官方中文社区', type: 'tg', icon: '👥', link: 'https://t.me/telegramc' },
             { name: '@BotFather', desc: '机器人创建工具', type: 'tg', icon: '🤖', link: 'https://t.me/BotFather' },
         ];
         
