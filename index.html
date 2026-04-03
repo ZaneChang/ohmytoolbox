@@ -84,7 +84,7 @@
         <p>精选全球最优质的 AI工具、加密货币交易所、Telegram群组资源</p>
     </section>
     <div class="tags">
-        <div class="tag active" onclick="setFilter('all')">全部</div>
+        <div class="tag active" onclick="setFilter('featured')">⭐ 精选</div>
         <div class="tag" onclick="setFilter('ai')">🤖 AI</div>
         <div class="tag" onclick="setFilter('crypto')">💰 加密货币</div>
         <div class="tag" onclick="setFilter('tg')">📡 Telegram群组</div>
@@ -165,16 +165,31 @@
         
         function render() {
             const s = document.getElementById('searchInput').value.toLowerCase();
-            const f = (arr) => arr.filter(t => (filter === 'all' || t.type === filter) && (!s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s)));
+            
+            // Featured: top 5 from each category
+            const featured = [...aiTools.slice(0,5), ...cryptoTools.slice(0,5), ...tgChannels.slice(0,5)];
+            
+            const f = (arr) => arr.filter(t => (filter === 'featured' || filter === 'all' || t.type === filter) && (!s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s)));
+            
+            // Show featured section or category sections
+            const showFeatured = (filter === 'featured' || filter === 'all') && !s;
+            
             document.getElementById('aiGrid').innerHTML = (filter === 'all' || filter === 'ai') ? f(aiTools).map(card).join('') : '';
             document.getElementById('cryptoGrid').innerHTML = (filter === 'all' || filter === 'crypto') ? f(cryptoTools).map(card).join('') : '';
             document.getElementById('tgGrid').innerHTML = (filter === 'all' || filter === 'tg') ? f(tgChannels).map(card).join('') : '';
             
+            // Handle featured filter
+            if (filter === 'featured') {
+                document.getElementById('aiGrid').innerHTML = f(aiTools.slice(0,5)).map(card).join('');
+                document.getElementById('cryptoGrid').innerHTML = f(cryptoTools.slice(0,5)).map(card).join('');
+                document.getElementById('tgGrid').innerHTML = f(tgChannels.slice(0,5)).map(card).join('');
+            }
+            
             // Hide/show section headers
             document.querySelectorAll('.section-header').forEach((el, i) => {
-                if(i === 0) el.style.display = (filter === 'all' || filter === 'ai') ? 'flex' : 'none';
-                if(i === 1) el.style.display = (filter === 'all' || filter === 'crypto') ? 'flex' : 'none';
-                if(i === 2) el.style.display = (filter === 'all' || filter === 'tg') ? 'flex' : 'none';
+                if(i === 0) el.style.display = (filter === 'all' || filter === 'ai' || filter === 'featured') ? 'flex' : 'none';
+                if(i === 1) el.style.display = (filter === 'all' || filter === 'crypto' || filter === 'featured') ? 'flex' : 'none';
+                if(i === 2) el.style.display = (filter === 'all' || filter === 'tg' || filter === 'featured') ? 'flex' : 'none';
             });
         }
         
