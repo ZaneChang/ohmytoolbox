@@ -72,48 +72,48 @@
         </div>
         <div class="nav-actions">
             <button class="nav-btn" onclick="toggleFavView()">❤️</button>
-            <button class="submit-btn" onclick="openModal()">+ Submit</button>
+            <button class="submit-btn" onclick="openModal()">+ 提交</button>
         </div>
     </nav>
     <section class="hero">
-        <h1>Discover the Best <span>Tools & Resources</span></h1>
-        <p>Curated resources from around the world.</p>
+        <h1>发现你的 <span>万能工具箱</span></h1>
+        <p>精选全球好用的工具,一个就够了。</p>
         <div class="stats">
-            <div class="stat-box"><div class="stat-num" id="totalNum">0</div><div class="stat-label">Total</div></div>
-            <div class="stat-box"><div class="stat-num">19</div><div class="stat-label">AI Tools</div></div>
-            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">Communities</div></div>
-            <div class="stat-box"><div class="stat-num">12</div><div class="stat-label">Productivity</div></div>
+            <div class="stat-box"><div class="stat-num" id="totalNum">0</div><div class="stat-label">总计</div></div>
+            <div class="stat-box"><div class="stat-num">19</div><div class="stat-label">AI工具</div></div>
+            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">TG频道</div></div>
+            <div class="stat-box"><div class="stat-num">12</div><div class="stat-label">效率软件</div></div>
         </div>
         <div class="search-container">
             <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" placeholder="Search..." id="search" oninput="render()">
+            <input type="text" class="search-input" placeholder="搜索工具..." id="search" oninput="render()">
         </div>
         <div class="tags">
-            <div class="tag active" onclick="setFilter('all')">All</div>
+            <div class="tag active" onclick="setFilter('all')">全部</div>
             <div class="tag" onclick="setFilter('ai')">🤖 AI</div>
             <div class="tag" onclick="setFilter('tg')">📡</div>
             <div class="tag" onclick="setFilter('productivity')">⚡</div>
         </div>
     </section>
     <div class="favorites-area" id="favArea">
-        <div class="section-header"><div class="section-title">❤️ My Favorites</div></div>
+        <div class="section-header"><div class="section-title">❤️ 我的收藏</div></div>
         <div class="grid" id="favGrid"></div>
     </div>
-    <div class="section-header"><div class="section-title">🤖 AI Tools</div></div>
+    <div class="section-header"><div class="section-title">🤖 AI工具</div></div>
     <div class="grid" id="aiGrid"></div>
-    <div class="section-header"><div class="section-title">📡 Communities</div></div>
+    <div class="section-header"><div class="section-title">📡 TG频道</div></div>
     <div class="grid" id="tgGrid"></div>
-    <div class="section-header"><div class="section-title">⚡ Productivity</div></div>
+    <div class="section-header"><div class="section-title">⚡ 效率软件</div></div>
     <div class="grid" id="proGrid"></div>
     <div class="modal" id="modal">
         <div class="modal-box">
-            <h3>Submit New Tool</h3>
-            <input type="text" id="name" placeholder="Tool name">
-            <input type="url" id="url" placeholder="URL">
-            <textarea id="desc" placeholder="Description" rows="3"></textarea>
+            <h3>提交新工具</h3>
+            <input type="text" id="name" placeholder="工具名称">
+            <input type="url" id="url" placeholder="网址">
+            <textarea id="desc" placeholder="描述" rows="3"></textarea>
             <div class="modal-btns">
-                <button class="modal-btn" onclick="closeModal()">Cancel</button>
-                <button class="modal-btn primary" onclick="submit()">Submit</button>
+                <button class="modal-btn" onclick="closeModal()">取消</button>
+                <button class="modal-btn primary" onclick="submit()">提交</button>
             </div>
         </div>
     </div>
@@ -153,15 +153,15 @@
             const s = document.getElementById('search').value.toLowerCase();
             document.getElementById('totalNum').textContent = aiTools.length + tgChannels.length + productivity.length;
             const f = (arr) => arr.filter(t => (filter === 'all' || t.type?.includes(filter)) && (!s || t.name.toLowerCase().includes(s) || t.desc?.toLowerCase().includes(s)));
-            document.getElementById('aiGrid').innerHTML = f(aiTools).map(card).join('') || '<div class="empty">No results</div>';
-            document.getElementById('tgGrid').innerHTML = f(tgChannels).map(card).join('') || '<div class="empty">No results</div>';
-            document.getElementById('proGrid').innerHTML = f(productivity).map(card).join('') || '<div class="empty">No results</div>';
+            document.getElementById('aiGrid').innerHTML = f(aiTools).map(card).join('') || '<div class="empty">暂无结果</div>';
+            document.getElementById('tgGrid').innerHTML = f(tgChannels).map(card).join('') || '<div class="empty">暂无结果</div>';
+            document.getElementById('proGrid').innerHTML = f(productivity).map(card).join('') || '<div class="empty">暂无结果</div>';
             const all = [...aiTools, ...tgChannels, ...productivity];
-            document.getElementById('favGrid').innerHTML = all.filter(t => favs.includes(t.name)).map(card).join('') || '<div class="empty">No favorites</div>';
+            document.getElementById('favGrid').innerHTML = all.filter(t => favs.includes(t.name)).map(card).join('') || '<div class="empty">还没有收藏</div>';
         }
         
         function card(t) {
-            return '<div class="card" onclick="window.open(\''+t.link+'\',\'_blank\')">'+(t.hot?'<span class="hot-tag">🔥 Hot</span>':'')+'<div class="card-header"><div class="card-icon">'+t.icon+'</div><div class="card-name">'+t.name+'</div><button class="card-fav '+(favs.includes(t.name)?'active':'')+'" onclick="event.stopPropagation();toggle(\''+t.name+'\')">❤️</button></div><div class="card-desc">'+t.desc+'</div><div class="card-footer"><span class="card-tag">'+t.type?.split(',')[0]+'</span><span class="card-link">Visit →</span></div></div>';
+            return '<div class="card" onclick="window.open(\''+t.link+'\',\'_blank\')">'+(t.hot?'<span class="hot-tag">🔥 Hot</span>':'')+'<div class="card-header"><div class="card-icon">'+t.icon+'</div><div class="card-name">'+t.name+'</div><button class="card-fav '+(favs.includes(t.name)?'active':'')+'" onclick="event.stopPropagation();toggle(\''+t.name+'\')">❤️</button></div><div class="card-desc">'+t.desc+'</div><div class="card-footer"><span class="card-tag">'+t.type?.split(',')[0]+'</span><span class="card-link">访问 →</span></div></div>';
         }
         
         function setFilter(f) { filter = f; document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); event.target.classList.add('active'); render(); }
@@ -169,7 +169,7 @@
         function toggleFavView() { document.getElementById('favArea').classList.toggle('active'); window.scrollTo({top:0,behavior:'smooth'}); }
         function openModal() { document.getElementById('modal').classList.add('active'); }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
-        function submit() { if(document.getElementById('name').value) { alert('Thanks!'); closeModal(); document.getElementById('name').value=''; document.getElementById('url').value=''; document.getElementById('desc').value=''; } }
+        function submit() { if(document.getElementById('name').value) { alert('感谢提交!'); closeModal(); document.getElementById('name').value=''; document.getElementById('url').value=''; document.getElementById('desc').value=''; } }
         
         render();
     </script>
