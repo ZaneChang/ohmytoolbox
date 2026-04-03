@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OhMyToolbox | 工具箱 - 精选好用的工具导航</title>
-    <meta name="description" content="OhMyToolbox - 精选AI工具、TG资源、效率软件导航。发现ChatGPT、Claude、Midjourney等热门工具。">
+    <title>OhMyToolbox | The Ultimate Resource Hub - AI, Tech & Tools</title>
+    <meta name="description" content="OhMyToolbox - 精选AI Tools、Communities、Productivity导航。发现ChatGPT、Claude、Midjourney等热门工具。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -206,25 +206,25 @@
     </nav>
     
     <section class="hero">
-        <h1>发现你的<span>万能工具箱</span></h1>
-        <p>精选全球好用的AI工具、TG资源、效率软件，一个就够了。</p>
+        <h1>Discover the Best <span>Tools & Resources</span></h1>
+        <p>Curated resources from around the world. AI tools, tech communities, productivity apps and more.</p>
         
         <div class="stats">
-            <div class="stat-box"><div class="stat-num" id="totalNum">50</div><div class="stat-label">个精选工具</div></div>
-            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">AI工具</div></div>
-            <div class="stat-box"><div class="stat-num">40+</div><div class="stat-label">TG资源</div></div>
-            <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">效率软件</div></div>
+            <div class="stat-box"><div class="stat-num" id="totalNum">50</div><div class="stat-label">curated resources</div></div>
+            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">AI Tools</div></div>
+            <div class="stat-box"><div class="stat-num">40+</div><div class="stat-label">Communities</div></div>
+            <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">Productivity</div></div>
         </div>
         
         <div class="search-container">
             <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" placeholder="搜索工具..." id="search" oninput="render()">
+            <input type="text" class="search-input" placeholder="Search tools, communities..." id="search" oninput="render()">
         </div>
         
         <div class="tags">
             <div class="tag active" onclick="setFilter('all')">全部</div>
-            <div class="tag" onclick="setFilter('ai')">🤖 AI工具</div>
-            <div class="tag" onclick="setFilter('tg')">📡 TG资源</div>
+            <div class="tag" onclick="setFilter('ai')">🤖 AI Tools</div>
+            <div class="tag" onclick="setFilter('tg')">📡 Communities</div>
             <div class="tag" onclick="setFilter('chat')">💬 对话</div>
             <div class="tag" onclick="setFilter('image')">🎨 图像</div>
             <div class="tag" onclick="setFilter('code')">⌨️ 编程</div>
@@ -239,13 +239,13 @@
         <div class="grid" id="favGrid"></div>
     </div>
     
-    <div class="section-header"><span class="section-icon">🤖</span><div class="section-title">AI工具</div></div>
+    <div class="section-header"><span class="section-icon">🤖</span><div class="section-title">AI Tools</div></div>
     <div class="grid" id="aiGrid"></div>
     
-    <div class="section-header"><span class="section-icon">📡</span><div class="section-title">TG资源</div></div>
+    <div class="section-header"><span class="section-icon">📡</span><div class="section-title">Communities</div></div>
     <div class="grid" id="tgGrid"></div>
     
-    <div class="section-header"><span class="section-icon">⚡</span><div class="section-title">效率软件</div></div>
+    <div class="section-header"><span class="section-icon">⚡</span><div class="section-title">Productivity</div></div>
     <div class="grid" id="proGrid"></div>
     
     <div class="modal" id="modal">
@@ -262,7 +262,7 @@
     </div>
     
     <footer>
-        <p>© 2026 OhMyToolbox · 发现更多,效率更高</p>
+        <p>© 2026 OhMyToolbox - Global · Discover more, achieve more</p>
     </footer>
     
     <script>
@@ -289,57 +289,50 @@
         ];
         
         const tgChannels = [
-            // 科技AI
-            { name: 'OpenAI', desc: 'OpenAI官方频道', type: 'tg,tech', icon: '🤖', hot: true, link: 'https://t.me/openai' },
-            { name: 'Anthropic', desc: 'Claude官方', type: 'tg,tech', icon: '🧠', link: 'https://t.me/anthropic' },
-            { name: 'Google AI', desc: 'Google AI最新动态', type: 'tg,tech', icon: '🔬', link: 'https://t.me/googleAI' },
-            { name: 'Machine Learning', desc: '机器学习社区', type: 'tg,tech', icon: '🧮', link: 'https://t.me/MachineLearning' },
-            { name: 'AI News', desc: 'AI行业新闻', type: 'tg,tech', icon: '📰', link: 'https://t.me/ainews' },
+            // AI & Tech
+            { name: 'OpenAI', desc: 'Official OpenAI updates', type: 'tg,ai', icon: '🤖', hot: true, link: 'https://t.me/openai' },
+            { name: 'Anthropic', desc: 'Claude AI official', type: 'tg,ai', icon: '🧠', link: 'https://t.me/anthropic' },
+            { name: 'Google AI', desc: 'Google AI latest news', type: 'tg,ai', icon: '🔬', link: 'https://t.me/googleAI' },
+            { name: 'AI News', desc: 'AI industry news', type: 'tg,ai', icon: '📰', link: 'https://t.me/ainews' },
+            { name: 'Machine Learning', desc: 'ML community', type: 'tg,ai', icon: '🧮', link: 'https://t.me/MachineLearning' },
             
-            // 开发者
-            { name: 'GitHub', desc: '开发者技术社区', type: 'tg,dev', icon: '🐙', link: 'https://t.me/github' },
-            { name: 'V2EX', desc: '程序员讨论社区', type: 'tg,dev', icon: '💬', link: 'https://t.me/v2ex' },
-            { name: '掘金', desc: '技术社区', type: 'tg,dev', icon: '⛏️', link: 'https://t.me/juejin' },
-            { name: 'Stack Overflow', desc: '技术问答', type: 'tg,dev', icon: '📚', link: 'https://t.me/stackoverflow' },
-            { name: 'DEV Community', desc: '开发者社区', type: 'tg,dev', icon: '👨‍💻', link: 'https://t.me/encodedev' },
+            // Developers
+            { name: 'GitHub', desc: 'Developer community', type: 'tg,dev', icon: '🐙', hot: true, link: 'https://t.me/github' },
+            { name: 'V2EX', desc: 'Chinese dev community', type: 'tg,dev', icon: '💬', link: 'https://t.me/v2ex' },
+            { name: 'Stack Overflow', desc: 'Tech Q&A', type: 'tg,dev', icon: '📚', link: 'https://t.me/stackoverflow' },
+            { name: 'DEV Community', desc: 'Dev.to community', type: 'tg,dev', icon: '👨‍💻', link: 'https://t.me/encodedev' },
+            { name: 'Hashnode', desc: 'Developer blogging', type: 'tg,dev', icon: '📝', link: 'https://t.me/hashnode' },
             
-            // 区块链Web3
-            { name: '金色财经', desc: '区块链行业媒体', type: 'tg,crypto', icon: '📰', hot: true, link: 'https://t.me/jinse' },
-            { name: '吴说区块链', desc: '最受欢迎币圈媒体', type: 'tg,crypto', icon: '🗣️', hot: true, link: 'https://t.me/wublock' },
-            { name: '币世界', desc: '实时币圈快讯', type: 'tg,crypto', icon: '⚡', link: 'https://t.me/bishijie' },
-            { name: '火星财经', desc: '区块链资讯', type: 'tg,crypto', icon: '🔥', link: 'https://t.me/marsfinance' },
-            { name: 'PANews', desc: '区块链媒体', type: 'tg,crypto', icon: '📡', link: 'https://t.me/panews' },
-            { name: 'Odaily', desc: '星球日报', type: 'tg,crypto', icon: '🌍', link: 'https://t.me/odaily' },
-            { name: 'Ethereum', desc: '以太坊官方', type: 'tg,crypto', icon: '💎', link: 'https://t.me/ethereum' },
-            { name: 'Bitcoin', desc: '比特币官方', type: 'tg,crypto', icon: '₿', link: 'https://t.me/Bitcoin' },
+            // Crypto & Web3
+            { name: 'Ethereum', desc: 'Ethereum official', type: 'tg,crypto', icon: '💎', hot: true, link: 'https://t.me/ethereum' },
+            { name: 'Bitcoin', desc: 'Bitcoin official', type: 'tg,crypto', icon: '₿', link: 'https://t.me/Bitcoin' },
+            { name: 'Vitalik', desc: 'Ethereum founder', type: 'tg,crypto', icon: '👤', link: 'https://t.me/vitalikbuterin' },
+            { name: 'DeFi Pulse', desc: 'DeFi analytics', type: 'tg,crypto', icon: '📊', link: 'https://t.me/defipulse' },
+            { name: 'The Block', desc: 'Crypto media', type: 'tg,crypto', icon: '📰', link: 'https://t.me/theblock' },
             
-            // 产品设计
-            { name: 'Product Hunt', desc: '产品发现社区', type: 'tg,product', icon: '🔍', hot: true, link: 'https://t.me/producthunt' },
-            { name: 'UX Collective', desc: '用户体验设计', type: 'tg,design', icon: '🎨', link: 'https://t.me/uxc' },
-            { name: 'Figma', desc: '设计工具社区', type: 'tg,design', icon: '🎯', link: 'https://t.me/figma' },
-            { name: 'Dribbble', desc: '设计师社区', type: 'tg,design', icon: '🏀', link: 'https://t.me/dribbble' },
+            // Product & Design
+            { name: 'Product Hunt', desc: 'Product discovery', type: 'tg,product', icon: '🔍', hot: true, link: 'https://t.me/producthunt' },
+            { name: 'Figma', desc: 'Design community', type: 'tg,design', icon: '🎨', link: 'https://t.me/figma' },
+            { name: 'Dribbble', desc: 'Designers community', type: 'tg,design', icon: '🏀', link: 'https://t.me/dribbble' },
+            { name: 'UX Collective', desc: 'UX design', type: 'tg,design', icon: '🎯', link: 'https://t.me/uxc' },
             
-            // 商业创业
-            { name: 'TechCrunch', desc: '科技媒体', type: 'tg,news', icon: '📰', link: 'https://t.me/techcrunch' },
-            { name: '36氪', desc: '创业媒体', type: 'tg,news', icon: '36', link: 'https://t.me/kr36' },
-            { name: '虎嗅', desc: '商业媒体报道', type: 'tg,news', icon: '🐯', link: 'https://t.me/huxiu' },
-            { name: '少数派', desc: '数字生活方式', type: 'tg,lifestyle', icon: '🔊', link: 'https://t.me/sspai' },
+            // Tech News
+            { name: 'TechCrunch', desc: 'Tech news', type: 'tg,news', icon: '📰', link: 'https://t.me/techcrunch' },
+            { name: 'The Verge', desc: 'Tech & culture', type: 'tg,news', icon: '📱', link: 'https://t.me/theverge' },
+            { name: 'Wired', desc: 'Science & tech', type: 'tg,news', icon: '🔌', link: 'https://t.me/wired' },
+            { name: 'Ars Technica', desc: 'Tech reviews', type: 'tg,news', icon: '💻', link: 'https://t.me/arstechnica' },
             
-            // 学习教育
-            { name: 'Coursera', desc: '在线课程平台', type: 'tg,edu', icon: '🎓', link: 'https://t.me/coursera' },
-            { name: 'edX', desc: 'MOOC平台', type: 'tg,edu', icon: '📚', link: 'https://t.me/edxonline' },
-            { name: 'Learn Web3', desc: 'Web3学习', type: 'tg,edu', icon: '📖', link: 'https://t.me/learnweb3' },
+            // Learning
+            { name: 'Coursera', desc: 'Online courses', type: 'tg,edu', icon: '🎓', link: 'https://t.me/coursera' },
+            { name: 'edX', desc: 'MOOC platform', type: 'tg,edu', icon: '📚', link: 'https://t.me/edxonline' },
+            { name: 'freeCodeCamp', desc: 'Learn to code', type: 'tg,edu', icon: '🔥', hot: true, link: 'https://t.me/freecodecamp' },
             
-            // 生活方式
-            { name: '少数派', desc: '数字生活', type: 'tg,lifestyle', icon: '🔊', hot: true, link: 'https://t.me/sspai' },
-            { name: '即刻', desc: '兴趣社区', type: 'tg,lifestyle', icon: '⚡', link: 'https://t.me/jikeapp' },
-            { name: '少数派S', desc: '数码科技', type: 'tg,lifestyle', icon: '📱', link: 'https://t.me/sspai' },
-            
-            // 效率工具
-            { name: 'Notion', desc: '笔记工具', type: 'tg,tool', icon: '📒', link: 'https://t.me/Notion' },
-            { name: 'Raycast', desc: '效率启动器', type: 'tg,tool', icon: '⚡', hot: true, link: 'https://t.me/raycast' },
-            { name: 'Telegram', desc: '通讯工具官方', type: 'tg,tool', icon: '✈️', hot: true, link: 'https://t.me/telegram' },
-            { name: '@BotFather', desc: '机器人创建', type: 'tg,tool', icon: '🤖', link: 'https://t.me/BotFather' },
+            // Productivity
+            { name: 'Notion', desc: 'All-in-one workspace', type: 'tg,tool', icon: '📒', hot: true, link: 'https://t.me/Notion' },
+            { name: 'Raycast', desc: 'Mac launcher', type: 'tg,tool', icon: '⚡', hot: true, link: 'https://t.me/raycast' },
+            { name: 'Telegram', desc: 'Messaging app', type: 'tg,tool', icon: '✈️', hot: true, link: 'https://t.me/telegram' },
+            { name: 'Obsidian', desc: 'Knowledge base', type: 'tg,tool', icon: '💎', link: 'https://t.me/obsidianmd' },
+            { name: 'Linear', desc: 'Project management', type: 'tg,tool', icon: '📋', link: 'https://t.me/linear' },
         ];
         
         const productivity = [
