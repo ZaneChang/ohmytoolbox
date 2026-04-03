@@ -20,6 +20,9 @@
         .brand { display: flex; align-items: center; gap: 12px; }
         .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
         .brand-text { font-size: 22px; font-weight: 800; }
+        .nav-items { display: flex; gap: 20px; align-items: center; }
+        .nav-link { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .nav-link:hover { color: var(--primary); }
         .brand-text span { color: var(--accent); }
         .hero { text-align: center; padding: 50px 20px 30px; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.15), transparent); }
         .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
@@ -85,6 +88,9 @@
         <div class="brand">
             <div class="brand-icon" onclick="location.reload()">🧰</div>
             <div class="brand-text">OhMy<span>Toolbox</span></div>
+        </div>
+    <div class="nav-items">
+            <a href="https://github.com/ZaneChang/ohmytoolbox" target="_blank" class="nav-link">GitHub</a>
         </div>
     </nav>
     <section class="hero">
