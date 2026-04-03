@@ -64,6 +64,11 @@
         .card { position: relative; overflow: hidden; }
         .card:active::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); animation: ripple 0.4s ease-out; }
         @keyframes ripple { from { transform: scale(0); } to { transform: scale(2); } }
+    
+        .search-box { max-width: 500px; margin: 20px auto 0; }
+        .search-box input { width: 100%; padding: 14px 20px; border-radius: 30px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 15px; outline: none; transition: border-color 0.2s; }
+        .search-box input:focus { border-color: var(--primary); }
+        .search-box input::placeholder { color: var(--text-dim); }
     </style>
 </head>
 <body>
@@ -155,7 +160,8 @@
         let filter = 'all';
         
         function render() {
-            const f = (arr) => arr.filter(t => filter === 'all' || t.type === filter);
+            const s = document.getElementById('searchInput').value.toLowerCase();
+            const f = (arr) => arr.filter(t => (filter === 'all' || t.type === filter) && (!s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s)));
             document.getElementById('aiGrid').innerHTML = (filter === 'all' || filter === 'ai') ? f(aiTools).map(card).join('') : '';
             document.getElementById('cryptoGrid').innerHTML = (filter === 'all' || filter === 'crypto') ? f(cryptoTools).map(card).join('') : '';
             document.getElementById('tgGrid').innerHTML = (filter === 'all' || filter === 'tg') ? f(tgChannels).map(card).join('') : '';
