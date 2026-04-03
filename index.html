@@ -120,31 +120,31 @@
     <footer><p>© 2026 OhMyToolbox</p></footer>
     <script>
         const aiTools = [
-            {name:'Claude',name_zh:'Claude',desc:'Anthropic flagship AI model',name_zh_desc:'Anthropic 旗舰AI模型',type:'ai,chat',icon:'🧠',hot:true,link:'https://claude.ai'},
-            {name:'ChatGPT',name_zh:'ChatGPT',desc:'OpenAI GPT-4',name_zh_desc:'OpenAI GPT-4',type:'ai,chat',icon:'💬',hot:true,link:'https://chat.openai.com'},
-            {name:'DeepSeek',name_zh:'DeepSeek',desc:'Open source AI model',name_zh_desc:'开源大模型',type:'ai,chat',icon:'🔮',link:'https://chat.deepseek.com'},
-            {name:'Midjourney',name_zh:'Midjourney',desc:'AI image generation',name_zh_desc:'AI图像生成',type:'ai,image',icon:'🎨',hot:true,link:'https://www.midjourney.com'},
-            {name:'Cursor',name_zh:'Cursor',desc:'AI code editor',name_zh_desc:'AI代码编辑器',type:'ai,code',icon:'⌨️',hot:true,link:'https://cursor.sh'},
-            {name:'Perplexity',name_zh:'Perplexity',desc:'AI search engine',name_zh_desc:'AI搜索引擎',type:'ai,agent',icon:'🔍',link:'https://www.perplexity.ai'},
-            {name:'Windsurf',name_zh:'Windsurf',desc:'AI programming assistant',name_zh_desc:'AI编程助手',type:'ai,code',icon:'💻',link:'https://windsurf.ai'},
-            {name:'V0',name_zh:'V0',desc:'Vercel frontend generator',name_zh_desc:'Vercel前端代码',type:'ai,code',icon:'⚛️',link:'https://v0.dev'},
-            {name:'Devin',name_zh:'Devin',desc:'AI programmer',name_zh_desc:'AI程序员',type:'ai,agent',icon:'🛠️',link:'https://devin.ai'},
-            {name:'Gamma',name_zh:'Gamma',desc:'AI PPT maker',name_zh_desc:'AI PPT制作',type:'ai,productivity',icon:'📊',link:'https://gamma.app'},
+            {name:'Claude',name_zh:'Claude',desc:'Anthropic 旗舰AI模型',name_zh_desc:'Anthropic 旗舰AI,推理能力强',type:'ai,chat',icon:'🧠',hot:true,link:'https://claude.ai'},
+            {name:'ChatGPT',name_zh:'ChatGPT',desc:'OpenAI GPT-4',name_zh_desc:'OpenAI 对话AI,生态最丰富',type:'ai,chat',icon:'💬',hot:true,link:'https://chat.openai.com'},
+            {name:'DeepSeek',name_zh:'DeepSeek',desc:'国产开源大模型',name_zh_desc:'国产开源大模型,API价格低',type:'ai,chat',icon:'🔮',link:'https://chat.deepseek.com'},
+            {name:'Midjourney',name_zh:'Midjourney',desc:'最强AI图像生成',name_zh_desc:'最强AI图像生成,画质细腻',type:'ai,image',icon:'🎨',hot:true,link:'https://www.midjourney.com'},
+            {name:'Cursor',name_zh:'Cursor',desc:'AI代码编辑器',name_zh_desc:'AI代码编辑器,编程效率翻倍',type:'ai,code',icon:'⌨️',hot:true,link:'https://cursor.sh'},
+            {name:'Perplexity',name_zh:'Perplexity',desc:'AI搜索引擎',name_zh_desc:'AI搜索,实时信息整合',type:'ai,agent',icon:'🔍',link:'https://www.perplexity.ai'},
+            {name:'Windsurf',name_zh:'Windsurf',desc:'AI编程助手',name_zh_desc:'AI编程助手,Flow模式',type:'ai,code',icon:'💻',link:'https://windsurf.ai'},
+            {name:'V0',name_zh:'V0',desc:'Vercel前端代码生成',name_zh_desc:'Vercel前端代码,React神器',type:'ai,code',icon:'⚛️',link:'https://v0.dev'},
+            {name:'Devin',name_zh:'Devin',desc:'AI程序员',name_zh_desc:'AI程序员,独立完成项目',type:'ai,agent',icon:'🛠️',link:'https://devin.ai'},
+            {name:'Gamma',name_zh:'Gamma',desc:'AI PPT制作',name_zh_desc:'AI PPT制作,演示神器',type:'ai,productivity',icon:'📊',link:'https://gamma.app'},
         ];
         const tgChannels = [
-            {name:'OpenAI',name_zh:'OpenAI',desc:'Official updates',name_zh_desc:'官方频道',type:'tg',icon:'🤖',hot:true,link:'https://t.me/openai'},
-            {name:'GitHub',name_zh:'GitHub',desc:'Developer community',name_zh_desc:'开发者社区',type:'tg',icon:'🐙',hot:true,link:'https://t.me/github'},
-            {name:'Product Hunt',name_zh:'Product Hunt',desc:'Product discovery',name_zh_desc:'产品发现',type:'tg',icon:'🔍',hot:true,link:'https://t.me/producthunt'},
-            {name:'Ethereum',name_zh:'以太坊',desc:'Ethereum official',name_zh_desc:'以太坊官方',type:'tg',icon:'💎',link:'https://t.me/ethereum'},
-            {name:'Telegram',name_zh:'Telegram',desc:'Messaging app',name_zh_desc:'通讯工具',type:'tg',icon:'✈️',link:'https://t.me/telegram'},
+            {name:'OpenAI',name_zh:'OpenAI',desc:'OpenAI官方频道',name_zh_desc:'OpenAI官方更新',type:'tg',icon:'🤖',hot:true,link:'https://t.me/openai'},
+            {name:'GitHub',name_zh:'GitHub',desc:'开发者技术社区',name_zh_desc:'全球最大开源社区',type:'tg',icon:'🐙',hot:true,link:'https://t.me/github'},
+            {name:'Product Hunt',name_zh:'Product Hunt',desc:'产品发现社区',name_zh_desc:'每日新产品',type:'tg',icon:'🔍',hot:true,link:'https://t.me/producthunt'},
+            {name:'以太坊',name_zh:'以太坊',desc:'以太坊官方',name_zh_desc:'ETH官方频道',type:'tg',icon:'💎',link:'https://t.me/ethereum'},
+            {name:'Telegram',name_zh:'Telegram',desc:'即时通讯工具',name_zh_desc:'最受欢迎的通讯App',type:'tg',icon:'✈️',link:'https://t.me/telegram'},
         ];
         const productivity = [
-            {name:'Notion',name_zh:'Notion',desc:'All-in-one workspace',name_zh_desc:'全能笔记',type:'productivity',icon:'📒',hot:true,link:'https://notion.so'},
-            {name:'Raycast',name_zh:'Raycast',desc:'Mac launcher',name_zh_desc:'效率启动器',type:'productivity',icon:'⚡',hot:true,link:'https://raycast.com'},
-            {name:'Figma',name_zh:'Figma',desc:'UI design tool',name_zh_desc:'UI设计',type:'productivity',icon:'🎯',hot:true,link:'https://figma.com'},
-            {name:'Linear',name_zh:'Linear',desc:'Project management',name_zh_desc:'项目管理',type:'productivity',icon:'📋',link:'https://linear.app'},
-            {name:'Slack',name_zh:'Slack',desc:'Team collaboration',name_zh_desc:'团队协作',type:'productivity',icon:'💬',link:'https://slack.com'},
-            {name:'Zoom',name_zh:'Zoom',desc:'Video conferencing',name_zh_desc:'视频会议',type:'productivity',icon:'📹',link:'https://zoom.us'},
+            {name:'Notion',name_zh:'Notion',desc:'全能笔记工具',name_zh_desc:'笔记/项目/文档一体化',type:'productivity',icon:'📒',hot:true,link:'https://notion.so'},
+            {name:'Raycast',name_zh:'Raycast',desc:'Mac效率启动器',name_zh_desc:'Mac必备效率工具',type:'productivity',icon:'⚡',hot:true,link:'https://raycast.com'},
+            {name:'Figma',name_zh:'Figma',desc:'协作UI设计工具',name_zh_desc:'在线设计神器',type:'productivity',icon:'🎯',hot:true,link:'https://figma.com'},
+            {name:'Linear',name_zh:'Linear',desc:'项目管理工具',name_zh_desc:'设计顶级',type:'productivity',icon:'📋',link:'https://linear.app'},
+            {name:'Slack',name_zh:'Slack',desc:'团队协作通讯',name_zh_desc:'企业沟通工具',type:'productivity',icon:'💬',link:'https://slack.com'},
+            {name:'Zoom',name_zh:'Zoom',desc:'视频会议工具',name_zh_desc:'远程会议必备',type:'productivity',icon:'📹',link:'https://zoom.us'},
         ];
         let favs = JSON.parse(localStorage.getItem('omt_favs') || '[]');
         let filter = 'all';
