@@ -3,402 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OhMyToolbox | 好工具箱 - 精选好用的好工具</title>
-    <meta name="description" content="OhMyToolbox - 精选好工具、TG资源导航。发现ChatGPT、Claude、Midjourney等热门好工具。">
+    <title>OhMyToolbox | AI + 加密货币 + TG群组</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --accent: #22d3ee;
-            --bg: #0f0f14;
-            --card: #18181f;
-            --border: #27272a;
-            --text: #fafafa;
-            --text-dim: #a1a1aa;
-            --green: #22c55e;
-            --orange: #f97316;
-            --pink: #ec4899;
-        }
-        body { 
-            font-family: 'Outfit', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.15), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(34,211,238,0.1), transparent);
-        }
-        /* 顶部导航 */
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 40px;
-            background: rgba(24,24,31,0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .brand-icon {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            box-shadow: 0 4px 20px rgba(99,102,241,0.3);
-        }
-        .brand-text {
-            font-size: 22px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff 0%, var(--text-dim) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        :root { --primary: #6366f1; --accent: #22d3ee; --bg: #0f0f14; --card: #18181f; --border: #27272a; --text: #fafafa; --text-dim: #a1a1aa; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: var(--card); border-bottom: 1px solid var(--border); }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .brand-text { font-size: 22px; font-weight: 800; }
         .brand-text span { color: var(--accent); }
-        .nav-actions { display: flex; gap: 12px; align-items: center; }
-        .nav-btn {
-            width: 40px; height: 40px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            cursor: pointer;
-            font-size: 18px;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s;
-        }
-        .nav-btn:hover { border-color: var(--primary); transform: scale(1.05); }
-        /* Hero区 */
-        .hero {
-            text-align: center;
-            padding: 60px 20px 40px;
-        }
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p {
-            font-size: 18px;
-            color: var(--text-dim);
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        /* 统计 */
-        .stat-num {
-            font-size: 32px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .stat-label { color: var(--text-dim); font-size: 14px; margin-top: 4px; }
-        /* 搜索 */
-        
-        
-        /* 标签 */
-        .tags {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        .tag {
-            padding: 10px 20px;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            color: var(--text-dim);
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        .tag:hover { border-color: var(--primary); color: var(--text); }
-        .tag.active { 
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
-            color: #fff; 
-            border-color: transparent;
-        }
-        /* 分类标题 */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 50px 0 24px;
-            padding: 0 20px;
-        }
-        .section-title {
-            font-size: 24px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        /* 网格 */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 0 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        /* 卡片 */
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .card:hover { 
-            transform: translateY(-6px); 
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .card:hover::before { opacity: 1; }
+        .hero { text-align: center; padding: 60px 20px 40px; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
+        .hero h1 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 18px; color: var(--text-dim); max-width: 600px; margin: 0 auto; }
+        .tags { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 50px; padding: 0 20px; }
+        .tag { padding: 10px 24px; border-radius: 24px; border: 1px solid var(--border); background: var(--card); color: var(--text-dim); cursor: pointer; font-size: 14px; transition: all 0.2s; }
+        .tag:hover { border-color: var(--primary); }
+        .tag.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .section-header { max-width: 1200px; margin: 40px auto 24px; padding: 0 20px; }
+        .section-title { font-size: 24px; font-weight: 700; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 0 20px; max-width: 1200px; margin: 0 auto; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.3s; }
+        .card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-        .card-icon { 
-            width: 52px; height: 52px; 
-            background: linear-gradient(135deg, #27272a, #18181f);
-            border-radius: 14px; 
-            display: flex; align-items: center; justify-content: center;
-            font-size: 26px;
-        }
-        .card-name { 
-            font-size: 18px; 
-            font-weight: 600; 
-            flex: 1;
-        }
-        .card-fav {
-            font-size: 22px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            opacity: 0.4;
-            transition: all 0.2s;
-        }
-        .card-fav:hover, .card-fav.active { opacity: 1; }
-        .card-fav.active { color: var(--orange); }
-        .card-desc { 
-            color: var(--text-dim); 
-            font-size: 14px; 
-            line-height: 1.6; 
-            margin-bottom: 14px;
-        }
-        .card-footer { display: flex; align-items: center; justify-content: space-between; }
-        .card-tag {
-            font-size: 12px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            background: rgba(99,102,241,0.1);
-            color: var(--primary);
-        }
+        .card-icon { width: 52px; height: 52px; background: linear-gradient(135deg, #27272a, #18181f); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+        .card-name { font-size: 18px; font-weight: 600; flex: 1; }
+        .card-desc { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
+        .card-footer { display: flex; justify-content: space-between; }
+        .card-tag { font-size: 12px; padding: 6px 12px; border-radius: 20px; background: rgba(99,102,241,0.1); color: var(--primary); }
         .card-link { color: var(--accent); font-size: 14px; font-weight: 500; }
-        /* 热门标签 */
-        .hot-tag {
-            position: absolute;
-            top: 12px; right: 12px;
-            font-size: 11px;
-            padding: 5px 12px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, var(--orange), #fb923c);
-            color: #fff;
-            font-weight: 600;
-        }
-        /* 收藏区 */
-        .favorites-area {
-            display: none;
-            margin: 40px 20px;
-            padding: 30px;
-            background: var(--card);
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-        .favorites-area.active { display: block; }
-        /* 弹窗 */
-        
-        .modal-btn {
-            padding: 12px 24px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: var(--bg);
-            color: var(--text);
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .modal-btn.primary { 
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
-            color: #fff; 
-            border: none; 
-        }
-        /* 底部 */
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-dim);
-            font-size: 14px;
-            border-top: 1px solid var(--border);
-            margin-top: 60px;
-        }
-        @media (max-width: 768px) {
-            .navbar { padding: 12px 20px; }
-            .hero h1 { font-size: 32px; }
-            .hero p { font-size: 16px; }
-            .grid { grid-template-columns: 1fr; padding: 0 15px; }
-        }
+        .hot-tag { position: absolute; top: 12px; right: 12px; font-size: 11px; padding: 5px 12px; border-radius: 20px; background: linear-gradient(135deg, #f97316, #fb923c); color: #fff; font-weight: 600; }
+        footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 14px; border-top: 1px solid var(--border); margin-top: 60px; }
+        @media (max-width: 768px) { .hero h1 { font-size: 32px; } .grid { grid-template-columns: 1fr; } }
         .empty { text-align: center; padding: 50px; color: var(--text-dim); }
     </style>
 </head>
 <body>
-    <!-- 导航 -->
     <nav class="navbar">
         <div class="brand">
             <div class="brand-icon">🧰</div>
             <div class="brand-text">OhMy<span>Toolbox</span></div>
         </div>
-        <div class="nav-actions">
-            <button class="submit-btn" onclick="openModal()">+ 提交工具</button>
-        </div>
     </nav>
-    <!-- Hero -->
     <section class="hero">
-        <h1>发现你的<span>好工具箱</span></h1>
-        <p>精选全球好用的好工具和TG资源,一个就够了。</p>
-        <div class="stat-label">个精选工具</div></div>
-            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">好工具</div></div>
-            <div class="stat-box"><div class="stat-num">16</div><div class="stat-label">TG资源</div></div>
-        </div>
-        <div class="tags">
-            <div class="tag active" onclick="setFilter('all')">全部</div>
-            <div class="tag" onclick="setFilter('chat')">💬 对话AI</div>
-            <div class="tag" onclick="setFilter('image')">🎨 图像AI</div>
-            <div class="tag" onclick="setFilter('code')">⌨️ 编程</div>
-            <div class="tag" onclick="setFilter('agent')">⚡ Agent</div>
-            <div class="tag" onclick="setFilter('news')">📰 资讯</div>
-            <div class="tag" onclick="setFilter('trading')">📈 交易</div>
-        </div>
+        <h1>发现你的<span>万能工具箱</span></h1>
+        <p>精选 AI工具、加密货币、TG群组</p>
     </section>
-    <!-- 收藏区 -->
+    <div class="tags">
+        <div class="tag active" onclick="setFilter('all')">全部</div>
+        <div class="tag" onclick="setFilter('ai')">🤖 AI</div>
+        <div class="tag" onclick="setFilter('crypto')">💰 加密货币</div>
+        <div class="tag" onclick="setFilter('tg')">📡 TG群组</div>
     </div>
-    <!-- 好工具 -->
-    <div class="section-header">
-        <div class="section-title">🤖 AI</div>
-    </div>
+    <div class="section-header"><div class="section-title">🤖 AI</div></div>
     <div class="grid" id="aiGrid"></div>
-    <!-- TG资源 -->
-    <div class="section-header">
-        <div class="section-title">📡 TG群组</div>
-    </div>
+    <div class="section-header"><div class="section-title">💰 加密货币</div></div>
+    <div class="grid" id="cryptoGrid"></div>
+    <div class="section-header"><div class="section-title">📡 TG群组</div></div>
     <div class="grid" id="tgGrid"></div>
-    <!-- 弹窗 -->
-        </div>
-    </div>
-    <footer>
-        <p>© 2026 OhMyToolbox · Made with 🧰</p>
-    </footer>
+    <footer><p>© 2026 OhMyToolbox</p></footer>
     <script>
         const aiTools = [
-            { name: 'Claude', desc: 'Anthropic 旗舰AI模型,推理能力强,代码能力顶级', type: 'chat', icon: '🧠', hot: true, link: 'https://claude.ai' },
-            { name: 'ChatGPT', desc: 'OpenAI GPT-4,对话生成顶级,生态最丰富', type: 'chat', icon: '💬', hot: true, link: 'https://chat.openai.com' },
-            { name: 'DeepSeek', desc: '国产开源大模型,API价格超低', type: 'chat', icon: '🔮', link: 'https://chat.deepseek.com' },
-            { name: 'Grok', desc: 'xAI 出品,实时信息搜索强', type: 'chat', icon: '🚀', link: 'https://x.com/i/grok' },
-            { name: 'Gemini', desc: 'Google 多模态AI,图片理解强', type: 'chat', icon: '🌟', link: 'https://gemini.google.com' },
-            { name: 'Midjourney', desc: '最强AI图像生成,画质细腻逼真', type: 'image', icon: '🎨', hot: true, link: 'https://www.midjourney.com' },
-            { name: 'DALL-E', desc: 'OpenAI 图像生成,与GPT深度集成', type: 'image', icon: '🖼️', link: 'https://openai.com/dall-e-3' },
-            { name: 'Leonardo', desc: '开源AI绘画平台,免费额度多', type: 'image', icon: '🎭', link: 'https://leonardo.ai' },
-            { name: 'Cursor', desc: 'AI代码编辑器,编程效率翻倍', type: 'code', icon: '⌨️', hot: true, link: 'https://cursor.sh' },
-            { name: 'Windsurf', desc: 'AI编程助手,Flow模式创新', type: 'code', icon: '💻', link: 'https://windsurf.ai' },
-            { name: 'V0', desc: 'Vercel 前端代码生成,React神器', type: 'code', icon: '⚛️', link: 'https://v0.dev' },
-            { name: 'Manus', desc: 'AI Agent,自动执行任务', type: 'agent', icon: '⚡', hot: true, link: 'https://manus.im' },
-            { name: 'Perplexity', desc: 'AI搜索,实时信息整合', type: 'agent', icon: '🔍', link: 'https://www.perplexity.ai' },
-            { name: 'Devin', desc: 'AI程序员,独立完成项目', type: 'agent', icon: '🛠️', link: 'https://devin.ai' },
+            {name:'Claude',desc:'Anthropic 旗舰AI模型',type:'ai',icon:'🧠',hot:true,link:'https://claude.ai'},
+            {name:'ChatGPT',desc:'OpenAI GPT-4 对话AI',type:'ai',icon:'💬',hot:true,link:'https://chat.openai.com'},
+            {name:'DeepSeek',desc:'国产开源大模型',type:'ai',icon:'🔮',link:'https://chat.deepseek.com'},
+            {name:'Gemini',desc:'Google 多模态AI',type:'ai',icon:'🌟',link:'https://gemini.google.com'},
+            {name:'Grok',desc:'xAI 实时搜索',type:'ai',icon:'🚀',link:'https://x.com/i/grok'},
+            {name:'Midjourney',desc:'最强AI图像生成',type:'ai',icon:'🎨',hot:true,link:'https://www.midjourney.com'},
+            {name:'Cursor',desc:'AI代码编辑器',type:'ai',icon:'⌨️',hot:true,link:'https://cursor.sh'},
+            {name:'Perplexity',desc:'AI搜索引擎',type:'ai',icon:'🔍',link:'https://www.perplexity.ai'},
+            {name:'Manus',desc:'AI Agent 自动任务',type:'ai',icon:'⚡',hot:true,link:'https://manus.im'},
+            {name:'Devin',desc:'AI程序员',type:'ai',icon:'🛠️',link:'https://devin.ai'},
+        ];
+        const cryptoTools = [
+            {name:'CoinGecko',desc:'加密货币价格行情',type:'crypto',icon:'📊',link:'https://www.coingecko.com'},
+            {name:'CoinMarketCap',desc:'加密货币市值排行',type:'crypto',icon:'📈',link:'https://coinmarketcap.com'},
+            {name:'TradingView',desc:'技术分析图表',type:'crypto',icon:'📉',link:'https://www.tradingview.com'},
+            {name:'TradingView',desc:'交易社区',type:'crypto',icon:'💬',link:'https://t.me/tradingview'},
+            {name:'DeFi Llama',desc:'DeFi 协议数据',type:'crypto',icon:'🦙',link:'https://defillama.com'},
+            {name:'DappRadar',desc:'DApp 数据分析',type:'crypto',icon:'📱',link:'https://dappradar.com'},
         ];
         const tgChannels = [
-            { name: '金色财经', desc: '区块链行业头部媒体', type: 'news', icon: '📰', link: 'https://t.me/jinse' },
-            { name: '吴说区块链', desc: '最受欢迎币圈媒体,内幕消息', type: 'news', icon: '🗣️', link: 'https://t.me/wublock' },
-            { name: '币世界', desc: '实时币圈快讯', type: 'news', icon: '⚡', link: 'https://t.me/bishijie' },
-            { name: '火星财经', desc: '区块链资讯平台', type: 'news', icon: '🔥', link: 'https://t.me/marsfinance' },
-            { name: 'PANews', desc: '区块链媒体,数据分析', type: 'news', icon: '📡', link: 'https://t.me/panews' },
-            { name: '币coin', desc: '合约信号社区', type: 'crypto', icon: '🪙', link: 'https://t.me/bicointv' },
-            { name: 'BTCbitcoin', desc: '比特币价格分析', type: 'crypto', icon: '₿', link: 'https://t.me/BTCbitcoin' },
-            { name: '以太坊', desc: '以太坊官方频道', type: 'crypto', icon: '💎', link: 'https://t.me/ethereum' },
-            { name: '比特币', desc: '比特币官方频道', type: 'crypto', icon: '₿', link: 'https://t.me/Bitcoin' },
-            { name: 'Vitalik', desc: '以太坊创始人', type: 'crypto', icon: '👤', link: 'https://t.me/vitalikbuterin' },
-            { name: '@BotFather', desc: '机器人创建工具', type: 'trading', icon: '🤖', link: 'https://t.me/BotFather' },
+            {name:'金色财经',desc:'区块链行业头部媒体',type:'tg',icon:'📰',link:'https://t.me/jinse'},
+            {name:'吴说区块链',desc:'币圈内幕消息',type:'tg',icon:'🗣️',link:'https://t.me/wublock'},
+            {name:'火星财经',desc:'区块链资讯平台',type:'tg',icon:'🔥',link:'https://t.me/marsfinance'},
+            {name:'PANews',desc:'区块链媒体',type:'tg',icon:'📡',link:'https://t.me/panews'},
+            {name:'币coin',desc:'合约信号社区',type:'tg',icon:'🪙',link:'https://t.me/bicointv'},
+            {name:'以太坊',desc:'以太坊官方',type:'tg',icon:'💎',link:'https://t.me/ethereum'},
+            {name:'比特币',desc:'比特币官方',type:'tg',icon:'₿',link:'https://t.me/Bitcoin'},
+            {name:'Vitalik',desc:'以太坊创始人',type:'tg',icon:'👤',link:'https://t.me/vitalikbuterin'},
+            {name:'OpenAI',desc:'OpenAI官方',type:'tg',icon:'🤖',link:'https://t.me/openai'},
+            {name:'GitHub',desc:'开发者社区',type:'tg',icon:'🐙',link:'https://t.me/github'},
         ];
-        
         let filter = 'all';
+        
         function render() {
-            const s = document.getElementById('search').value.toLowerCase();
-            document.getElementById('totalNum').textContent = aiTools.length + tgChannels.length;
-            const f = (arr) => arr.filter(t => (filter === 'all' || t.type === filter) && (!s || t.name.toLowerCase().includes(s) || t.desc.includes(s)));
-            document.getElementById('aiGrid').innerHTML = f(aiTools).map(card).join('') || '<div class="empty">暂无结果</div>';
-            document.getElementById('tgGrid').innerHTML = f(tgChannels).map(card).join('') || '<div class="empty">暂无结果</div>';
-            const all = [...aiTools, ...tgChannels];
-        }
-        function card(t) {
-            const hot = t.hot ? '<span class="hot-tag">🔥 热门</span>' : '';
-            const active = false ? 'active' : '';
-            return `
-                <div class="card" onclick="window.open('${t.link}','_blank')">
-                    ${hot}
-                    <div class="card-header">
-                        <div class="card-icon">${t.icon}</div>
-                        <div class="card-name">${t.name}</div>
-                        <button class="card-fav ${active}" onclick="event.stopPropagation();toggle('${t.name}')">❤️</button>
-                    </div>
-                    <div class="card-desc">${t.desc}</div>
-                    <div class="card-footer">
-                        <span class="card-tag">${t.type}</span>
-                        <span class="card-link">访问 →</span>
-                    </div>
-                </div>
-            `;
-        }
-        function setFilter(f) {
-            filter = f;
-            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            render();
+            const f = (arr) => arr.filter(t => filter === 'all' || t.type === filter);
+            document.getElementById('aiGrid').innerHTML = f(aiTools).map(card).join('') || '<div class="empty">暂无</div>';
+            document.getElementById('cryptoGrid').innerHTML = f(cryptoTools).map(card).join('') || '<div class="empty">暂无</div>';
+            document.getElementById('tgGrid').innerHTML = f(tgChannels).map(card).join('') || '<div class="empty">暂无</div>';
         }
         
-        );
+        function card(t) {
+            return '<div class="card" onclick="window.open(\''+t.link+'\',\'_blank\')">'+(t.hot?'<span class="hot-tag">🔥 热门</span>':'')+'<div class="card-header"><div class="card-icon">'+t.icon+'</div><div class="card-name">'+t.name+'</div></div><div class="card-desc">'+t.desc+'</div><div class="card-footer"><span class="card-tag">'+t.type+'</span><span class="card-link">访问 →</span></div></div>';
         }
+        
+        function setFilter(f) { 
+            filter = f; 
+            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); 
+            event.target.classList.add('active'); 
+            render(); 
         }
+        
         render();
     </script>
 </body>
