@@ -411,20 +411,23 @@ const productivity = [
         }
         
         function card(t) {
-            const hot = t.hot ? '<span class="hot-tag">🔥 热门</span>' : '';
+            const name = currentLang === 'zh' && t.name_zh ? t.name_zh : t.name;
+            const desc = currentLang === 'zh' && t.name_zh_desc ? t.name_zh_desc : t.desc;
+            const hot = t.hot ? '<span class="hot-tag">' + (currentLang === 'zh' ? '🔥 热门' : '🔥 Hot') + '</span>' : '';
             const active = favs.includes(t.name) ? 'active' : '';
+            const visitText = currentLang === 'zh' ? '访问 →' : 'Visit →';
             return `
                 <div class="card" onclick="window.open('${t.link}','_blank')">
                     ${hot}
                     <div class="card-header">
                         <div class="card-icon">${t.icon}</div>
-                        <div class="card-name">${t.name}</div>
+                        <div class="card-name">${name}</div>
                         <button class="card-fav ${active}" onclick="event.stopPropagation();toggle('${t.name}')">❤️</button>
                     </div>
-                    <div class="card-desc">${t.desc}</div>
+                    <div class="card-desc">${desc}</div>
                     <div class="card-footer">
-                        <span class="card-tag">${t.type.split(',')[0]}</span>
-                        <span class="card-link">访问 →</span>
+                        <span class="card-tag">${t.type?.split(',')[0] || t.type}</span>
+                        <span class="card-link">${visitText}</span>
                     </div>
                 </div>
             `;
