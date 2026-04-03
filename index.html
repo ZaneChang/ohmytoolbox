@@ -218,7 +218,7 @@
             return '<div class="card" onclick="window.open(\''+t.link+'\',\'_blank\')">'+(t.hot?'<span class="hot-tag">🔥 热门</span>':'')+'<div class="card-header"><div class="card-icon">'+t.icon+'</div><div class="card-name">'+t.name+'</div><button class="card-fav '+(favs.includes(t.name)?'active':'')+'" onclick="event.stopPropagation();toggle(\''+t.name+'\')">❤️</button></div><div class="card-desc">'+t.desc+'</div><div class="card-footer"><span class="card-tag ${t.type?.split(',')[0]}">'+t.type?.split(',')[0]+'</span><span class="card-link">访问 →</span></div></div>';
         }
         
-        function setFilter(f) { filter = f; document.querySelector全部('.tag').forEach(t => t.classList.remove('active')); event.target.classList.add('active'); render(); }
+        function setFilter(f) { filter = f; document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); event.target.classList.add('active'); render(); }
         function toggle(n) { favs = favs.includes(n) ? favs.filter(x => x !== n) : [...favs, n]; localStorage.setItem('omt_favs', JSON.stringify(favs)); render(); }
         function toggleFavView() { document.getElementById('favArea').classList.toggle('active'); window.scrollTo({top:0,behavior:'smooth'}); }
         function openModal() { document.getElementById('modal').classList.add('active'); }
