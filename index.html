@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧰</text></svg>">
     <title>OhMyToolbox | AI + 加密货币 + Telegram</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --primary: #6366f1; --accent: #22d3ee; --bg: #08080c; --card: #18181f; --border: #27272a; --text: #fafafa; --text-dim: #a1a1aa; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--primary); color: #fff; padding: 8px 16px; z-index: 1000; }
+        .skip-link:focus { top: 0; }
+        :root { --primary: #6366f1; --accent: #22d3ee; --bg: #050508; --card: #18181f; --border: #27272a; --text: #fafafa; --text-dim: #a1a1aa; }
         body { font-family: 'Outfit', sans-serif; font-display: swap, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: var(--card); border-bottom: 1px solid var(--border); }
         .brand { display: flex; align-items: center; gap: 12px; }
@@ -42,6 +47,9 @@
         .card-link { color: var(--accent); font-size: 14px; font-weight: 500; }
         .hot-tag { position: absolute; top: 12px; right: 12px; font-size: 11px; padding: 5px 12px; border-radius: 20px; background: linear-gradient(135deg, #f97316, #fb923c); color: #fff; font-weight: 600; }
         footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 14px; border-top: 1px solid var(--border); margin-top: 60px; }
+        @media (max-width: 900px) {
+            .search-box { max-width: 90%; }
+        }
         @media (max-width: 768px) {
             .navbar { padding: 12px 20px; }
             .brand-text { font-size: 18px; }
@@ -72,6 +80,7 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">跳到主要内容</a>
     <nav class="navbar">
         <div class="brand">
             <div class="brand-icon" onclick="location.reload()">🧰</div>
@@ -82,22 +91,22 @@
         <h1>发现你的<span>AI + 加密货币</span>工具箱</h1>
         <p>精选全球最优质的 AI工具、加密货币交易所、Telegram群组资源</p>
     </section>
-    <div class="tags">
-        <div class="tag active" onclick="setFilter('featured')">⭐ 精选</div>
-        <div class="tag" onclick="setFilter('ai')">🤖 AI</div>
-        <div class="tag" onclick="setFilter('crypto')">💰 加密货币</div>
-        <div class="tag" onclick="setFilter('tg')">📡 Telegram群组</div>
+    <div class="tags" role="navigation" aria-label="分类筛选">
+        <div class="tag active" onkeydown="if(event.key==='Enter')setFilter('featured')">⭐ 精选</div>
+        <div class="tag" onkeydown="if(event.key==='Enter')setFilter('ai')">🤖 AI</div>
+        <div class="tag" onkeydown="if(event.key==='Enter')setFilter('crypto')">💰 加密货币</div>
+        <div class="tag" onkeydown="if(event.key==='Enter')setFilter('tg')">📡 Telegram群组</div>
     </div>
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="搜索工具..." oninput="render()">
+    <div class="search-box" role="search" aria-label="搜索工具">
+        <input type="text" id="searchInput" placeholder="搜索工具..." aria-label="搜索输入" oninput="render()">
     </div>
     <div class="section-header"><div class="section-title">🤖 AI</div></div>
-    <div class="grid" id="aiGrid"></div>
+    <main id="main-content"><div class="grid" id="aiGrid"></div>
     <div class="section-header"><div class="section-title">💰 加密货币</div></div>
     <div class="grid" id="cryptoGrid"></div>
     <div class="section-header"><div class="section-title">📡 Telegram群组</div></div>
     <div class="grid" id="tgGrid"></div>
-    <footer><p>© 2026 OhMyToolbox</p></footer>
+    </main><footer><p>© 2026 OhMyToolbox</p></footer>
     <script>
         const aiTools = [
             {name:'Claude',desc:'Anthropic 旗舰AI模型,推理能力顶级',type:'ai',icon:'🧠',hot:true,link:'https://claude.ai'},
