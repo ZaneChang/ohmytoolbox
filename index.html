@@ -165,32 +165,30 @@
         
         function render() {
             const s = document.getElementById('searchInput').value.toLowerCase();
+            const f = (arr) => arr.filter(t => (filter === 'all' || t.type === filter) && (!s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s)));
             
-            // Featured: top 5 from each category
-            const featured = [...aiTools.slice(0,5), ...cryptoTools.slice(0,5), ...tgChannels.slice(0,5)];
-            
-            const f = (arr) => arr.filter(t => (filter === 'featured' || filter === 'all' || t.type === filter) && (!s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s)));
-            
-            // Show featured section or category sections
-            const showFeatured = (filter === 'featured' || filter === 'all') && !s;
-            
-            document.getElementById('aiGrid').innerHTML = (filter === 'all' || filter === 'ai') ? f(aiTools).map(card).join('') : '';
-            document.getElementById('cryptoGrid').innerHTML = (filter === 'all' || filter === 'crypto') ? f(cryptoTools).map(card).join('') : '';
-            document.getElementById('tgGrid').innerHTML = (filter === 'all' || filter === 'tg') ? f(tgChannels).map(card).join('') : '';
-            
-            // Handle featured filter
-            if (filter === 'featured') {
-                document.getElementById('aiGrid').innerHTML = f(aiTools.slice(0,5)).map(card).join('');
-                document.getElementById('cryptoGrid').innerHTML = f(cryptoTools.slice(0,5)).map(card).join('');
-                document.getElementById('tgGrid').innerHTML = f(tgChannels.slice(0,5)).map(card).join('');
+            // Handle featured filter - show all top items in one grid
+            if (filter === 'featured' && !s) {
+                const featured = [...aiTools.filter(t => t.hot).slice(0,3), ...cryptoTools.filter(t => t.hot).slice(0,3), ...tgChannels.filter(t => t.hot).slice(0,3)];
+                document.getElementById('featuredGrid').innerHTML = featured.map(card).join('');
+                document.getElementById('featuredGrid').style.display = 'block';
+                document.getElementById('aiGrid').style.display = 'none';
+                document.getElementById('cryptoGrid').style.display = 'none';
+                document.getElementById('tgGrid').style.display = 'none';
+                document.querySelectorAll('.section-header').forEach(el => el.style.display = 'none');
+            } else {
+                document.getElementById('featuredGrid').style.display = 'none';
+                document.getElementById('aiGrid').innerHTML = (filter === 'all' || filter === 'ai') ? f(aiTools).map(card).join('') : '';
+                document.getElementById('aiGrid').style.display = (filter === 'all' || filter === 'ai') ? 'grid' : 'none';
+                document.getElementById('cryptoGrid').innerHTML = (filter === 'all' || filter === 'crypto') ? f(cryptoTools).map(card).join('') : '';
+                document.getElementById('cryptoGrid').style.display = (filter === 'all' || filter === 'crypto') ? 'grid' : 'none';
+                document.getElementById('tgGrid').innerHTML = (filter === 'all' || filter === 'tg') ? f(tgChannels).map(card).join('') : '';
+                document.getElementById('tgGrid').style.display = (filter === 'all' || filter === 'tg') ? 'grid' : 'none';
+                
+                document.querySelectorAll('.section-header').forEach((el, i) => {
+                    el.style.display = (filter === 'all' || (i===0 && filter === 'ai') || (i===1 && filter === 'crypto') || (i===2 && filter === 'tg')) ? 'flex' : 'none';
+                });
             }
-            
-            // Hide/show section headers
-            document.querySelectorAll('.section-header').forEach((el, i) => {
-                if(i === 0) el.style.display = (filter === 'all' || filter === 'ai' || filter === 'featured') ? 'flex' : 'none';
-                if(i === 1) el.style.display = (filter === 'all' || filter === 'crypto' || filter === 'featured') ? 'flex' : 'none';
-                if(i === 2) el.style.display = (filter === 'all' || filter === 'tg' || filter === 'featured') ? 'flex' : 'none';
-            });
         }
         
         function card(t) {
