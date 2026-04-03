@@ -80,9 +80,9 @@
         <p>精选全球好用的工具,一个就够了。</p>
         <div class="stats">
             <div class="stat-box"><div class="stat-num" id="totalNum">0</div><div class="stat-label">总计</div></div>
-            <div class="stat-box"><div class="stat-num">19</div><div class="stat-label">AI工具</div></div>
-            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">TG频道</div></div>
-            <div class="stat-box"><div class="stat-num">12</div><div class="stat-label">效率软件</div></div>
+            <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">AI工具</div></div>
+            <div class="stat-box"><div class="stat-num">15</div><div class="stat-label">TG频道</div></div>
+            <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">效率软件</div></div>
         </div>
         <div class="search-container">
             <span class="search-icon">🔍</span>
@@ -120,31 +120,59 @@
     <footer><p>© 2026 OhMyToolbox</p></footer>
     <script>
         const aiTools = [
-            {name:'Claude',name_zh:'Claude',desc:'Anthropic 旗舰AI模型',name_zh_desc:'Anthropic 旗舰AI,推理能力强',type:'ai,chat',icon:'🧠',hot:true,link:'https://claude.ai'},
-            {name:'ChatGPT',name_zh:'ChatGPT',desc:'OpenAI GPT-4',name_zh_desc:'OpenAI 对话AI,生态最丰富',type:'ai,chat',icon:'💬',hot:true,link:'https://chat.openai.com'},
-            {name:'DeepSeek',name_zh:'DeepSeek',desc:'国产开源大模型',name_zh_desc:'国产开源大模型,API价格低',type:'ai,chat',icon:'🔮',link:'https://chat.deepseek.com'},
-            {name:'Midjourney',name_zh:'Midjourney',desc:'最强AI图像生成',name_zh_desc:'最强AI图像生成,画质细腻',type:'ai,image',icon:'🎨',hot:true,link:'https://www.midjourney.com'},
-            {name:'Cursor',name_zh:'Cursor',desc:'AI代码编辑器',name_zh_desc:'AI代码编辑器,编程效率翻倍',type:'ai,code',icon:'⌨️',hot:true,link:'https://cursor.sh'},
-            {name:'Perplexity',name_zh:'Perplexity',desc:'AI搜索引擎',name_zh_desc:'AI搜索,实时信息整合',type:'ai,agent',icon:'🔍',link:'https://www.perplexity.ai'},
-            {name:'Windsurf',name_zh:'Windsurf',desc:'AI编程助手',name_zh_desc:'AI编程助手,Flow模式',type:'ai,code',icon:'💻',link:'https://windsurf.ai'},
-            {name:'V0',name_zh:'V0',desc:'Vercel前端代码生成',name_zh_desc:'Vercel前端代码,React神器',type:'ai,code',icon:'⚛️',link:'https://v0.dev'},
-            {name:'Devin',name_zh:'Devin',desc:'AI程序员',name_zh_desc:'AI程序员,独立完成项目',type:'ai,agent',icon:'🛠️',link:'https://devin.ai'},
-            {name:'Gamma',name_zh:'Gamma',desc:'AI PPT制作',name_zh_desc:'AI PPT制作,演示神器',type:'ai,productivity',icon:'📊',link:'https://gamma.app'},
+            {name:'Claude',name_zh:'Claude',desc:'Anthropic 旗舰AI模型,推理能力顶级',name_zh_desc:'Anthropic 旗舰AI,代码能力强',type:'ai,chat',icon:'🧠',hot:true,link:'https://claude.ai'},
+            {name:'ChatGPT',name_zh:'ChatGPT',desc:'OpenAI GPT-4,对话生成顶级',name_zh_desc:'OpenAI 对话AI,生态最丰富',type:'ai,chat',icon:'💬',hot:true,link:'https://chat.openai.com'},
+            {name:'DeepSeek',name_zh:'DeepSeek',desc:'国产开源大模型,API价格低',name_zh_desc:'国产开源大模型,性能强',type:'ai,chat',icon:'🔮',link:'https://chat.deepseek.com'},
+            {name:'Gemini',name_zh:'Gemini',desc:'Google 多模态AI',name_zh_desc:'Google 多模态AI,图片理解强',type:'ai,chat',icon:'🌟',link:'https://gemini.google.com'},
+            {name:'Grok',name_zh:'Grok',desc:'xAI 出品,实时信息搜索强',name_zh_desc:'xAI 实时搜索,幽默感足',type:'ai,chat',icon:'🚀',link:'https://x.com/i/grok'},
+            {name:'Midjourney',name_zh:'Midjourney',desc:'最强AI图像生成,画质细腻',name_zh_desc:'AI图像生成,无出其右',type:'ai,image',icon:'🎨',hot:true,link:'https://www.midjourney.com'},
+            {name:'DALL-E',name_zh:'DALL-E',desc:'OpenAI 图像生成',name_zh_desc:'OpenAI 图像,与GPT集成',type:'ai,image',icon:'🖼️',link:'https://openai.com/dall-e-3'},
+            {name:'Leonardo',name_zh:'Leonardo',desc:'开源AI绘画平台,免费额度多',name_zh_desc:'开源AI绘画,每日150积分',type:'ai,image',icon:'🎭',link:'https://leonardo.ai'},
+            {name:'Stable Diffusion',name_zh:'Stable Diffusion',desc:'开源图像生成,本地可部署',name_zh_desc:'开源图像生成,可本地运行',type:'ai,image',icon:'🧪',link:'https://stability.ai'},
+            {name:'Cursor',name_zh:'Cursor',desc:'AI代码编辑器,编程效率翻倍',name_zh_desc:'AI编程,效率提升10倍',type:'ai,code',icon:'⌨️',hot:true,link:'https://cursor.sh'},
+            {name:'Windsurf',name_zh:'Windsurf',desc:'AI编程助手,Flow模式创新',name_zh_desc:'AI编程,自动补全强大',type:'ai,code',icon:'💻',link:'https://windsurf.ai'},
+            {name:'V0',name_zh:'V0',desc:'Vercel前端代码生成,React神器',name_zh_desc:'前端AI,秒出UI代码',type:'ai,code',icon:'⚛️',link:'https://v0.dev'},
+            {name:'GitHub Copilot',name_zh:'GitHub Copilot',desc:'代码补全AI,程序员必备',name_zh_desc:'编程必备,自动补全',type:'ai,code',icon:'👨‍💻',hot:true,link:'https://github.com/features/copilot'},
+            {name:'Manus',name_zh:'Manus',desc:'AI Agent,自动执行任务',name_zh_desc:'任务自动执行,多代理协作',type:'ai,agent',icon:'⚡',hot:true,link:'https://manus.im'},
+            {name:'Perplexity',name_zh:'Perplexity',desc:'AI搜索,实时信息整合',name_zh_desc:'AI搜索,学术神器',type:'ai,agent',icon:'🔍',link:'https://www.perplexity.ai'},
+            {name:'Devin',name_zh:'Devin',desc:'AI程序员,独立完成项目',name_zh_desc:'AI程序员,震惊业界',type:'ai,agent',icon:'🛠️',link:'https://devin.ai'},
+            {name:'Notion AI',name_zh:'Notion AI',desc:'AI笔记辅助,写作神器',name_zh_desc:'笔记AI,写作润色',type:'ai,productivity',icon:'📝',link:'https://notion.so'},
+            {name:'Gamma',name_zh:'Gamma',desc:'AI PPT制作,演示神器',name_zh_desc:'AI生成PPT,一键搞定',type:'ai,productivity',icon:'📊',link:'https://gamma.app'},
+            {name:'Runway',name_zh:'Runway',desc:'AI视频生成平台',name_zh_desc:'视频AI,创作神器',type:'ai,productivity',icon:'🎬',link:'https://runwayml.com'},
+            {name:'Grammarly',name_zh:'Grammarly',desc:'AI写作辅助,语法检查',name_zh_desc:'写作AI,英文必备',type:'ai,productivity',icon:'✍️',link:'https://grammarly.com'},
         ];
         const tgChannels = [
-            {name:'OpenAI',name_zh:'OpenAI',desc:'OpenAI官方频道',name_zh_desc:'OpenAI官方更新',type:'tg',icon:'🤖',hot:true,link:'https://t.me/openai'},
-            {name:'GitHub',name_zh:'GitHub',desc:'开发者技术社区',name_zh_desc:'全球最大开源社区',type:'tg',icon:'🐙',hot:true,link:'https://t.me/github'},
+            {name:'金色财经',name_zh:'金色财经',desc:'区块链行业头部媒体',name_zh_desc:'币圈资讯最全',type:'tg,news',icon:'📰',hot:true,link:'https://t.me/jinse'},
+            {name:'吴说区块链',name_zh:'吴说区块链',desc:'最受欢迎中文币圈媒体',name_zh_desc:'独家内幕消息',type:'tg,news',icon:'🗣️',hot:true,link:'https://t.me/wublock'},
+            {name:'币世界',name_zh:'币世界',desc:'实时币圈快讯',name_zh_desc:'24小时快讯',type:'tg,news',icon:'⚡',link:'https://t.me/bishijie'},
+            {name:'火星财经',name_zh:'火星财经',desc:'区块链资讯平台',name_zh_desc:'深度报道',type:'tg,news',icon:'🔥',link:'https://t.me/marsfinance'},
+            {name:'PANews',name_zh:'PANews',desc:'区块链媒体,数据分析强',name_zh_desc:'数据解读',type:'tg,news',icon:'📡',link:'https://t.me/panews'},
+            {name:'OpenAI',name_zh:'OpenAI',desc:'OpenAI官方频道',name_zh_desc:'官方更新',type:'tg',icon:'🤖',hot:true,link:'https://t.me/openai'},
+            {name:'GitHub',name_zh:'GitHub',desc:'开发者技术社区',name_zh_desc:'开源项目',type:'tg',icon:'🐙',hot:true,link:'https://t.me/github'},
+            {name:'V2EX',name_zh:'V2EX',desc:'程序员讨论社区',name_zh_desc:'中国最大程序员社区',type:'tg',icon:'💬',link:'https://t.me/v2ex'},
+            {name:'掘金',name_zh:'掘金',desc:'技术社区',name_zh_desc:'帮你提升',type:'tg',icon:'⛏️',link:'https://t.me/juejin'},
             {name:'Product Hunt',name_zh:'Product Hunt',desc:'产品发现社区',name_zh_desc:'每日新产品',type:'tg',icon:'🔍',hot:true,link:'https://t.me/producthunt'},
-            {name:'以太坊',name_zh:'以太坊',desc:'以太坊官方',name_zh_desc:'ETH官方频道',type:'tg',icon:'💎',link:'https://t.me/ethereum'},
-            {name:'Telegram',name_zh:'Telegram',desc:'即时通讯工具',name_zh_desc:'最受欢迎的通讯App',type:'tg',icon:'✈️',link:'https://t.me/telegram'},
+            {name:'Figma',name_zh:'Figma',desc:'设计工具社区',name_zh_desc:'设计师聚集地',type:'tg',icon:'🎨',link:'https://t.me/figma'},
+            {name:'以太坊',name_zh:'以太坊',desc:'以太坊官方',name_zh_desc:'ETH官方',type:'tg',icon:'💎',link:'https://t.me/ethereum'},
+            {name:'比特币',name_zh:'比特币',desc:'比特币官方',name_zh_desc:'BTC官方',type:'tg',icon:'₿',link:'https://t.me/Bitcoin'},
+            {name:'Telegram',name_zh:'Telegram',desc:'即时通讯工具',name_zh_desc:'通讯神器',type:'tg',icon:'✈️',hot:true,link:'https://t.me/telegram'},
+            {name:'BotFather',name_zh:'BotFather',desc:'机器人创建工具',name_zh_desc:'TG机器人之父',type:'tg',icon:'🤖',link:'https://t.me/BotFather'},
         ];
         const productivity = [
-            {name:'Notion',name_zh:'Notion',desc:'全能笔记工具',name_zh_desc:'笔记/项目/文档一体化',type:'productivity',icon:'📒',hot:true,link:'https://notion.so'},
-            {name:'Raycast',name_zh:'Raycast',desc:'Mac效率启动器',name_zh_desc:'Mac必备效率工具',type:'productivity',icon:'⚡',hot:true,link:'https://raycast.com'},
-            {name:'Figma',name_zh:'Figma',desc:'协作UI设计工具',name_zh_desc:'在线设计神器',type:'productivity',icon:'🎯',hot:true,link:'https://figma.com'},
-            {name:'Linear',name_zh:'Linear',desc:'项目管理工具',name_zh_desc:'设计顶级',type:'productivity',icon:'📋',link:'https://linear.app'},
-            {name:'Slack',name_zh:'Slack',desc:'团队协作通讯',name_zh_desc:'企业沟通工具',type:'productivity',icon:'💬',link:'https://slack.com'},
-            {name:'Zoom',name_zh:'Zoom',desc:'视频会议工具',name_zh_desc:'远程会议必备',type:'productivity',icon:'📹',link:'https://zoom.us'},
+            {name:'Notion',name_zh:'Notion',desc:'全能笔记工具,笔记/项目/文档',name_zh_desc:'All-in-one工作空间',type:'productivity',icon:'📒',hot:true,link:'https://notion.so'},
+            {name:'Raycast',name_zh:'Raycast',desc:'Mac效率启动器,AI集成',name_zh_desc:'Mac必备效率工具',type:'productivity',icon:'⚡',hot:true,link:'https://raycast.com'},
+            {name:'Arc Browser',name_zh:'Arc Browser',desc:'AI增强浏览器,体验未来',name_zh_desc:'未来浏览器',type:'productivity',icon:'🌐',link:'https://arc.net'},
+            {name:'Linear',name_zh:'Linear',desc:'项目管理工具,设计顶级',name_zh_desc:'PM神器',type:'productivity',icon:'📋',hot:true,link:'https://linear.app'},
+            {name:'Figma',name_zh:'Figma',desc:'协作UI设计工具',name_zh_desc:'设计神器',type:'productivity',icon:'🎯',hot:true,link:'https://figma.com'},
+            {name:'Canva',name_zh:'Canva',desc:'在线设计工具,小白友好',name_zh_desc:'设计小白必备',type:'productivity',icon:'🎨',link:'https://canva.com'},
+            {name:'Slack',name_zh:'Slack',desc:'团队协作通讯工具',name_zh_desc:'企业沟通',type:'productivity',icon:'💬',link:'https://slack.com'},
+            {name:'Zoom',name_zh:'Zoom',desc:'视频会议工具',name_zh_desc:'远程会议',type:'productivity',icon:'📹',link:'https://zoom.us'},
+            {name:'Grammarly',name_zh:'Grammarly',desc:'AI写作辅助,语法检查',name_zh_desc:'英文写作神器',type:'productivity',icon:'✍️',link:'https://grammarly.com'},
+            {name:'Loom',name_zh:'Loom',desc:'屏幕录制工具,异步沟通',name_zh_desc:'异步沟通神器',type:'productivity',icon:'🎥',link:'https://loom.com'},
+            {name:'Obsidian',name_zh:'Obsidian',desc:'Markdown笔记,知识管理',name_zh_desc:'双向链接笔记',type:'productivity',icon:'💎',link:'https://obsidian.md'},
+            {name:'ClickUp',name_zh:'ClickUp',desc:'一体化项目管理',name_zh_desc:'全能PM工具',type:'productivity',icon:'✅',link:'https://clickup.com'},
+            {name:'Telegram',name_zh:'Telegram',desc:'即时通讯工具',name_zh_desc:'通讯神器',type:'productivity',icon:'✈️',hot:true,link:'https://telegram.org'},
+            {name:'Chrome',name_zh:'Chrome',desc:'浏览器,扩展生态最强',name_zh_desc:'全球最流行',type:'productivity',icon:'🌍',link:'https://chrome.google.com'},
         ];
         let favs = JSON.parse(localStorage.getItem('omt_favs') || '[]');
         let filter = 'all';
