@@ -391,7 +391,7 @@
             <div class="brand-text">OhMy<span>Toolbox</span></div>
         </div>
         <div class="nav-actions">
-            <button class="nav-btn" onclick="toggleFavView()">❤️</button>
+            
             <button class="submit-btn" onclick="openModal()">+ 提交工具</button>
         </div>
     </nav>
@@ -401,16 +401,12 @@
         <h1>发现你的<span>好工具箱</span></h1>
         <p>精选全球好用的好工具和TG资源,一个就够了。</p>
         
-        <div class="stats">
-            <div class="stat-box"><div class="stat-num" id="totalNum">30</div><div class="stat-label">个精选工具</div></div>
+        <div class="stat-label">个精选工具</div></div>
             <div class="stat-box"><div class="stat-num">14</div><div class="stat-label">好工具</div></div>
             <div class="stat-box"><div class="stat-num">16</div><div class="stat-label">TG资源</div></div>
         </div>
         
-        <div class="search-container">
-            <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" placeholder="搜索工具..." id="search" oninput="render()">
-        </div>
+        
         
         <div class="tags">
             <div class="tag active" onclick="setFilter('all')">全部</div>
@@ -424,9 +420,7 @@
     </section>
     
     <!-- 收藏区 -->
-    <div class="favorites-area" id="favArea">
-        
-        <div class="grid" id="favGrid"></div>
+    
     </div>
     
     <!-- 好工具 -->
@@ -442,16 +436,7 @@
     <div class="grid" id="tgGrid"></div>
     
     <!-- 弹窗 -->
-    <div class="modal" id="modal">
-        <div class="modal-box">
-            <h3>提交新工具</h3>
-            <input type="text" id="name" placeholder="工具名称">
-            <input type="url" id="url" placeholder="网址 https://...">
-            <textarea id="desc" placeholder="简单描述" rows="3"></textarea>
-            <div class="modal-btns">
-                <button class="modal-btn" onclick="closeModal()">取消</button>
-                <button class="modal-btn primary" onclick="submit()">提交</button>
-            </div>
+    
         </div>
     </div>
     
