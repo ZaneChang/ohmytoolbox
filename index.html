@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧰</text></svg>">
     <title>OhMyToolbox | AI + 加密货币 + Telegram</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #6366f1; --accent: #22d3ee; --bg: #08080c; --card: #18181f; --border: #27272a; --text: #fafafa; --text-dim: #a1a1aa; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        body { font-family: 'Outfit', sans-serif; font-display: swap, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: var(--card); border-bottom: 1px solid var(--border); }
         .brand { display: flex; align-items: center; gap: 12px; }
         .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
@@ -24,9 +25,10 @@
         .tag:hover { border-color: var(--primary); }
         .tag.active { background: var(--primary); color: #fff; border-color: var(--primary); }
         .section-header { max-width: 1200px; margin: 40px auto 24px; padding: 0 20px; }
+        .section-header { transition: opacity 0.3s ease; }
         .section-title { font-size: 26px; font-weight: 700; display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
         .count { font-size: 14px; padding: 4px 12px; border-radius: 20px; background: rgba(99,102,241,0.15); color: var(--primary); }
-        .card { animation: cardIn 0.4s ease-out; }
+        .card { will-change: transform; animation: cardIn 0.4s ease-out; }
         @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 0.8; } }
         @keyframes cardIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 0 20px; max-width: 1200px; margin: 0 auto; }
@@ -53,10 +55,15 @@
             .card { padding: 16px; }
             .card-icon { width: 40px; height: 40px; font-size: 20px; }
             .card-name { font-size: 16px; }
-            .section-title { font-size: 20px; }
+            .section-header { transition: opacity 0.3s ease; }
+        .section-title { font-size: 20px; }
             .count { font-size: 12px; padding: 3px 8px; }
         }
         .empty { text-align: center; padding: 50px; color: var(--text-dim); }
+    
+        .card { position: relative; overflow: hidden; }
+        .card:active::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); animation: ripple 0.4s ease-out; }
+        @keyframes ripple { from { transform: scale(0); } to { transform: scale(2); } }
     </style>
 </head>
 <body>
@@ -158,14 +165,29 @@
             return '<div class="card" onclick="window.open(\''+t.link+'\',\'_blank\')">'+(t.hot?'<span class="hot-tag">🔥 热门</span>':'')+'<div class="card-header"><div class="card-icon">'+t.icon+'</div><div class="card-name">'+t.name+'</div></div><div class="card-desc">'+t.desc+'</div><div class="card-footer"><span class="card-tag">'+t.type+'</span><span class="card-link">访问 →</span></div></div>';
         }
         
-        function setFilter(f) { 
+        function setFilter(f) {
+            document.querySelectorAll('.section-header').forEach((el, i) => { el.style.opacity = '0'; setTimeout(() => el.style.opacity = '1', 300); }); 
             filter = f; 
             document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); 
             event.target.classList.add('active'); 
-            render(); 
+            render();
+
+        document.addEventListener('keydown', function(e) {
+            if(e.key === '1') setFilter('all');
+            if(e.key === '2') setFilter('ai');
+            if(e.key === '3') setFilter('crypto');
+            if(e.key === '4') setFilter('tg');
+        }); 
         }
         
         render();
+
+        document.addEventListener('keydown', function(e) {
+            if(e.key === '1') setFilter('all');
+            if(e.key === '2') setFilter('ai');
+            if(e.key === '3') setFilter('crypto');
+            if(e.key === '4') setFilter('tg');
+        });
     </script>
 
     <div onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(99,102,241,0.4);z-index:100;font-size:20px;color:#fff;">↑</div>
