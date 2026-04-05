@@ -169,51 +169,38 @@
         function render() {
             const s = document.getElementById('searchInput').value.toLowerCase();
             
-            const f = (type) => tools.filter(t => {
-                const matchType = filter === 'all' || t.type === filter || (filter === 'all');
-                const matchSearch = !s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s);
-                return matchType && matchSearch;
+            const categories = ['exchange', 'wallet', 'data', 'defi', 'nft', 'learn'];
+            
+            categories.forEach(cat => {
+                // Update count
+                const count = tools.filter(t => t.type === cat).length;
+                const countEl = document.getElementById(cat + 'Count');
+                if (countEl) countEl.textContent = count;
+                
+                // Filter and render grid
+                let list = tools.filter(t => t.type === cat);
+                if (s) {
+                    list = list.filter(t => t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s));
+                }
+                
+                const gridEl = document.getElementById(cat + 'Grid');
+                if (gridEl) {
+                    gridEl.innerHTML = list.map(t => `
+                        <div class="card" onclick="window.open('${t.link}','_blank')">
+                            ${t.hot ? '<span class="hot-tag">🔥</span>' : ''}
+                            <div class="card-header">
+                                <div class="card-icon">${t.icon}</div>
+                                <div class="card-name">${t.name}</div>
+                            </div>
+                            <div class="card-desc">${t.desc}</div>
+                            <div class="card-footer">
+                                <span class="card-tag">${t.type}</span>
+                                <span class="card-link">前往 →</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
             });
-            
-            const show = (id, type) => {
-                const list = f(type);
-                document.getElementById(id).innerHTML = list.map(t => `
-                    <div class="card" onclick="window.open('${t.link}','_blank')">
-                        ${t.hot ? '<span class="hot-tag">🔥</span>' : ''}
-                        <div class="card-header">
-                            <div class="card-icon">${t.icon}</div>
-                            <div class="card-name">${t.name}</div>
-                        </div>
-                        <div class="card-desc">${t.desc}</div>
-                        <div class="card-footer">
-                            <span class="card-tag">${t.type}</span>
-                            <span class="card-link">前往 →</span>
-                        </div>
-                    </div>
-                `).join('');
-            };
-            
-            show('exchangeCount', 'exchange');
-            show('walletCount', 'wallet');
-            show('dataCount', 'data');
-            show('defiCount', 'defi');
-            show('nftCount', 'nft');
-            show('learnCount', 'learn');
-            
-            show('exchangeGrid', 'exchange');
-            show('walletGrid', 'wallet');
-            show('dataGrid', 'data');
-            show('defiGrid', 'defi');
-            show('nftGrid', 'nft');
-            show('learnGrid', 'learn');
-            
-            // Update counts
-            document.getElementById('exchangeCount').textContent = tools.filter(t => t.type === 'exchange').length;
-            document.getElementById('walletCount').textContent = tools.filter(t => t.type === 'wallet').length;
-            document.getElementById('dataCount').textContent = tools.filter(t => t.type === 'data').length;
-            document.getElementById('defiCount').textContent = tools.filter(t => t.type === 'defi').length;
-            document.getElementById('nftCount').textContent = tools.filter(t => t.type === 'nft').length;
-            document.getElementById('learnCount').textContent = tools.filter(t => t.type === 'learn').length;
         }
         
         render();
