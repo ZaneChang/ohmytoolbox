@@ -3,248 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧰</text></svg>">
-    <title>OhMyToolbox | 加密货币工具箱</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>₿</text></svg>">
+    <title>CryptoToolbox | 加密货币工具导航</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        .skip-link { position: absolute; top: -40px; left: 0; background: var(--primary); color: #fff; padding: 8px 16px; z-index: 1000; }
-        .skip-link:focus { top: 0; }
-        :root { --primary: #6366f1; --accent: #22d3ee; --bg: #050508; --card: #18181f; --border: #27272a; --text: #fafafa; --text-dim: #a1a1aa; }
-        body { font-family: 'Outfit', sans-serif; font-display: swap, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+        :root { --primary: #f7931a; --accent: #22d3ee; --bg: #050508; --card: #18181f; --border: #27272a; --text: #fafafa; --text-dim: #a1a1aa; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: var(--card); border-bottom: 1px solid var(--border); }
         .brand { display: flex; align-items: center; gap: 12px; }
-        .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), #fbbd08); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
         .brand-text { font-size: 22px; font-weight: 800; }
-        .nav-link { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-        .nav-link:hover { color: var(--primary); }
-        .brand-text span { color: var(--accent); }
-        .hero { text-align: center; padding: 50px 20px 30px; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.15), transparent); }
+        .brand-text span { color: var(--primary); }
+        .hero { text-align: center; padding: 60px 20px 40px; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(247,147,26,0.15), transparent); }
         .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
-        .hero h1 span { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero h1 span { color: var(--primary); }
         .hero p { font-size: 18px; color: var(--text-dim); max-width: 600px; margin: 0 auto; }
         .tags { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 30px 20px 40px; }
         .tag { padding: 10px 24px; border-radius: 24px; border: 1px solid var(--border); background: var(--card); color: var(--text-dim); cursor: pointer; font-size: 14px; transition: all 0.2s; }
         .tag:hover { border-color: var(--primary); }
         .tag.active { background: var(--primary); color: #fff; border-color: var(--primary); }
         .section-header { max-width: 1200px; margin: 0 auto 20px; padding: 40px 20px 0; }
-        .section-header:first-child { padding-top: 40px; }
         .section-title { font-size: 26px; font-weight: 700; display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
-        .count { font-size: 14px; padding: 4px 12px; border-radius: 20px; background: rgba(99,102,241,0.15); color: var(--primary); }
-        .card { will-change: transform; animation: cardIn 0.4s ease-out; }
-        @keyframes cardIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .count { font-size: 14px; padding: 4px 12px; border-radius: 20px; background: rgba(247,147,26,0.15); color: var(--primary); }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; padding: 0 20px 40px; max-width: 1200px; margin: 0 auto; }
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.3s; position: relative; }
-        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 25px 50px rgba(99,102,241,0.3), 0 0 30px rgba(34,211,238,0.1); }
+        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 25px 50px rgba(247,147,26,0.3), 0 0 30px rgba(34,211,238,0.1); }
         .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
         .card-icon { width: 52px; height: 52px; background: linear-gradient(135deg, #27272a, #18181f); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
         .card-name { font-size: 18px; font-weight: 600; flex: 1; }
         .card-desc { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
         .card-footer { display: flex; justify-content: space-between; }
-        .card-tag { font-size: 12px; padding: 6px 12px; border-radius: 20px; background: rgba(99,102,241,0.1); color: var(--primary); }
+        .card-tag { font-size: 12px; padding: 6px 12px; border-radius: 20px; background: rgba(247,147,26,0.1); color: var(--primary); }
         .card-link { color: var(--accent); font-size: 14px; font-weight: 500; }
         .hot-tag { position: absolute; top: 12px; right: 12px; font-size: 11px; padding: 5px 12px; border-radius: 20px; background: linear-gradient(135deg, #f97316, #fb923c); color: #fff; font-weight: 600; }
         footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 14px; border-top: 1px solid var(--border); margin-top: 60px; }
-        @media (max-width: 900px) {
-            .search-box { max-width: 90%; }
-        }
+        .search-box { max-width: 600px; margin: 24px auto 0; position: relative; }
+        .search-box input { width: 100%; padding: 16px 24px 16px 50px; border-radius: 16px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 15px; outline: none; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .search-box input:focus { border-color: var(--primary); box-shadow: 0 4px 30px rgba(247,147,26,0.2); }
+        .search-box::before { content: "🔍"; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 18px; opacity: 0.5; }
         @media (max-width: 768px) {
             .navbar { padding: 12px 20px; }
             .brand-text { font-size: 18px; }
             .hero { padding: 40px 16px 30px; }
             .hero h1 { font-size: 28px; }
-            .hero p { font-size: 14px; }
-            .tags { gap: 8px; margin-bottom: 30px; }
-            .tag { padding: 8px 16px; font-size: 13px; }
-            .grid { grid-template-columns: 1fr; gap: 12px; }
-            .card { padding: 16px; }
-            .card-icon { width: 40px; height: 40px; font-size: 20px; }
-            .card-name { font-size: 16px; }
-            .section-header:first-child { padding-top: 40px; }
-        .section-title { font-size: 20px; }
-            .count { font-size: 12px; padding: 3px 8px; }
+            .grid { grid-template-columns: 1fr; }
         }
-        .empty { text-align: center; padding: 50px; color: var(--text-dim); }
-    
-        .card { position: relative; overflow: hidden; }
-        .card:active::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); animation: ripple 0.4s ease-out; }
-        @keyframes ripple { from { transform: scale(0); } to { transform: scale(2); } }
-    
-        .search-box { max-width: 600px; margin: 24px auto 0; position: relative; }
-        .search-box input { width: 100%; padding: 16px 24px 16px 50px; border-radius: 16px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 15px; outline: none; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-        .search-box input:focus { border-color: var(--primary); box-shadow: 0 4px 30px rgba(99,102,241,0.2); }
-        .search-box::before { content: "🔍"; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 18px; opacity: 0.5; }
-        
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-link">跳到主要内容</a>
     <nav class="navbar">
         <div class="brand">
-            <div class="brand-icon" onclick="location.reload()">🧰</div>
-            <div class="brand-text">OhMy<span>Toolbox</span></div>
+            <div class="brand-icon" onclick="location.reload()">₿</div>
+            <div class="brand-text">Crypto<span>Toolbox</span></div>
         </div>
-    
     </nav>
     <section class="hero">
         <h1>发现你的<span>加密货币</span>工具箱</h1>
-        <p>加密货币必备工具导航 - 交易所、DeFi、NFT、Web3学习资源</p>
+        <p>交易所、钱包、DeFi、NFT、Web3学习资源一站式导航</p>
     </section>
-    <div class="tags" role="navigation" aria-label="分类筛选">
-        <div class="tag active" onclick="setFilter('featured')">⭐ 精选</div>
-        <div class="tag" onclick="setFilter('crypto')">💰 加密货币</div>
-        <div class="tag" onclick="setFilter('tg')">📡 Telegram群组</div>
-        <div class="tag" onclick="setFilter('ai')">🤖 AI工具</div>
+    <div class="tags">
+        <div class="tag active" onclick="setFilter('all')">⭐ 全部</div>
+        <div class="tag" onclick="setFilter('exchange')">🏦 交易所</div>
+        <div class="tag" onclick="setFilter('wallet')">👛 钱包</div>
+        <div class="tag" onclick="setFilter('data')">📊 数据</div>
+        <div class="tag" onclick="setFilter('defi')">🔄 DeFi</div>
+        <div class="tag" onclick="setFilter('nft')">🖼️ NFT</div>
+        <div class="tag" onclick="setFilter('learn')">📚 学习</div>
     </div>
-    <div class="search-box" role="search" aria-label="搜索工具">
-        <input type="text" id="searchInput" placeholder="搜索工具..." aria-label="搜索输入" oninput="render()">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="搜索工具..." oninput="render()">
     </div>
-    <div class="section-header"><div class="section-title">💰 加密货币</div></div>
-    <div class="grid" id="cryptoGrid"></div>
-    <div class="section-header"><div class="section-title">📡 Telegram群组</div></div>
-    <div class="grid" id="tgGrid"></div>
-    <div class="section-header"><div class="section-title">🤖 AI工具</div></div>
-    <div class="grid" id="aiGrid"></div>
-    </main><footer><p>© 2026 OhMyToolbox</p></footer>
+    
+    <div class="section-header"><div class="section-title">🏦 交易所 <span class="count" id="exchangeCount"></span></div></div>
+    <div class="grid" id="exchangeGrid"></div>
+    
+    <div class="section-header"><div class="section-title">👛 钱包 <span class="count" id="walletCount"></span></div></div>
+    <div class="grid" id="walletGrid"></div>
+    
+    <div class="section-header"><div class="section-title">📊 数据工具 <span class="count" id="dataCount"></span></div></div>
+    <div class="grid" id="dataGrid"></div>
+    
+    <div class="section-header"><div class="section-title">🔄 DeFi <span class="count" id="defiCount"></span></div></div>
+    <div class="grid" id="defiGrid"></div>
+    
+    <div class="section-header"><div class="section-title">🖼️ NFT <span class="count" id="nftCount"></span></div></div>
+    <div class="grid" id="nftGrid"></div>
+    
+    <div class="section-header"><div class="section-title">📚 学习资源 <span class="count" id="learnCount"></span></div></div>
+    <div class="grid" id="learnGrid"></div>
+
+    <footer><p>© 2026 CryptoToolbox</p></footer>
     <script>
-        const aiTools = [
-            {name:'Claude',desc:'Anthropic 旗舰AI模型,推理能力顶级',type:'ai',icon:'🧠',hot:true,link:'https://claude.ai'},
-            {name:'ChatGPT',desc:'OpenAI GPT-4,对话生成顶级',type:'ai',icon:'💬',hot:true,link:'https://chat.openai.com'},
-            {name:'DeepSeek',desc:'国产开源大模型,API价格低',type:'ai',icon:'🔮',hot:true,link:'https://chat.deepseek.com'},
-            {name:'Gemini',desc:'Google 多模态AI',type:'ai',icon:'🌟',link:'https://gemini.google.com'},
-            {name:'Grok',desc:'xAI 实时搜索,幽默感强',type:'ai',icon:'🚀',link:'https://x.com/i/grok'},
-            {name:'Midjourney',desc:'最强AI图像生成',type:'ai',icon:'🎨',hot:true,link:'https://www.midjourney.com'},
-            {name:'DALL-E',desc:'OpenAI 图像生成',type:'ai',icon:'🖼️',link:'https://openai.com/dall-e-3'},
-            {name:'Leonardo',desc:'开源AI绘画平台',type:'ai',icon:'🎭',link:'https://leonardo.ai'},
-            {name:'Stable Diffusion',desc:'开源图像生成,可本地部署',type:'ai',icon:'🧪',link:'https://stability.ai'},
-            {name:'Cursor',desc:'AI代码编辑器,效率翻倍',type:'ai',icon:'⌨️',hot:true,link:'https://cursor.sh'},
-            {name:'Windsurf',desc:'AI编程助手,Flow模式',type:'ai',icon:'💻',link:'https://windsurf.ai'},
-            {name:'V0',desc:'Vercel前端代码生成',type:'ai',icon:'⚛️',link:'https://v0.dev'},
-            {name:'GitHub Copilot',desc:'代码补全AI',type:'ai',icon:'👨‍💻',hot:true,link:'https://github.com/features/copilot'},
-            {name:'Perplexity',desc:'AI搜索引擎,实时信息',type:'ai',icon:'🔍',link:'https://www.perplexity.ai'},
-            {name:'Manus',desc:'AI Agent 自动任务',type:'ai',icon:'⚡',hot:true,link:'https://manus.im'},
-            {name:'Devin',desc:'AI程序员,独立完成项目',type:'ai',icon:'🛠️',link:'https://devin.ai'},
-            {name:'Notion AI',desc:'AI笔记辅助写作',type:'ai',icon:'📝',link:'https://notion.so'},
-            {name:'Gamma',desc:'AI PPT制作',type:'ai',icon:'📊',hot:true,link:'https://gamma.app'},
-            {name:'Runway',desc:'AI视频生成',type:'ai',icon:'🎬',link:'https://runwayml.com'},
-            {name:'Grammarly',desc:'AI写作辅助,语法检查',type:'ai',icon:'✍️',link:'https://grammarly.com'},
-        ];
-        const cryptoTools = [
+        const tools = [
             // 交易所
-            {name:'Binance',desc:'全球最大交易所',type:'crypto',icon:'🟡',hot:true,link:'https://www.binance.com'},
-            {name:'OKX',desc:'全球Top交易所',type:'crypto',icon:'⚫',hot:true,link:'https://www.okx.com'},
-            {name:'Bybit',desc:'衍生品交易所',type:'crypto',icon:'🟦',hot:true,link:'https://www.bybit.com'},
-            {name:'Coinbase',desc:'美国合规交易所',type:'crypto',icon:'🔵',link:'https://www.coinbase.com'},
-            {name:'Bitget',desc:'合约跟单平台',type:'crypto',icon:'🟢',link:'https://www.bitget.com'},
-            {name:'Gate.io',desc:'全球Top10交易所',type:'crypto',icon:'🟩',link:'https://www.gate.io'},
-            {name:'Kraken',desc:'美国老牌交易所',type:'crypto',icon:'🟣',link:'https://www.kraken.com'},
-            {name:'Bitfinex',desc:'老牌交易所',type:'crypto',icon:'🟧',link:'https://www.bitfinex.com'},
+            {name:'Binance',desc:'全球最大加密货币交易所',type:'exchange',icon:'🟡',hot:true,link:'https://www.binance.com'},
+            {name:'OKX',desc:'全球Top交易所,支持合约',type:'exchange',icon:'⚫',hot:true,link:'https://www.okx.com'},
+            {name:'Bybit',desc:'衍生品交易所头部',type:'exchange',icon:'🟦',hot:true,link:'https://www.bybit.com'},
+            {name:'Coinbase',desc:'美国合规交易所',type:'exchange',icon:'🔵',link:'https://www.coinbase.com'},
+            {name:'Bitget',desc:'合约跟单平台',type:'exchange',icon:'🟢',link:'https://www.bitget.com'},
+            {name:'Gate.io',desc:'全球Top10交易所',type:'exchange',icon:'🟩',link:'https://www.gate.io'},
+            {name:'Kraken',desc:'美国老牌交易所',type:'exchange',icon:'🟣',link:'https://www.kraken.com'},
+            {name:'Bitfinex',desc:'老牌交易所',type:'exchange',icon:'🟧',link:'https://www.bitfinex.com'},
+            {name:'BitMEX',desc:'合约交易所',type:'exchange',icon:'⚙️',link:'https://www.bitmex.com'},
+            {name:'KuCoin',desc:'全球社群交易所',type:'exchange',icon:'🌀',link:'https://www.kucoin.com'},
+            
             // 钱包
-            {name:'MetaMask',desc:'最热门ETH钱包',type:'crypto',icon:'🦊',hot:true,link:'https://metamask.io'},
-            {name:'OKX Wallet',desc:'多链钱包',type:'crypto',icon:'🔴',link:'https://www.okx.com/wallet'},
-            {name:'BitKeep',desc:'多链钱包',type:'crypto',icon:'💎',link:'https://bitkeep.com'},
-            {name:'Trust Wallet',desc:'移动端钱包',type:'crypto',icon:'✅',link:'https://trustwallet.com'},
-            {name:'Rabby',desc:'ETH钱包新秀',type:'crypto',icon:'🐰',link:'https://rabby.io'},
-            {name:'Rainbow',desc:'ETH移动钱包',type:'crypto',icon:'🌈',link:'https://rainbow.me'},
+            {name:'MetaMask',desc:'最热门以太坊钱包',type:'wallet',icon:'🦊',hot:true,link:'https://metamask.io'},
+            {name:'OKX Wallet',desc:'多链钱包',type:'wallet',icon:'🔴',link:'https://www.okx.com/wallet'},
+            {name:'BitKeep',desc:'多链钱包',type:'wallet',icon:'💎',link:'https://bitkeep.com'},
+            {name:'Trust Wallet',desc:'移动端钱包首选',type:'wallet',icon:'✅',link:'https://trustwallet.com'},
+            {name:'Rabby',desc:'ETH钱包新秀',type:'wallet',icon:'🐰',link:'https://rabby.io'},
+            {name:'Rainbow',desc:'ETH移动钱包',type:'wallet',icon:'🌈',link:'https://rainbow.me'},
+            {name:'Coinbase Wallet',desc:'Coinbase钱包',type:'wallet',icon:'💰',link:'https://www.coinbase.com/wallet'},
+            {name:'Phantom',desc:'Solana钱包',type:'wallet',icon:'👻',link:'https://phantom.app'},
+            {name:'Solflare',desc:'Solana生态钱包',type:'wallet',icon:'☀️',link:'https://solflare.com'},
+            {name:'Keplr',desc:'Cosmos生态钱包',type:'wallet',icon:'🔑',link:'https://keplrwallet.com'},
+            
             // 数据工具
-            {name:'DeFi Llama',desc:'DeFi协议数据',type:'crypto',icon:'🦙',link:'https://defillama.com'},
-            {name:'DappRadar',desc:'DApp数据分析',type:'crypto',icon:'📱',link:'https://dappradar.com'},
-            {name:'CoinGecko',desc:'价格行情数据',type:'crypto',icon:'📊',link:'https://www.coingecko.com'},
-            {name:'CoinMarketCap',desc:'市值排行',type:'crypto',icon:'📈',link:'https://coinmarketcap.com'},
-            {name:'TradingView',desc:'技术分析图表',type:'crypto',icon:'📉',link:'https://www.tradingview.com'},
+            {name:'CoinMarketCap',desc:'加密货币市值排行',type:'data',icon:'📈',hot:true,link:'https://coinmarketcap.com'},
+            {name:'CoinGecko',desc:'价格行情数据',type:'data',icon:'📊',hot:true,link:'https://www.coingecko.com'},
+            {name:'TradingView',desc:'技术分析图表',type:'data',icon:'📉',link:'https://www.tradingview.com'},
+            {name:'Glassnode',desc:'链上数据分析',type:'data',icon:'🔮',link:'https://glassnode.com'},
+            {name:'CryptoQuant',desc:'链上数据工具',type:'data',icon:'📡',link:'https://cryptoquant.com'},
+            {name:'Nansen',desc:'区块链分析平台',type:'data',icon:'🧭',link:'https://nansen.ai'},
+            
+            // DeFi
+            {name:'Uniswap',desc:'以太坊最大DEX',type:'defi',icon:'🦄',hot:true,link:'https://uniswap.org'},
+            {name:'PancakeSwap',desc:'BNB Chain最大DEX',type:'defi',icon:'🥞',hot:true,link:'https://pancakeswap.finance'},
+            {name:'Aave',desc:'去中心化借贷',type:'defi',icon:'👻',link:'https://aave.com'},
+            {name:'Compound',desc:'借贷协议',type:'defi',icon:'🧪',link:'https://compound.finance'},
+            {name:'Curve',desc:'稳定币DEX',type:'defi',icon:'💫',link:'https://curve.fi'},
+            {name:'DeFi Llama',desc:'DeFi协议数据',type:'defi',icon:'🦙',link:'https://defillama.com'},
+            {name:'Yearn',desc:'收益聚合器',type:'defi',icon:'🦊',link:'https://yearn.finance'},
+            {name:'Rocket Pool',desc:'ETH流动性质押',type:'defi',icon:'🚀',link:'https://rocketpool.net'},
+            
             // NFT
-            {name:'OpenSea',desc:'最大NFT市场',type:'crypto',icon:'🌊',hot:true,link:'https://opensea.io'},
-            {name:'Blur',desc:'NFT交易平台',type:'crypto',icon:'👁️',link:'https://blur.io'},
-            {name:'Magic Eden',desc:'Solana NFT',type:'crypto',icon:'🧙',link:'https://magiceden.io'},
+            {name:'OpenSea',desc:'最大NFT市场',type:'nft',icon:'🌊',hot:true,link:'https://opensea.io'},
+            {name:'Blur',desc:'NFT交易平台',type:'nft',icon:'👁️',link:'https://blur.io'},
+            {name:'Magic Eden',desc:'Solana NFT',type:'nft',icon:'🧙',link:'https://magiceden.io'},
+            {name:'Foundation',desc:'艺术NFT平台',type:'nft',icon:'🎨',link:'https://foundation.app'},
+            {name:'Zora',desc:'音乐NFT平台',type:'nft',icon:'🎵',link:'https://zora.co'},
+            {name:'Rarible',desc:'NFT市场',type:'nft',icon:'💎',link:'https://rarible.com'},
+            
+            // 学习资源
+            {name:'Bitcoin白皮书',desc:'BTC入门必读',type:'learn',icon:'📄',link:'https://bitcoin.org/bitcoin.pdf'},
+            {name:'以太坊官网',desc:'ETH官方文档',type:'learn',icon:'💎',link:'https://ethereum.org'},
+            {name:'Vitalik博客',desc:'以太坊创始人博客',type:'learn',icon:'👤',link:'https://vitalik.ca'},
+            {name:'CoinAcademy',desc:'加密货币学习平台',type:'learn',icon:'🎓',link:'https://coinacademy.fr'},
+            {name:'Web3 University',desc:'Web3学习资源',type:'learn',icon:'🏛️',link:'https://www.web3-university.org'},
+            {name:'CryptoZombies',desc:'智能合约教程',type:'learn',icon:'🧟',link:'https://cryptozombies.io'},
         ];
-        const tgChannels = [
-            {name:'金色财经',desc:'区块链行业头部媒体',type:'tg',icon:'📰',hot:true,link:'https://t.me/jinse'},
-            {name:'吴说区块链',desc:'币圈内幕消息',type:'tg',icon:'🗣️',hot:true,link:'https://t.me/wublock'},
-            {name:'火星财经',desc:'区块链资讯平台',type:'tg',icon:'🔥',link:'https://t.me/marsfinance'},
-            {name:'PANews',desc:'区块链媒体',type:'tg',icon:'📡',link:'https://t.me/panews'},
-            {name:'币世界',desc:'实时币圈快讯',type:'tg',icon:'⚡',link:'https://t.me/bishijie'},
-            {name:'币coin',desc:'合约信号社区',type:'tg',icon:'🪙',link:'https://t.me/bicointv'},
-            {name:'合约帝',desc:'合约交易社区',type:'tg',icon:'📊',link:'https://t.me/jiayoux'},
-            {name:'TradingView',desc:'全球交易者社区',type:'tg',icon:'📈',link:'https://t.me/tradingview'},
-            {name:'币圈研究院',desc:'价值投资社区',type:'tg',icon:'📚',link:'https://t.me/biquanyjs'},
-            {name:'以坊',desc:'以太坊官方',type:'tg',icon:'💎',link:'https://t.me/ethereum'},
-            {name:'比特币',desc:'比特币官方',type:'tg',icon:'₿',link:'https://t.me/Bitcoin'},
-            {name:'Vitalik',desc:'以太坊创始人',type:'tg',icon:'👤',link:'https://t.me/vitalikbuterin'},
-            {name:'Satoshi',desc:'比特币创始人',type:'tg',icon:'🎩',link:'https://t.me/btc'},
-            {name:'OpenAI',desc:'OpenAI官方',type:'tg',icon:'🤖',hot:true,link:'https://t.me/openai'},
-            {name:'Anthropic',desc:'Claude官方',type:'tg',icon:'🧠',link:'https://t.me/anthropic'},
-            {name:'GitHub',desc:'开发者社区',type:'tg',icon:'🐙',link:'https://t.me/github'},
-            {name:'V2EX',desc:'程序员社区',type:'tg',icon:'💬',link:'https://t.me/v2ex'},
-            {name:'Product Hunt',desc:'产品发现社区',type:'tg',icon:'🔍',link:'https://t.me/producthunt'},
-            {name:'Telegram',desc:'官方频道',type:'tg',icon:'✈️',link:'https://t.me/telegram'},
-            {name:'BotFather',desc:'机器人创建工具',type:'tg',icon:'🤖',link:'https://t.me/BotFather'},
-        ];
-        let filter = 'featured';
+        
+        let filter = 'all';
+        
+        function setFilter(f) {
+            filter = f;
+            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            render();
+        }
         
         function render() {
             const s = document.getElementById('searchInput').value.toLowerCase();
-            const f = (arr) => arr.filter(t => (filter === 'all' || filter === 'featured' || t.type === filter) && (!s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s)));
             
-            // Featured: show hot items only in each section
-            // Show crypto first when featured
-            let aiShow, cryptoShow, tgShow;
-            if (filter === 'featured') {
-                cryptoShow = f(cryptoTools.filter(t => t.hot));
-                tgShow = f(tgChannels.filter(t => t.hot));
-                aiShow = f(aiTools.filter(t => t.hot));
-            } else {
-                cryptoShow = f(cryptoTools);
-                tgShow = f(tgChannels);
-                aiShow = f(aiTools);
-            }
-            
-            document.getElementById('cryptoGrid').innerHTML = cryptoShow.map(card).join('') || '';
-            document.getElementById('tgGrid').innerHTML = tgShow.map(card).join('') || '';
-            document.getElementById('aiGrid').innerHTML = aiShow.map(card).join('') || '';
-            
-            document.getElementById('cryptoGrid').style.display = (filter === 'all' || filter === 'crypto' || filter === 'featured') ? 'grid' : 'none';
-            document.getElementById('tgGrid').style.display = (filter === 'all' || filter === 'tg' || filter === 'featured') ? 'grid' : 'none';
-            document.getElementById('aiGrid').style.display = (filter === 'all' || filter === 'ai' || filter === 'featured') ? 'grid' : 'none';
-            
-            // Section order: crypto(0), tg(1), ai(2)
-            document.querySelectorAll('.section-header').forEach((el, i) => {
-                el.style.display = (filter === 'all' || filter === 'featured' || (i===0 && filter === 'crypto') || (i===1 && filter === 'tg') || (i===2 && filter === 'ai')) ? 'flex' : 'none';
+            const f = (type) => tools.filter(t => {
+                const matchType = filter === 'all' || t.type === filter || (filter === 'all');
+                const matchSearch = !s || t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s);
+                return matchType && matchSearch;
             });
-        }
-        
-        function card(t) {
-            return '<div class="card" onclick="window.open(\''+t.link+'\',\'_blank\')">'+(t.hot?'<span class="hot-tag">🔥 热门</span>':'')+'<div class="card-header"><div class="card-icon">'+t.icon+'</div><div class="card-name">'+t.name+'</div></div><div class="card-desc">'+t.desc+'</div><div class="card-footer"><span class="card-tag">'+t.type+'</span><span class="card-link">访问 →</span></div></div>';
-        }
-        
-        function setFilter(f) {
-            document.querySelectorAll('.section-header').forEach((el, i) => { el.style.opacity = '0'; setTimeout(() => el.style.opacity = '1', 300); }); 
-            filter = f; 
-            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); 
-            event.target.classList.add('active'); 
-            render();
-
-        document.addEventListener('keydown', function(e) {
-            if(e.key === '1') setFilter('all');
-            if(e.key === '2') setFilter('ai');
-            if(e.key === '3') setFilter('crypto');
-            if(e.key === '4') setFilter('tg');
-        }); 
+            
+            const show = (id, type) => {
+                const list = f(type);
+                document.getElementById(id).innerHTML = list.map(t => `
+                    <div class="card" onclick="window.open('${t.link}','_blank')">
+                        ${t.hot ? '<span class="hot-tag">🔥</span>' : ''}
+                        <div class="card-header">
+                            <div class="card-icon">${t.icon}</div>
+                            <div class="card-name">${t.name}</div>
+                        </div>
+                        <div class="card-desc">${t.desc}</div>
+                        <div class="card-footer">
+                            <span class="card-tag">${t.type}</span>
+                            <span class="card-link">前往 →</span>
+                        </div>
+                    </div>
+                `).join('');
+            };
+            
+            show('exchangeCount', 'exchange');
+            show('walletCount', 'wallet');
+            show('dataCount', 'data');
+            show('defiCount', 'defi');
+            show('nftCount', 'nft');
+            show('learnCount', 'learn');
+            
+            show('exchangeGrid', 'exchange');
+            show('walletGrid', 'wallet');
+            show('dataGrid', 'data');
+            show('defiGrid', 'defi');
+            show('nftGrid', 'nft');
+            show('learnGrid', 'learn');
+            
+            // Update counts
+            document.getElementById('exchangeCount').textContent = tools.filter(t => t.type === 'exchange').length;
+            document.getElementById('walletCount').textContent = tools.filter(t => t.type === 'wallet').length;
+            document.getElementById('dataCount').textContent = tools.filter(t => t.type === 'data').length;
+            document.getElementById('defiCount').textContent = tools.filter(t => t.type === 'defi').length;
+            document.getElementById('nftCount').textContent = tools.filter(t => t.type === 'nft').length;
+            document.getElementById('learnCount').textContent = tools.filter(t => t.type === 'learn').length;
         }
         
         render();
-
-        document.addEventListener('keydown', function(e) {
-            if(e.key === '1') setFilter('all');
-            if(e.key === '2') setFilter('ai');
-            if(e.key === '3') setFilter('crypto');
-            if(e.key === '4') setFilter('tg');
-        });
     </script>
-
-    <div onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,var(--primary),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(99,102,241,0.4);z-index:100;font-size:20px;color:#fff;">↑</div>
 </body>
 </html>
