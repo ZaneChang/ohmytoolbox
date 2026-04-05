@@ -14,7 +14,7 @@
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: var(--card); border-bottom: 1px solid var(--border); }
         .brand { display: flex; align-items: center; gap: 12px; }
-        .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), #fbbd08); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .brand-icon { width: 42px; height: 42px; background: linear-gradient(135deg, var(--primary), #fbbd08); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; }
         .brand-text { font-size: 22px; font-weight: 800; }
         .brand-text span { color: var(--primary); }
         .hero { text-align: center; padding: 60px 20px 40px; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(247,147,26,0.15), transparent); }
@@ -44,6 +44,7 @@
         .search-box input { width: 100%; padding: 16px 24px 16px 50px; border-radius: 16px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-size: 15px; outline: none; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
         .search-box input:focus { border-color: var(--primary); box-shadow: 0 4px 30px rgba(247,147,26,0.2); }
         .search-box::before { content: "🔍"; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 18px; opacity: 0.5; }
+        .article-date { font-size: 12px; color: var(--text-dim); margin-bottom: 8px; }
         @media (max-width: 768px) {
             .navbar { padding: 12px 20px; }
             .brand-text { font-size: 18px; }
@@ -62,7 +63,7 @@
     </nav>
     <section class="hero">
         <h1>发现你的<span>加密货币</span>工具箱</h1>
-        <p>交易所、钱包、DeFi、NFT、Web3学习资源一站式导航</p>
+        <p>交易所、钱包、DeFi、NFT、Web3学习资源、文章教程一站式导航</p>
     </section>
     <div class="tags">
         <div class="tag active" onclick="setFilter('all')">⭐ 全部</div>
@@ -72,28 +73,32 @@
         <div class="tag" onclick="setFilter('defi')">🔄 DeFi</div>
         <div class="tag" onclick="setFilter('nft')">🖼️ NFT</div>
         <div class="tag" onclick="setFilter('learn')">📚 学习</div>
+        <div class="tag" onclick="setFilter('article')">📖 文章</div>
     </div>
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="搜索工具..." oninput="render()">
+        <input type="text" id="searchInput" placeholder="搜索工具或文章..." oninput="render()">
     </div>
     
-    <div class="section-header"><div class="section-title">🏦 交易所 <span class="count" id="exchangeCount"></span></div></div>
+    <div class="section-header"><div class="section-title">🏦 交易所 <span class="count" id="exchangeCount">0</span></div></div>
     <div class="grid" id="exchangeGrid"></div>
     
-    <div class="section-header"><div class="section-title">👛 钱包 <span class="count" id="walletCount"></span></div></div>
+    <div class="section-header"><div class="section-title">👛 钱包 <span class="count" id="walletCount">0</span></div></div>
     <div class="grid" id="walletGrid"></div>
     
-    <div class="section-header"><div class="section-title">📊 数据工具 <span class="count" id="dataCount"></span></div></div>
+    <div class="section-header"><div class="section-title">📊 数据工具 <span class="count" id="dataCount">0</span></div></div>
     <div class="grid" id="dataGrid"></div>
     
-    <div class="section-header"><div class="section-title">🔄 DeFi <span class="count" id="defiCount"></span></div></div>
+    <div class="section-header"><div class="section-title">🔄 DeFi <span class="count" id="defiCount">0</span></div></div>
     <div class="grid" id="defiGrid"></div>
     
-    <div class="section-header"><div class="section-title">🖼️ NFT <span class="count" id="nftCount"></span></div></div>
+    <div class="section-header"><div class="section-title">🖼️ NFT <span class="count" id="nftCount">0</span></div></div>
     <div class="grid" id="nftGrid"></div>
     
-    <div class="section-header"><div class="section-title">📚 学习资源 <span class="count" id="learnCount"></span></div></div>
+    <div class="section-header"><div class="section-title">📚 学习资源 <span class="count" id="learnCount">0</span></div></div>
     <div class="grid" id="learnGrid"></div>
+    
+    <div class="section-header"><div class="section-title">📖 文章 <span class="count" id="articleCount">0</span></div></div>
+    <div class="grid" id="articleGrid"></div>
 
     <footer><p>© 2026 OhMyToolbox</p></footer>
     <script>
@@ -155,34 +160,37 @@
             {name:'CoinAcademy',desc:'加密货币学习平台',type:'learn',icon:'🎓',link:'https://coinacademy.fr'},
             {name:'Web3 University',desc:'Web3学习资源',type:'learn',icon:'🏛️',link:'https://www.web3-university.org'},
             {name:'CryptoZombies',desc:'智能合约教程',type:'learn',icon:'🧟',link:'https://cryptozombies.io'},
+            
+            // 文章
+            {name:'新手入门:如何购买比特币',desc:'2026-04-05 · 15分钟阅读 · 新手教程',type:'article',icon:'📖',hot:true,link:'articles/bitcoin-buy.html'},
+            {name:'一文读懂什么是DeFi',desc:'2026-04-04 · 20分钟阅读 · DeFi科普',type:'article',icon:'📖',hot:true,link:'articles/defi-explained.html'},
+            {name:'MetaMask钱包设置教程',desc:'2026-04-03 · 12分钟阅读 · 钱包教程',type:'article',icon:'📖',link:'articles/metamask-setup.html'},
+            {name:'交易所对比:Binance vs OKX',desc:'2026-04-02 · 18分钟阅读 · 评测对比',type:'article',icon:'📖',link:'articles/binance-vs-okx.html'},
+            {name:'什么是NFT?如何入门?',desc:'2026-04-01 · 15分钟阅读 · NFT科普',type:'article',icon:'📖',link:'articles/nft-guide.html'},
+            {name:'如何参与DeFi流动性挖矿',desc:'2026-03-30 · 25分钟阅读 · DeFi教程',type:'article',icon:'📖',link:'articles/defi-mining.html'},
+            {name:'加密货币安全指南',desc:'2026-03-28 · 20分钟阅读 · 安全提醒',type:'article',icon:'📖',link:'articles/crypto-security.html'},
+            {name:'认识Web3:未来互联网',desc:'2026-03-25 · 18分钟阅读 · Web3科普',type:'article',icon:'📖',link:'articles/web3-intro.html'},
+            {name:'以太坊Gas费优化技巧',desc:'2026-03-22 · 15分钟阅读 · 实用技巧',type:'article',icon:'📖',link:'articles/gas-optimization.html'},
+            {name:'主流Layer2项目盘点',desc:'2026-03-20 · 22分钟阅读 · Layer2评测',type:'article',icon:'📖',link:'articles/layer2-review.html'},
         ];
         
         let currentFilter = 'all';
         
         function setFilter(filterName) {
             currentFilter = filterName;
-            
-            // Update active state
-            document.querySelectorAll('.tag').forEach(tag => {
-                tag.classList.remove('active');
+            document.querySelectorAll('.tag').forEach((tag, idx) => {
+                const filters = ['all', 'exchange', 'wallet', 'data', 'defi', 'nft', 'learn', 'article'];
+                tag.classList.toggle('active', filters[idx] === filterName);
             });
-            
-            // Find and set active - use text content to match
-            const tags = document.querySelectorAll('.tag');
-            const filterMap = {'all':0, 'exchange':1, 'wallet':2, 'data':3, 'defi':4, 'nft':5, 'learn':6};
-            if (tags[filterMap[filterName]]) {
-                tags[filterMap[filterName]].classList.add('active');
-            }
-            
             render();
         }
         
         function render() {
             const searchText = document.getElementById('searchInput').value.toLowerCase();
-            const categories = ['exchange', 'wallet', 'data', 'defi', 'nft', 'learn'];
+            const categories = ['exchange', 'wallet', 'data', 'defi', 'nft', 'learn', 'article'];
             
             categories.forEach(cat => {
-                // Get count
+                // Update count
                 const count = tools.filter(t => t.type === cat).length;
                 const countEl = document.getElementById(cat + 'Count');
                 if (countEl) countEl.textContent = count;
@@ -210,7 +218,7 @@
                             </div>
                             <div class="card-desc">${t.desc}</div>
                             <div class="card-footer">
-                                <span class="card-tag">${t.type}</span>
+                                <span class="card-tag">${t.type === 'article' ? '📖 文章' : t.type}</span>
                                 <span class="card-link">前往 →</span>
                             </div>
                         </div>
@@ -219,7 +227,6 @@
             });
         }
         
-        // Initialize
         render();
     </script>
 </body>
