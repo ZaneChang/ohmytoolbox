@@ -262,7 +262,160 @@
             render();
         }
         
+        
         function render() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const categories = ['exchange', 'wallet', 'data', 'defi', 'nft', 'learn'];
+            
+    
+// Auto-load all articles from folder
+const loadArticles = async () => {
+    const gridEl = document.getElementById('articleGrid');
+    if (!gridEl) return;
+    
+    // List of known articles (in real scenario, this would fetch directory listing)
+    const articleFiles = [
+        'articles/crypto-start-from-zero.html',
+        'articles/上去的撒撒撒.md',
+        'articles/发发发发发.md'
+    ];
+    
+    let articles = [];
+    
+    for (const file of articleFiles) {
+        try {
+            const response = await fetch(file);
+            if (!response.ok) continue;
+            const text = await response.text();
+            
+            // Parse frontmatter (both MD and HTML)
+            let title, date, readTime, category, excerpt;
+            
+            if (file.endsWith('.md')) {
+                title = text.match(/title:\s*(.+)/)?.[1] || file.replace('articles/','').replace('.md','');
+                date = text.match(/date:\s*(.+)/)?.[1] || '';
+                readTime = text.match(/readTime:\s*(.+)/)?.[1] || '15分钟';
+                category = text.match(/category:\s*(.+)/)?.[1] || '文章';
+                excerpt = text.match(/excerpt:\s*(.+)/)?.[1] || '';
+            } else if (file.endsWith('.html')) {
+                title = text.match(/<title>([^<]+)/)?.[1] || file;
+                date = text.match(/📅 ([^<]+)/)?.[1] || '';
+                readTime = text.match(/⏱️ ([^<]+)/)?.[1] || '';
+                category = text.match(/📂 ([^<]+)/)?.[1] || '';
+                excerpt = '';
+            }
+            
+            const name = title || file;
+            const desc = date || excerpt || '点击阅读';
+            const descWithTime = readTime ? `${date} · ${readTime}阅读${category ? ' · ' + category : ''}` : desc;
+            
+            // Check search
+            const match = !searchText || 
+                name.toLowerCase().includes(searchText) || 
+                desc.toLowerCase().includes(searchText);
+            
+            if (match) {
+                articles.push({
+                    name: name,
+                    desc: descWithTime,
+                    type: 'article',
+                    icon: '📖',
+                    link: file,
+                    hot: false
+                });
+            }
+        } catch(e) {
+            console.log('Could not load:', file);
+        }
+    }
+    
+    document.getElementById('articleCount').textContent = articles.length;
+    
+    gridEl.innerHTML = articles.map(t => `
+        <div class="card" onclick="loadArticle('${t.link}');event.stopPropagation();" style="cursor:pointer;">
+            <div class="card-header">
+                <div class="card-icon">${t.icon}</div>
+                <div class="card-name">${t.name}</div>
+            </div>
+            <div class="card-desc">${t.desc}</div>
+            <div class="card-footer">
+                <span class="card-tag">📖 文章</span>
+                <span class="card-link">阅读 →</span>
+            </div>
+        </div>
+    `).join('');
+};
+
+            const articleFiles = [
+                'articles/crypto-start-from-zero.html',
+                'articles/上去的撒撒撒.md',
+                'articles/发发发发发.md'
+            ];
+            
+            const loadArticles = async () => {
+                const gridEl = document.getElementById('articleGrid');
+                if (!gridEl) return;
+                
+                let articles = [];
+                for (const file of articleFiles) {
+                    try {
+                        const response = await fetch(file);
+                        const text = await response.text();
+                        
+                        // Parse frontmatter
+                        const titleMatch = text.match(/title:\s*(.+)/);
+                        const dateMatch = text.match(/date:\s*(.+)/);
+                        const readTimeMatch = text.match(/readTime:\s*(.+)/);
+                        const categoryMatch = text.match(/category:\s*(.+)/);
+                        const excerptMatch = text.match(/excerpt:\s*(.+)/);
+                        
+                        const title = titleMatch ? titleMatch[1] : file.replace('articles/','').replace('.md','').replace('.html','');
+                        const date = dateMatch ? dateMatch[1] : '';
+                        const readTime = readTimeMatch ? readTimeMatch[1] : '15分钟';
+                        const category = categoryMatch ? categoryMatch[1] : '文章';
+                        const excerpt = excerptMatch ? excerptMatch[1] : '';
+                        
+                        // Check search
+                        const match = !searchText || 
+                            title.toLowerCase().includes(searchText) || 
+                            (excerpt && excerpt.toLowerCase().includes(searchText));
+                        
+                        if (match) {
+                            articles.push({
+                                name: title,
+                                desc: `${date} · ${readTime}阅读 · ${category}`,
+                                type: 'article',
+                                icon: '📖',
+                                link: file,
+                                hot: false
+                            });
+                        }
+                    } catch(e) {
+                        console.log('Could not load:', file);
+                    }
+                }
+                
+                document.getElementById('articleCount').textContent = articles.length;
+                
+                gridEl.innerHTML = articles.map(t => `
+                    <div class="card" onclick="loadArticle('${t.link}');event.stopPropagation();" style="cursor:pointer;">
+                        <div class="card-header">
+                            <div class="card-icon">${t.icon}</div>
+                            <div class="card-name">${t.name}</div>
+                        </div>
+                        <div class="card-desc">${t.desc}</div>
+                        <div class="card-footer">
+                            <span class="card-tag">📖 文章</span>
+                            <span class="card-link">阅读 →</span>
+                        </div>
+                    </div>
+                `).join('');
+            };
+            
+            loadArticles();
+            
+            // Categories
+
             const searchText = document.getElementById('searchInput').value.toLowerCase();
             const categories = ['exchange', 'wallet', 'data', 'defi', 'nft', 'learn', 'article'];
             
@@ -278,7 +431,7 @@
                 // Apply search filter
                 if (searchText) {
                     list = list.filter(t => 
-                        t.name.toLowerCase().includes(searchText) || 
+                        t.name.toLowerCase().includes(searchText) || (t.type==='article' && (t.desc && t.desc.toLowerCase().includes(searchText))) || 
                         t.desc.toLowerCase().includes(searchText)
                     );
                 }
