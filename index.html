@@ -175,6 +175,81 @@
             {name:'主流Layer2项目盘点',desc:'2026-03-20 · 22分钟阅读 · Layer2评测',type:'article',icon:'📖',link:'articles/layer2-review.html'},
         ];
         
+
+        // Simple markdown to HTML converter
+        function mdToHtml(md) {
+            if (!md) return '';
+            
+            // Headers
+            md = md.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+            md = md.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+            md = md.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+            
+            // Bold
+            md = md.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            
+            // Italic
+            md = md.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            
+            // Links
+            md = md.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+            
+            // Lists
+            md = md.replace(/^- (.+)$/gm, '<li>$1</li>');
+            md = md.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            
+            // Line breaks
+            md = md.replace(/\n\n/g, '</p><p>');
+            md = md.replace(/\n/g, '<br>');
+            
+            return '<p>' + md + '</p>';
+        }
+        
+        // Load markdown article
+        async function loadArticle(link) {
+            try {
+                const response = await fetch(link);
+                const text = await response.text();
+                
+                // Extract frontmatter and content
+                const frontmatterMatch = text.match(/^---\n([\s\S]*?)\n---/);
+                const frontmatter = frontmatterMatch ? frontmatterMatch[1] : '';
+                const body = text.replace(/^---\n[\s\S]*?\n---/, '').trim();
+                
+                // Parse frontmatter
+                const title = frontmatter.match(/title:\s*(.+)/)?.[1] || '无标题';
+                const date = frontmatter.match(/date:\s*(.+)/)?.[1] || '';
+                const readTime = frontmatter.match(/readTime:\s*(.+)/)?.[1] || '15分钟';
+                const category = frontmatter.match(/category:\s*(.+)/)?.[1] || '';
+                const excerpt = frontmatter.match(/excerpt:\s*(.+)/)?.[1] || '';
+                
+                // Convert markdown body to HTML
+                const contentHtml = mdToHtml(body);
+                
+                // Create article display
+                const articleHtml = `
+                    <div style="max-width:800px;margin:0 auto;padding:40px 20px;">
+                        <a href="index.html" style="color:#a1a1aa;margin-bottom:30px;display:block;">← 返回首页</a>
+                        <h1 style="color:#f7931a;font-size:32px;margin-bottom:10px;">${title}</h1>
+                        <p style="color:#a1a1aa;font-size:14px;margin-bottom:30px;">
+                            ${date ? '📅 ' + date : ''} ${readTime ? '· ⏱️ ' + readTime : ''}
+                            ${category ? '· 📂 ' + category : ''}
+                        </p>
+                        <div style="color:#a1a1aa;line-height:1.8;">${contentHtml}</div>
+                        <div style="margin-top:60px;padding-top:20px;border-top:1px solid #27272a;">
+                            <a href="index.html" style="color:#a1a1aa;">← 返回首页</a>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.innerHTML = articleHtml;
+            } catch (e) {
+                console.error('Error loading article:', e);
+                alert('加载文章失败');
+            }
+        }
+
+
         let currentFilter = 'all';
         
         function setFilter(filterName) {
@@ -211,7 +286,7 @@
                 const gridEl = document.getElementById(cat + 'Grid');
                 if (gridEl) {
                     gridEl.innerHTML = list.map(t => `
-                        <div class="card" onclick="window.open('${t.link}','_blank')">
+                        <div class="card" onclick="if(t.type === 'article'){loadArticle('${t.link}');event.stopPropagation();}else{window.open('${t.link}','_blank')}">
                             ${t.hot ? '<span class="hot-tag">🔥</span>' : ''}
                             <div class="card-header">
                                 <div class="card-icon">${t.icon}</div>
