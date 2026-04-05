@@ -157,32 +157,48 @@
             {name:'CryptoZombies',desc:'智能合约教程',type:'learn',icon:'🧟',link:'https://cryptozombies.io'},
         ];
         
-        let filter = 'all';
+        let currentFilter = 'all';
         
-        function setFilter(f) {
-            filter = f;
-            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+        function setFilter(filterName) {
+            currentFilter = filterName;
+            
+            // Update active state
+            document.querySelectorAll('.tag').forEach(tag => {
+                tag.classList.remove('active');
+            });
+            
+            // Find and set active - use text content to match
+            const tags = document.querySelectorAll('.tag');
+            const filterMap = {'all':0, 'exchange':1, 'wallet':2, 'data':3, 'defi':4, 'nft':5, 'learn':6};
+            if (tags[filterMap[filterName]]) {
+                tags[filterMap[filterName]].classList.add('active');
+            }
+            
             render();
         }
         
         function render() {
-            const s = document.getElementById('searchInput').value.toLowerCase();
-            
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
             const categories = ['exchange', 'wallet', 'data', 'defi', 'nft', 'learn'];
             
             categories.forEach(cat => {
-                // Update count
+                // Get count
                 const count = tools.filter(t => t.type === cat).length;
                 const countEl = document.getElementById(cat + 'Count');
                 if (countEl) countEl.textContent = count;
                 
-                // Filter and render grid
+                // Filter items
                 let list = tools.filter(t => t.type === cat);
-                if (s) {
-                    list = list.filter(t => t.name.toLowerCase().includes(s) || t.desc.toLowerCase().includes(s));
+                
+                // Apply search filter
+                if (searchText) {
+                    list = list.filter(t => 
+                        t.name.toLowerCase().includes(searchText) || 
+                        t.desc.toLowerCase().includes(searchText)
+                    );
                 }
                 
+                // Render grid
                 const gridEl = document.getElementById(cat + 'Grid');
                 if (gridEl) {
                     gridEl.innerHTML = list.map(t => `
@@ -203,6 +219,7 @@
             });
         }
         
+        // Initialize
         render();
     </script>
 </body>
