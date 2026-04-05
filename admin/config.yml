@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
+# Enable Netlify Identity
+publish_mode: "editorial_workflow"
+
 media_folder: "images"
 public_folder: "/images"
 
